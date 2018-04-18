@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ursa Labs</title>
+    <link>https://ursalabs.org/</link>
+    <description>Recent content on Ursa Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>(c) 2018 Copyright Ursa Labs LLC.</copyright>
+    <lastBuildDate>Mon, 26 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://ursalabs.org/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About Ursa Labs</title>
+      <link>https://ursalabs.org/about/</link>
+      <pubDate>Mon, 26 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://ursalabs.org/about/</guid>
+      <description>Founded in 2018, Ursa Labs is an industry-funded development group specializing in open source data science tools. It is dedicated to advancing the start of the art in high-productivity, high-performance, cross-language software for data scientists.
+Learn more about our technology vision and roadmap.
+Leadership 
+ Wes McKinney Director Wes created the pandas project in 2008 and wrote the book Python for Data Analysis, helping popularize the use of Python for data science.</description>
+    </item>
+    
+    <item>
+      <title>Supporting Ursa Labs</title>
+      <link>https://ursalabs.org/support/</link>
+      <pubDate>Mon, 26 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://ursalabs.org/support/</guid>
+      <description>Thank your for your interest in lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</description>
+    </item>
+    
+    <item>
+      <title>Ursa Labs Technology</title>
+      <link>https://ursalabs.org/tech/</link>
+      <pubDate>Mon, 26 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://ursalabs.org/tech/</guid>
+      <description>Apache Arrow Development Platform Storage Interfaces Data Access Shared Memory and IPC Arrow-native Computation Engine Subgraph Compiler / Code-generation Python Support R Support JavaScript Support Builds, CI, Packaging Performance and Benchmarking    The Ursa Labs team has been creating popular open source data science tools for over a decade.
+One of our goals is to empower and accelerate the work of data scientists through more efficient and scalable in-memory computing.</description>
+    </item>
+    
+  </channel>
+</rss>

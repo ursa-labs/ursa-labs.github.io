@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Ursa Labs Technology  &middot; Ursa Labs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+<link rel="author" href="http://plus.google.com/+Myprofile">
+
+
+<meta property="og:title" content="Ursa Labs Technology  &middot; Ursa Labs ">
+<meta property="og:site_name" content="Ursa Labs"/>
+<meta property="og:url" content="https://ursalabs.org/tech/" />
+<meta property="og:locale" content="en">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2018-03-26T00:00:00Z" />
+<meta property="og:article:modified_time" content="2018-03-26T00:00:00Z" />
+
+  
+
+  
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@Myprofile" />
+<meta name="twitter:creator" content="@Myprofile" />
+<meta name="twitter:title" content="Ursa Labs Technology" />
+<meta name="twitter:description" content="" />
+<meta name="twitter:url" content="https://ursalabs.org/tech/" />
+<meta name="twitter:domain" content="https://ursalabs.org/">
+  
+
+  
+<script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "headline": "Ursa Labs Technology",
+    "author": {
+      "@type": "Person",
+      "name": "http://profiles.google.com/+Myprofile?rel=author"
+    },
+    "datePublished": "2018-03-26",
+    "description": "",
+    "wordCount": 3416
+  }
+</script>
+  
+
+
+
+<link rel="canonical" href="https://ursalabs.org/tech/" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
+<link rel="icon" href="https://ursalabs.org/favicon.png">
+<meta name="generator" content="Hugo 0.38-DEV" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="https://ursalabs.org/css/bootswatch/flatly/bootstrap.min.css">
+
+
+<link rel="stylesheet" href="https://ursalabs.org/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ursalabs.org/css/style.css">
+
+
+<link rel="stylesheet" href="https://ursalabs.org/css/style_custom.css">
+
+
+
+  <link rel="stylesheet" href="https://ursalabs.org/css/highlight/default.css">
+
+
+
+</head>
+<body>
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+          
+          <a class="navbar-brand-img" href="https://ursalabs.org/">
+            <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
+            
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/about/" >
+                  
+                  About
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/support/" >
+                  
+                  Support
+                </a>
+              
+            </li>
+            
+            <li class="active">
+              
+                <a href="https://ursalabs.org/tech/" >
+                  
+                  Technology
+                </a>
+              
+            </li>
+            
+            
+              
+          </ul>
+        </div>
+        
+      </div>
+    </nav>
+  </header>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <header class="container hat">
+  <h1>Ursa Labs Technology
+</h1>
+
+</header>
+
+      <div class="content">
+  <div class="row">
+<div style="padding-top: 40px;" class="col-sm-3">
+<nav id="myScrollspy">
+      <ul class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="120">
+        <li><a href="#apache-arrow-platform">Apache Arrow Development Platform</a></li>
+        <li><a href="#low-level-storage-interfaces">Storage Interfaces</a></li>
+        <li><a href="#serialization-formats-and-other-data-access">Data Access</a></li>
+        <li><a href="#shared-memory-ipc-object-store">Shared Memory and IPC</a></li>
+        <li><a href="#arrow-native-computation-engine">Arrow-native Computation Engine</a></li>
+        <li><a href="#subgraph-compilation-code-generation">Subgraph Compiler / Code-generation</a></li>
+        <li><a href="#python-support">Python Support</a></li>
+        <li><a href="#r-support">R Support</a></li>
+        <li><a href="#javascript-support">JavaScript Support</a></li>
+        <li><a href="#build-systems-continuous-integration-and-software-delivery">Builds, CI, Packaging</a></li>
+        <li><a href="#build-systems-continuous-integration-and-software-delivery">Performance and Benchmarking</a></li>
+      </ul>
+    </nav>
+
+</div>
+
+<div style="padding-top: 40px;" class="col-sm-8">
+
+<p>The Ursa Labs team has been creating popular open source data science tools for
+over a decade.</p>
+
+<p>One of our goals is to empower and accelerate the work of data scientists
+through more efficient and scalable in-memory computing. Many popular data
+science tools (such as the popular Python pandas library) in general do not
+effectively leverage modern hardware (large RAM, multicore CPU, GPU-equipped,
+etc.). Much effort in the ecosystem has focused more on deep learning and
+problems related to machine learning, leaving fundamental issues in data
+access, data manipulation, exploratory data analysis, and feature engineering
+comparatively underattended.</p>
+
+<p>So far, our work has been concentrated in the <a href="https://arrow.apache.org">Apache Arrow project</a> which
+has a broader application scope than data science. In time, we may expand to
+create software artifacts focused more specifically on the data science domain.</p>
+
+<p>In addition to providing the foundation for the technology stack described in
+this document, the Arrow project serves as a unifying, high-performance data
+interoperability layer beyond the data science world. Systems using Arrow as a
+native memory format will be more interoperable with each other and have more
+opportunities for collaboration and code reuse. As more systems adopt Arrow,
+Arrow-based data science tools will reap the benefits. Read more about the
+Arrow project in general at <a href="http://arrow.apache.org">http://arrow.apache.org</a>.</p>
+
+<h1 id="apache-arrow-platform">Apache Arrow Platform</h1>
+
+<p>The Arrow C++ project provides some of the initial building blocks of this
+technology stack.</p>
+
+<ul>
+<li>Standardized in-memory columnar (&laquo;data frame&raquo;) format for analytical
+processing</li>
+<li>Schema and value type descriptions</li>
+<li>Batch and Streaming messaging (RPC or shared memory IPC) with zero-copy
+access</li>
+<li>Low-level memory management</li>
+<li>Low-level storage / filesystem interfaces, including shared memory</li>
+<li>Columnar format stability &amp; feature hardening</li>
+</ul>
+
+<p>The Arrow columnar memory format has been in development since 2015. The key
+components of this system (the &laquo;specification&raquo;) are:</p>
+
+<ul>
+<li>Physical memory layout for primitive and nested types</li>
+<li>Logical type definitions (e.g. “what is a timestamp”)</li>
+<li>Serialized metadata representation (we are using Google’s Flatbuffers project
+to serialize Arrow metadata)</li>
+<li>Protocol for messaging (described below), which together with the above is
+generally called the &laquo;Arrow binary format&raquo; or the &laquo;wire format&raquo;</li>
+</ul>
+
+<p>We are validating &laquo;completeness&raquo; of the specification by running <em>integration
+tests</em> between reference implementations in languages like Java, C++, and
+JavaScript.</p>
+
+<p>We have refined and expanded many of these details since commencing development
+at the beginning of 2016. As time goes on, we must grow the columnar format
+responsibly and sustainably to support our own needs as well as the needs of
+other Arrow users (which are developers of other data systems). The objective
+is to build a large, robust, and stable Arrow ecosystem.</p>
+
+<p>We plan to work with the Apache Arrow community to reach binary format
+stability and make a 1.0 release later in 2018 or in 2019. Many users (other
+OSS projects and companies) have indicated that they will begin to adopt Arrow
+more wholeheartedly once the binary format is stable.</p>
+
+<p>There are some other things that we have contemplated adding to Arrow (which
+may increase over time), such as:</p>
+
+<ul>
+<li>Column-wise compression in binary/on-wire format</li>
+<li>Record batch-level column statistics</li>
+<li>Richer messaging / RPC system</li>
+</ul>
+
+<p>The Arrow specification describes the binary format for serializing schemas and
+representing units of data (“record batches”, chunks of tables). On top of this
+binary format, we have developed batch and streaming messaging formats for
+transmitting datasets.</p>
+
+<p>Thus far, message transport and RPC details have not been fully developed. We
+propose to implement efficient integration with well-established messaging
+frameworks, like gRPC and ZeroMQ, to make it easy for our users to send and
+receive data between themselves and with data access layers supporting these
+native Arrow RPC protocols (vs. proprietary protocols, like ODBC, that must be
+deserialized to Arrow format).</p>
+
+<h2 id="low-level-storage-interfaces">Low-level Storage Interfaces</h2>
+
+<p>In C++, we have developed abstractions for managing memory lifetime using RAII
+and smart pointers (<a href="http://en.cppreference.com/w/cpp/language/raii">http://en.cppreference.com/w/cpp/language/raii</a>). This also
+permits clean hierarchical memory references, shared buffer ownership and
+parent-child semantics, copy-on-write, and other benefits.</p>
+
+<p>To interface with the outside world, we must build bridges between low-level IO
+interfaces and filesystem-like storage layers and Arrow’s C++ memory
+subsystem. These should support both synchronous and, where relevant,
+asynchronous access. We wish to maximize throughput from each kind of data
+source, while providing a consistent, robust, fast, and full featured API for
+each data source. Among other things, this includes:</p>
+
+<ul>
+<li>Local files / shared memory</li>
+<li>Memory mapped files</li>
+<li>POSIX shared memory segments (or named shared memory in Windows)</li>
+<li>Normal operating system files</li>
+<li>GPU: CUDA or OpenCL-enabled devices</li>
+<li>Local network interfaces</li>
+<li>UNIX or Windows sockets</li>
+<li>Hadoop Filesystem (HDFS)</li>
+<li>HDFS RPC connectivity using libhdfs</li>
+<li>Amazon S3</li>
+<li>Google Cloud Storage</li>
+<li>Azure Blob Storage</li>
+</ul>
+
+<h2 id="serialization-formats-and-other-data-access">Serialization Formats and other Data Access</h2>
+
+<p>With Arrow as our runtime memory format for analytics and interchange, we must
+be able to convert between various popular storage and raw data input formats,
+and back.</p>
+
+<p>For file formats, these include, but are not limited to:</p>
+
+<ul>
+<li>CSV / Delimited Files</li>
+<li>JSON</li>
+<li>Apache Parquet: Popular columnar file format</li>
+<li>Apache ORC: Another Parquet-esque columnar data support, with good support i</li>
+<li>Apache Avro: Dynamic serialization format designed for RPC in the Hadoop ecosystem</li>
+<li>HDF5: Popular scientific data format for storing large array data</li>
+</ul>
+
+<p>In addition to supporting various file-based data storage formats, we will want
+to support some other kinds of binary data protocols in popular use</p>
+
+<ul>
+<li>ODBC: Supported by many SQL databases (Prior art for Arrow-ODBC in <a href="https://github.com/blue-yonder/turbodbc">https://github.com/blue-yonder/turbodbc</a>)</li>
+<li>SQLite: Bind natively to libsqlite3/4</li>
+<li>PostgreSQL</li>
+<li>Apache Kudu: Distributed columnar data store</li>
+<li>Hive / Impala (HiveServer2 protocol)</li>
+</ul>
+
+<h3 id="supporting-predicate-pushdown">Supporting predicate pushdown</h3>
+
+<p>Some data sources may benefit from evaluating boolean conditions while reading
+from the files to avoid deserializing data unnecessarily. Parquet and ORC are
+great examples &ndash; in addition to providing cached statistics about row groups,
+we can also evaluate simple predicates like FOO &gt; 5 and filter columns as we go
+rather than after the fact.</p>
+
+<h3 id="shared-memory-ipc-object-store">Shared Memory / IPC Object Store</h3>
+
+<p>In 2017 Apache Arrow acquired a component called Plasma
+(<a href="http://incubator.apache.org/ip-clearance/arrow-plasma-object-store.html">http://incubator.apache.org/ip-clearance/arrow-plasma-object-store.html</a>),
+developed to support the Ray project (<a href="https://github.com/ray-project/ray">https://github.com/ray-project/ray</a>), a
+machine learning development platform from the UC Berkeley RISELab.</p>
+
+<p>The Plasma store can assist with developing applications involving multiple
+processes that need to share data, which may reside in CPU or GPU
+memory. Computational processes live separately from the Plasma store, a third
+party daemon. The processes are able to access data managed by Plasma through
+zero-copy shared memory access, and so by employing the Arrow columnar format
+to encode structural information, can describe complex datasets and make them
+available with minimal serialization overhead.</p>
+
+<p>We wish to provide strong support for managing datasets used by multiple
+processes living on the CPU or GPU.</p>
+
+<h2 id="arrow-native-computation-engine">Arrow-native Computation Engine</h2>
+
+<p>Historically, data manipulation libraries in data science languages like Python
+and R have been bespoke, vertically integrated systems developed by small
+groups of developers. These include</p>
+
+<ul>
+<li>Custom in-memory data representations (example: R’s data frames, pandas’s
+data representation implemented on top of NumPy arrays)</li>
+<li>Libraries of algorithms targeting that data representation (see pandas’s
+internal algorithms library:
+<a href="https://github.com/pandas-dev/pandas/tree/master/pandas/_libs">https://github.com/pandas-dev/pandas/tree/master/pandas/_libs</a> )</li>
+<li>Naive eagerly-evaluated “runtime” (i.e. eager function evaluation in the host
+programming language)</li>
+<li>Data access / IO specific to data representation (see: R’s various data
+ingest functions, pandas’s equivalent functions)</li>
+</ul>
+
+<p>In some cases, a deferred evaluation system has been created. A good example is
+dplyr (<a href="http://dplyr.tidyverse.org/">http://dplyr.tidyverse.org/</a> and <a href="https://github.com/tidyverse/dplyr">https://github.com/tidyverse/dplyr</a>),
+which is specific to the R language and R’s data frame representation.</p>
+
+<p>We propose to develop portable, embeddable computation engine in C++ with the
+following features:</p>
+
+<ul>
+<li>Core system ships as portable C or C++ shared libraries, with bindings for
+each host language (Python, R, etc.)</li>
+<li>Runtime in-memory format is Arrow columnar format, and auxiliary data
+structures that can be described by composing Arrow data structures</li>
+<li>Reusable operator “kernel” library containing functions utilizing Arrow
+format as input and output. This includes pandas-style array functions as
+well as SQL-style relational operations (joins, aggregations, etc.)</li>
+<li>Multithreaded graph dataflow-based execution engine for efficient evaluation
+of lazy data frame expressions created in the host language</li>
+<li>Subgraph compilation using LLVM; optimize commonly operator patterns</li>
+<li>Support for user-defined operators and function kernels</li>
+</ul>
+
+<p>Initially, development will focus on efficient computing on a single node. We
+would be interested in developing a distributed runtime in the future.</p>
+
+<p>An architecturally similar system that operates on a different data model
+(numerical multidimensional array data) is the TensorFlow project from
+Google. Here we are processing data frames, not tensors.</p>
+
+<p>There is some prior art in building an Arrow-based computation engine. One
+example is Dremio (See <a href="http://dremio.com/">http://dremio.com/</a> and
+<a href="https://github.com/dremio/dremio-oss)">https://github.com/dremio/dremio-oss)</a>, which started out as a fork of the
+Apache Drill SQL-on-Hadoop system.</p>
+
+<h3 id="arrow-native-operator-kernel-library">Arrow-native Operator / Kernel Library</h3>
+
+<p>To build an Arrow-native data processing engine, we must implement functions
+which perform computations on the Arrow memory format without conversion to
+some other intermediate representation.</p>
+
+<p>The lowest-level unit of computation we call a kernel. A particular kernel
+corresponds to an operator, which may be things like “add”. In J and other APL
+derivatives, operators are called “verbs”. An operator performs computations on
+input data structures having well-defined types. Given an operator and input
+types, e.g. <code>Add(Float64, Float64)</code>, the kernel is selected which performs the
+operation on the particular input types.</p>
+
+<p>Data processing runtimes may break data into chunks and perform multiple kernel
+evaluations in separate threads. For example, the operation <code>x + y</code> can be
+computed by any number of threads in parallel.</p>
+
+<p>To build a functionally-complete data processing library such as pandas, we
+require operator kernel implementations for a wide variety of operations, such
+as (incomplete listing):</p>
+
+<ul>
+<li>Type casting; conversions from one data type to another</li>
+<li>Binary mathematical operators: numeric arithmetic, comparisons, bit-wise
+operations, etc.</li>
+<li>Mathematical functions (like sqrt, exp, log, in NumPy these are called
+“ufuncs”)</li>
+<li>Aggregation functions (“reductions”)</li>
+<li>Streaming-friendly aggregators (count, sum, mean, min, max, standard
+deviation, hyperloglog, count min sketch, etc.)</li>
+<li>Order statistics (quantiles, median, etc.)</li>
+<li>Attainment statistics (value at min/max, index of min/max, first crossing
+point, etc.)</li>
+<li>Aggregation on data resulting from inner kernel or user-defined function
+(“UDF”) evaluation. For example, “max(length(x))”</li>
+<li>General array functions (such as found in APL / J), such as:
+
+<ul>
+<li>Integer selection (“take”, called “From” in J)</li>
+<li>Integer assignment (“put”, called “Amend” in J / immutable APL)</li>
+<li>Boolean selection (“take where”)</li>
+<li>Boolean assignment (“put where”)</li>
+<li>Vectorized conditionals / if-else</li>
+<li>Substitute values</li>
+<li>Substitute / fill nulls</li>
+<li>Fill (“pad”) forward / backward</li>
+<li>Sort values</li>
+<li>Compute sort indices (called “argsort” in NumPy, and “grade up” in J)</li>
+<li>Sort array by indirect sort key (see /: dyad in J)</li>
+<li>Repeating values (called “repeat” in NumPy, “Copy” in J)</li>
+<li>Concatenation</li>
+</ul></li>
+<li>String functions (length, uppercase, lowercase, splitting, concatenation,
+regular expressions, and so forth)</li>
+<li>Hash table-based functions: unique, match (called “index-of” in J),
+dictionary-encode (called “factorize” in pandas), value counts, and isin
+(“member of”)</li>
+<li>Categorical data manipulations
+
+<ul>
+<li>Conform categories</li>
+<li>Incremental dictionary-encode</li>
+</ul></li>
+<li>Nested data manipulations
+
+<ul>
+<li>List flatten, nest</li>
+<li>Kernel evaluate (e.g. f(x) for each x in List<T>)</li>
+<li>Struct (or union) group or split</li>
+</ul></li>
+</ul>
+
+<p>For a given operator, there may be many implementations: Non-SIMD CPU, SIMD
+CPU, GPU (CUDA or OpenCL), etc. The computation engine can select the
+appropriate kernel implementation at runtime.</p>
+
+<p>In addition to array-based mathematical functions and other manipulations, we
+must also be able to perform relational algebra (joins) on tables (semantically
+collections of arrays): inner, outer, left, right, anti, semi.</p>
+
+<h3 id="logical-operator-graphs">Logical Operator Graphs</h3>
+
+<p>Given an operator and its input types and any parameters, we can resolve its
+output type. An operator’s output, therefore, can be viewed as an unevaluated
+input to another operator. Similar to TensorFlow and other graph-based
+computation engines, we can compose our operators to create computational
+graphs having well-specified input types and output types.</p>
+
+<p>As an example, consider the expression log(x + 1) - 1. This can be described as
+the graph:</p>
+
+<pre><code>Subtract (
+  Log (
+    Add (
+      x,
+      1
+    )
+  )
+)
+</code></pre>
+
+<p>Such logical graphs or “programs” do not indicate the execution strategy. In
+this graph, nodes are operators and edges are data dependencies.</p>
+
+<p>We additionally propose to specify an implementation-independent serialization
+format for describing such operator graphs. This will eventually permit
+multiple implementations of execution engines for these graphs to exist. We
+will probably develop a reference execution engine in C++ as described in the
+next section.</p>
+
+<h3 id="dataflow-runtime-virtual-machine">Dataflow Runtime / Virtual Machine</h3>
+
+<p>Note that the most naive “execution engine” or “runtime” is one that evaluates
+each operator serially, using 1 or more threads, fully materializing the result
+of each operator and input to subsequent operators. This is what the current
+pandas implementation does (and many of the other systems being used by data
+scientists currently):</p>
+
+<ul>
+<li>Results of operators are fully materialized as temporary arrays</li>
+<li>Most operators are single-threaded</li>
+<li>There is little to no optimization across operators (for example, there are
+specialized implementations of certain “group by” aggregations)</li>
+</ul>
+
+<p>We propose to develop a faster and more efficient execution engine for our
+analytical operator graphs. The primary strategies we will use when possible
+are:</p>
+
+<ul>
+<li>Avoiding temporary memory allocations, reusing memory in between operators</li>
+<li>Use all available processor cores</li>
+<li>Optimizing task sizes to improve CPU cache efficiency (this is sometimes
+called “pipelining”)</li>
+<li>Employ SIMD or GPU acceleration when feasible</li>
+<li>Perform cross-operator optimizations</li>
+</ul>
+
+<p>These techniques have been widely studied and employed in production systems in
+the analytic database world, so little novel research should be necessary.</p>
+
+<p>Note that each operator should be able to evaluate “eagerly” to emulate the
+existing “one operator at at time” execution approach.</p>
+
+<h3 id="subgraph-compilation-code-generation">Subgraph Compilation / Code Generation</h3>
+
+<p>Operator pipelining (combining multiple tasks into one, elimination of
+temporaries) yields some of the most significant performance improvements over
+the current naive approaches.</p>
+
+<p>Runtime code-generation with LLVM for specialized code paths is the next level
+of performance. This is essentially the approach that the TensorFlow team has
+taken by building XLA (<a href="https://www.tensorflow.org/performance/xla/">https://www.tensorflow.org/performance/xla/</a>) for a
+different class of computations (tensor math / linear algebra)</p>
+
+<p>Most modern query engines feature some amount of code-generation, mostly using
+LLVM as the compiler infrastructure.</p>
+
+<p>The interpreted / virtual machine approach has some drawbacks which can be
+remedied through code-generation / JIT compilation with LLVM:</p>
+
+<ul>
+<li>Portable C++ shared libraries may feature suboptimal code over
+runtime-generated code from LLVM</li>
+<li>It may not be practical to compile libraries with -march on the target
+host. What some projects have done is pre-compile non-SIMD,</li>
+<li>Reduced virtual machine and (in some cases) dynamic dispatch overhead in
+kernel evaluation</li>
+<li>Some classes of analytic optimizations more difficult or impossible to
+implement. Classic example ALL(PREDICATE). An example in pandas would be
+<code>f(x).all()</code>, where f is some function returning a boolean array. In a JIT’d
+version, f(x) can be computed in the same loop as the boolean reduction,
+enabling short-circuiting on the first observation of a false value</li>
+</ul>
+
+<p>APL interpreters, prior to the advent of compiler technology like LLVM, would
+partially address compute subgraph acceleration by special casing common
+operator patterns (for example, the J expression <code>&amp;/ a = b</code> might be recognized
+by the interpreter and be rewritten as a specialized all-equals operator)</p>
+
+<p>There is substantial prior art in databases and other data processing systems
+for using runtime code generations to accelerate hot code paths. The Weld
+project (<a href="https://cs.stanford.edu/~matei/papers/2017/cidr_weld.pdf">https://cs.stanford.edu/~matei/papers/2017/cidr_weld.pdf</a>), for
+example, is being developed currently by the Apache Spark creator’s research
+group at Stanford to accelerate internal code paths in Spark that form part of
+the Databricks Runtime (<a href="https://databricks.com/product/databricks-runtime">https://databricks.com/product/databricks-runtime</a>).</p>
+
+<h2 id="python-support">Python Support</h2>
+
+<p>We must develop comprehensive interoperability with the Python programming
+language and other widely deployed 3rd party libraries like NumPy and
+pandas. Priorities will depend on the needs of Python users.</p>
+
+<ul>
+<li>Conversions between Python built-in data structures and Arrow format</li>
+<li>Conversions between NumPy and pandas data structures and Arrow format</li>
+<li>Python API for declaring operations to be executed by the C++ native execution engine</li>
+<li>Machinery for implementing new Arrow operators in Python, also called
+“user-defined functions” or UDFs. This may include a NumPy or pandas-based
+API (for convenience) as well as an Arrow-based API.</li>
+<li>Python bindings / API for other components of the Arrow ecosystem: file
+formats, IO interfaces, etc.</li>
+</ul>
+
+<h2 id="r-support">R Support</h2>
+
+<p>The R language interface will aim to provide equivalent functionality (but
+R-flavored) as with the Python bindings, with roadmap being driven by the needs
+of R users.</p>
+
+<ul>
+<li>Conversions between R’s built-in data structures (vectors, data frames) and Arrow format</li>
+<li>R API for building and executing computation graphs</li>
+<li>dplyr / tidyverse-compatible interface</li>
+<li>data.table interface</li>
+<li>API for file formats, IO, other Arrow-based components</li>
+<li>Developer Productivity and User Support</li>
+</ul>
+
+<h2 id="javascript-support">JavaScript Support</h2>
+
+<p>While much of our efforts will focus on C++ development and bindings (for
+Python and R), we will benefit from having a strong JavaScript implementation
+to support browser-side data access and user interface development for
+applications powered by Arrow-based software on the back end.</p>
+
+<p>Implementation in JS has already been going on in TypeScript:
+<a href="https://github.com/apache/arrow/tree/master/js">https://github.com/apache/arrow/tree/master/js</a>. The scope of functionality will
+be significantly more limited in JavaScript (being “front end” tech where most
+of what is in this document is “back end” tech) comparatively, and focus on
+data streaming and manipulations necessary to support interactive data
+visualizations and other forms of data display.</p>
+
+<h2 id="build-systems-continuous-integration-and-software-delivery">Build Systems, Continuous Integration, and Software Delivery</h2>
+
+<p>Pursuing this technology roadmap wholeheartedly will require a significant
+amount of development on build systems, packaging, continuous integration and
+testing, benchmarking, etc. Failing to adequately support developer
+productivity and packaging and deployment for users will slow the project’s
+progress.</p>
+
+<p>In time, we will grow an increasingly large stack of 3rd party C and C++
+dependencies for building the core libraries. While the build system and its
+dependencies may grow more complex, developers and users must be protected from
+this increased complexity as much as possible.</p>
+
+<p>To put it simply, being a developer on this project must not be painful. In
+particular, this means that:</p>
+
+<ul>
+<li>It must be straightforward to set up a development environment on any of the
+supported platforms (Windows, macOS, and major Linux distributions)</li>
+<li>Build dependencies must be available either as pre-compiled binaries (for
+either dynamic or static linking) or for source build</li>
+<li>The process for adding new build dependencies must be well-documented</li>
+<li>As of this writing (April 2018), we have been relying on the conda-forge
+packaging platform (<a href="https://conda-forge.org/">https://conda-forge.org/</a>) and separate Dockerfiles (for
+non-conda Python builds) for maintaining our binary toolchain for
+developers. We will have to do better.</li>
+</ul>
+
+<h3 id="packaging-releases-nightly-builds">Packaging, Releases, Nightly Builds</h3>
+
+<p>The workflow for making the software available to normal users must be as
+painless and streamlined as possible for the developers of the project. This
+includes:</p>
+
+<ul>
+<li>Versioned, production release builds on all major platforms (Windows, macOS,
+major Linux distributions), and any required binary dependencies</li>
+<li>Nightly snapshot builds on all platforms</li>
+<li>Painless, automated installation in downstream consumer languages (Python, R,
+and so forth)</li>
+</ul>
+
+<p>Maintaining the packaging toolchain and builds is quite a lot of work. As of
+this writing, there are still many manual steps. We are publishing a limited
+set of nightly builds, and only for conda users on Linux.</p>
+
+<h3 id="continuous-integration">Continuous Integration</h3>
+
+<p>We must develop reliable continuous integration (CI) services to test the
+software that is able to scale in two key dimensions:</p>
+
+<ul>
+<li>The number of concurrent developers</li>
+<li>The complexity of the codebase(s)</li>
+</ul>
+
+<p>Thus far, we have been getting by using the Apache Software Foundation’s Travis
+CI (Linux, macOS) and Appveyor (Windows) capacity for CI.</p>
+
+<h3 id="downstream-integration-testing">Downstream Integration Testing</h3>
+
+<p>In addition to endogenous testing of the Arrow-based data science library
+stack, we must have confidence on a nightly or ad hoc basis that each code
+patch merged does not break downstream users of the projects. This includes
+other OSS projects like Apache Spark, Dremio, pandas, Dask, and others.</p>
+
+<p>Running such integration tests with downstream systems may be too onerous in
+general to include with the standard continuous integration processes. We
+propose to provide a straightforward process for developers to create
+integration tests which can be added to a nightly validation process, so that
+any breakages will be made known to the development team within 24 hours.</p>
+
+<p>This nightly process integration testing should also be available for ad hoc
+validation of &laquo;sensitive&raquo; patches.</p>
+
+<h2 id="performance-testing-and-benchmarking">Performance Testing and Benchmarking</h2>
+
+<p>In addition to validating the correctness and well-functioning of this
+software, we must also continuously monitor and improve its performance in
+different execution environments. Frequently, the performance of critical
+operations may become degraded or have major regressions by accident, even
+though the calculations are still correct.Our benchmarking systems must provide:</p>
+
+<ul>
+<li><p>A well-documented, straightforward way to write new benchmarks in the
+implementation (C++) and user (Python, R, etc.) languages.</p></li>
+
+<li><p>Nightly benchmarking and continuous monitoring. The data produced by this
+process should be browsable, and it should send “alerts” when there are any
+performance deviations outside some acceptable tolerance. See
+<a href="https://github.com/airspeed-velocity/asv">https://github.com/airspeed-velocity/asv</a> as one example tool to assist with
+automating benchmark data collection and analysis</p></li>
+</ul>
+
+<h2 id="talks-and-other-references">Talks and Other References</h2>
+
+<ul>
+<li><a href="https://www.slideshare.net/wesm/shared-infrastructure-for-data-science">https://www.slideshare.net/wesm/shared-infrastructure-for-data-science</a></li>
+</ul>
+
+
+
+</div>
+</div>
+</div>
+
+</div>
+
+
+      
+    </div>
+    
+  </div>
+</div>
+    
+<footer class="footer hidden-print">
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+
+</div>
+<div class="pull-right">
+
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              
+    
+<div class="container footline">
+	<div class="row">
+	    <div class="col-md-2">
+	    	<a class="footer-brand-img" href="https://ursalabs.org">
+            <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
+          </a>
+	    </div>
+	    <div class="col-md-10">
+	    	<h4>Innovating Open Source Data Science Tools</h4>
+	    </div>
+	    <div class="col-md-12">
+	    	<hr>
+	    </div>
+
+	 </div>
+</div>
+
+
+    
+<div class="container copyright">
+    <small>
+  &copy; 2018 Copyright Ursa Labs LLC.
+
+  </small>
+</div>
+<div class="container copyright tm-info">
+    <small>
+  Apache Arrow, Arrow, Apache, the Apache feather logo, and the Apache Arrow project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.
+
+  </small>
+</div>
+
+
+
+        </div>
+    </div>
+  </div>
+</footer>
+
+    
+
+<script src="https://ursalabs.org/js/jquery.min.js"></script>
+<script src="https://ursalabs.org/js/bootstrap.min.js"></script>
+
+<script src="https://ursalabs.org/js/highlight.pack.js"></script>
+<script src="https://ursalabs.org/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<script>
+  var _gaq=[['_setAccount','Your Google Analytics tracking code'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+<script>
+CONTENTLANGUAGE = ""; 
+</script>
+
+
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/config/TeX-AMS-MML_HTMLorMML.js"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    for(var all in MathJax.Hub.getAllJax()) {
+        all.SourceElement().parentNode.className += ' has-jax';
+
+    }
+});
+</script>
+
+
+
+
+
+
+  </body>
+</html>
+

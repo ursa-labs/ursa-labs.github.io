@@ -1,0 +1,402 @@
+@import url(/css/google-fonts.css);
+
+/*  <-------------------   Additional CSS    ------------------->  */
+
+.navbar-default {
+background-color: #3F4945;
+}
+
+/* Site Logo */
+.navbar-brand-img img {
+	padding-top: 19px;
+	width: 50%;
+	height: auto;
+}
+
+
+/* The hero image */
+
+.hero-featured-image {
+width: 450px;
+height: auto;
+padding-top: 200px;
+}
+
+.bgimage {
+  width:100%;
+  height:700px;
+  background: url('/hero.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
+  z-index: 3;
+}
+.bgimage h5 {
+  color:white;
+  text-shadow:2px 2px #333;
+}
+
+a:hover, a:focus {
+color: #777777;
+text-decoration: none;
+ -o-transition:.2s;
+  -ms-transition:.2s;
+  -moz-transition:.2s;
+  -webkit-transition:.2s;
+  transition:.2s;
+}
+a:active, a:hover {
+outline: 0;
+}
+a {
+	color: #404040;
+    border-bottom: 1px solid;
+    text-decoration: none;
+    padding-bottom: 1px;
+	font-weight: 500;
+}
+
+.hat {
+	margin-top: 70px;
+}
+.body {
+	color: #404040;
+	line-height: 25px;
+
+}
+
+h2, .h2 {
+font-size: 32px;
+font-weight: 400;
+}
+
+.lead {
+font-size: 18px;
+line-height: 25px;
+}
+
+.full-background {
+	width: 100%;
+	padding-top: 60px;
+	padding-bottom: 60px;
+}
+
+.gray {
+	background-color: #F7F7F7;
+}
+
+.navbar-nav>li>a, .navbar-nav>li>a:hover {
+	border-bottom: none;
+}
+.navbar-right>li>a {
+	font-size: 16px;
+	font-weight: 400;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+	color: #ffffff;
+	opacity: .7;
+
+}
+
+.footer {
+	padding-top: 36px;
+	padding-bottom: 600px;
+	background-color: #3F4945;
+	color: #FFFFFF;
+}
+
+footer hr {
+	opacity: .3;
+	margin-top: 14px;
+}
+.footer-brand-img img {
+	width: 110px;
+	height: auto;
+	margin-top: 3.5px;
+	margin-bottom: 10.5px;
+}
+
+.copyright {
+	font-weight: 300;
+}
+.tm-info {
+	font-size: 13px;
+	font-weight: 400;
+	opacity: .5;
+}
+
+.col-element {
+	padding-bottom: 30px;
+}
+
+
+.job-board pre {
+	background-color: transparent;
+	border: none;
+}
+
+.section-break hr {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
+.img-group {
+	padding: 40px 30px;
+	float: left;
+	display: inline-block;
+}
+
+.form-group label {
+	font-weight: 400;
+}
+/*.featurette {
+	padding-bottom: 100px;
+}*/
+
+  .affix {
+      top: 100px;
+      z-index: 9999 !important;
+  }
+
+
+
+  @media screen and (max-width: 810px) {
+    #section1, #section2, #section3, #section41, #section42  {
+        margin-left: 150px;
+    }
+  }
+.nav-stacked  {
+background-color: #ffffff;
+
+}
+
+.nav-stacked.affix {
+width: 260px;
+}
+
+
+
+  @media screen and (max-width: 960px) {
+
+    .nav-stacked.affix {
+width: 155px;
+}
+  }
+
+    @media screen and (max-width: 1200px) {
+
+    .nav-stacked.affix {
+width: 210px;
+}
+  }
+
+
+
+
+li a {
+	color: #404040;
+	font-weight: 300;
+	font-size: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    opacity: .7;
+}
+.nav>li>a:hover, .nav>li>a:focus {
+text-decoration: none;
+background-color: #f9f9f9;
+color: #404040;
+opacity: 1;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
+color: #ffffff;
+background-color: #333c38;
+}
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+background-color: #333c38;
+}
+
+/*  <-------------------   Mobile CSS    ------------------->  */
+.top-menu {
+top: 50px;
+position: fixed;
+display: inline-block;
+
+}
+
+.top-menu-content {
+top: 100px;
+position: fixed;
+background-color: #000;
+width: 100%;
+}
+
+.navbar-default .navbar-toggle {
+border-color: transparent;
+}
+.blurb {
+	padding-bottom: 30px;
+}
+@media screen and (max-width: 768px) {
+	.bgimage {
+	width: 100%;
+	height: 400px;
+	background: url('/hero.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	z-index: 3;
+}
+
+	.hero-featured-image {
+	width: 290px;
+	height: auto;
+	padding-top: 130px;
+}
+
+    a.navbar-brand-img>img {
+      vertical-align: bottom;
+      padding: 1em 0 0 15px;
+      max-width: 80%;
+    }
+    .affix {
+    	top: 0px;
+    	position: relative;
+    	z-index: 1 !important;
+    }
+    .navbar-brand-img img {
+	padding-top: 19px;
+	width: 140px;
+	height: auto;
+	}
+	.hat {
+	margin-top: 30px;
+	}
+
+	.img-people img {
+		display: block;
+    margin-left: auto;
+    margin-right: auto;
+	width: 50% !important;
+	}
+
+	.blurb {
+		text-align: center;
+		padding-top: 20px;
+		padding-bottom: 40px;
+	}
+}
+
+
+/*  <-------------------   Ursa Theme CSS    ------------------->  */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif !important;
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 130px;
+}
+
+h5 {
+	font-weight: 300;
+}
+.footer {
+  position: absolute;
+  bottom: -5%;
+  width: 100%;
+  text-align: left;
+  padding-bottom: 4rem;
+}
+
+.col-sm-12 header {
+	padding-left: 0px;
+	padding-right: 0px;
+}
+body > .container {
+  padding: 40px 15px 40px 15px;
+}
+
+.navbar-brand {
+padding: 20px;
+vertical-align: baseline;;
+}
+
+.navbar-brand-img {
+    padding: 0px;
+}
+
+
+a.navbar-brand-img>img {
+  vertical-align: bottom;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.margin-10{margin-bottom:10px; margin-right:10px;}
+
+
+
+/* Responsive video? */
+iframe {
+  max-width: 100%;
+}
+
+/* Popover */
+.modal.ng-enter {
+  transition: opacity 1.5s ease-out;
+  opacity: 0;
+}
+.modal.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+.modal.ng-leave {
+  transition: opacity 1.5s ease-out;
+  opacity: 1;
+}
+.modal.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+
+#Email.fieldValid {
+  border: 1px solid #00ff00;
+}
+#Email.fieldInvalid {
+  border: 1px solid #ff0000;
+}
+code.has-jax {
+  font: inherit;
+  font-size: 100%;
+  background: inherit;
+  border: inherit;
+  }
+
+
+.share-box a{
+    padding: 0 0 0 5px;
+}
+
+.fa-facebook-official { color: #3b5998; }
+
+.fa-google-plus { color: #d34836; }
+
+.fa-linkedin { color: #0077b5; }
+
+.fa-envelop { color: #444444; }
+
+.fa-reddit { color: #ff5700; }
+
+.fa-twitter { color: #4099FF; }
