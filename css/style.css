@@ -13,7 +13,6 @@ background-color: #3F4945;
 	height: auto;
 }
 
-
 /* The hero image */
 
 .hero-featured-image {
@@ -101,7 +100,6 @@ line-height: 25px;
 
 .footer {
 	padding-top: 36px;
-	padding-bottom: 600px;
 	background-color: #3F4945;
 	color: #FFFFFF;
 }
@@ -130,6 +128,12 @@ footer hr {
 	padding-bottom: 30px;
 }
 
+:target:before {
+  content:"";
+  display:block;
+  height:80px; 
+  margin:-80px 0 0; 
+}
 
 .job-board pre {
 	background-color: transparent;
@@ -137,12 +141,12 @@ footer hr {
 }
 
 .section-break hr {
-	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 }
 
 .img-group {
-	padding: 40px 30px;
+	padding: 40px 40px 40px 0;
 	float: left;
 	display: inline-block;
 }
@@ -161,40 +165,45 @@ footer hr {
 
 
 
-  @media screen and (max-width: 810px) {
-    #section1, #section2, #section3, #section41, #section42  {
-        margin-left: 150px;
-    }
-  }
-.nav-stacked  {
-background-color: #ffffff;
-
-}
-
 .nav-stacked.affix {
 width: 260px;
 }
 
 
 
-  @media screen and (max-width: 960px) {
+@media screen and (max-width: 991px) {
 
     .nav-stacked.affix {
-width: 155px;
-}
+	width: 160px !important;
+	}
+  .blurb {
+    padding-bottom: 40px;
   }
+  .blurb-last {
+    padding-bottom: 0px;
+  }
+  .img-group {
+    padding: 20px 40px 30px 0;
+    float: left;
+    display: inline-block;
+  }
+}
 
-    @media screen and (max-width: 1200px) {
-
+  @media screen and (max-width: 1200px) {
     .nav-stacked.affix {
-width: 210px;
+	width: 210px;
+	}
 }
-  }
+
+.btn-primary {
+  background-color: #404040;
+  padding-right: 15px;
+  padding-left: 15px;
+  text-transform: uppercase;
+}
 
 
-
-
-li a {
+.nav-stacked>li>a {
 	color: #404040;
 	font-weight: 300;
 	font-size: 16px;
@@ -216,6 +225,22 @@ background-color: #333c38;
 background-color: #333c38;
 }
 
+.social-icons {
+    display:inline-block;
+    font-size: 20px;
+    line-height: 50px;
+    color:white;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    margin-left: 6px;
+    margin-right: 6px;
+    padding-bottom: 70px;
+}
+
+.social-icons a {
+    border-bottom: none;
+}
 /*  <-------------------   Mobile CSS    ------------------->  */
 .top-menu {
 top: 50px;
@@ -234,10 +259,15 @@ width: 100%;
 .navbar-default .navbar-toggle {
 border-color: transparent;
 }
-.blurb {
-	padding-bottom: 30px;
-}
+
 @media screen and (max-width: 768px) {
+
+  .navbar-right>li>a {
+font-size: 25px;
+font-weight: 300;
+line-height: 41px;
+}
+
 	.bgimage {
 	width: 100%;
 	height: 400px;
@@ -253,7 +283,10 @@ border-color: transparent;
 	height: auto;
 	padding-top: 130px;
 }
+.social-icons {
 
+    padding-bottom: 30px;
+}
     a.navbar-brand-img>img {
       vertical-align: bottom;
       padding: 1em 0 0 15px;
@@ -272,19 +305,34 @@ border-color: transparent;
 	.hat {
 	margin-top: 30px;
 	}
+.nav-stacked.affix {
+width: 100% !important;
+}
+
 
 	.img-people img {
 		display: block;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; 
 	width: 50% !important;
 	}
 
 	.blurb {
-		text-align: center;
-		padding-top: 20px;
-		padding-bottom: 40px;
+		text-align: left;
+		padding-top: 30px;
+		padding-bottom: 30px;
 	}
+    .blurb-last {
+    text-align: left;
+    padding-top: 30px;
+  }
+	.footer {
+  position: absolute;
+  bottom: -3%;
+  width: 100%;
+  text-align: left;
+  padding-bottom: 4rem;
+}
 }
 
 
@@ -312,6 +360,7 @@ h5 {
   width: 100%;
   text-align: left;
   padding-bottom: 4rem;
+  z-index: 9999;
 }
 
 .col-sm-12 header {
@@ -376,7 +425,7 @@ iframe {
 }
 #Email.fieldInvalid {
   border: 1px solid #ff0000;
-}
+}  
 code.has-jax {
   font: inherit;
   font-size: 100%;
@@ -399,4 +448,9 @@ code.has-jax {
 
 .fa-reddit { color: #ff5700; }
 
-.fa-twitter { color: #4099FF; }
+.fa-twitter { color: #999999; }
+.fa-twitter:hover { color: #444444; }
+.fa-github { color: #999999; }
+.fa-github:hover { color: #444444; }
+
+
