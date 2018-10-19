@@ -184,7 +184,7 @@ footer hr {
 
 .img-group {
 	padding: 40px 40px 40px 0;
-	float: left;
+/*	float: left;*/
 	display: inline-block;
 }
 
@@ -229,7 +229,7 @@ footer hr {
   }
   .img-group {
     padding: 20px 40px 30px 0;
-    float: left;
+/*    float: left;*/
     display: inline-block;
   }
 }
@@ -374,19 +374,13 @@ footer hr {
 	.hat {
   	margin-top: 30px;
 	}
-.nav-stacked.affix {
-width: 100% !important;
-}
-
-
   .nav-stacked.affix {
     width: 100% !important;
   }
 
 
-  body {
-    margin-bottom: 350px !important;
-    word-wrap: break-word;
+  .nav-stacked.affix {
+    width: 100% !important;
   }
 
   .bgimage-about {
@@ -402,10 +396,8 @@ width: 100% !important;
   .bgimage-support h1 {
     padding-top: 85px;
   }
-  body > .container {
-    margin-bottom: 300px !important;
-  }
   body {
+    margin-bottom: 380px !important;
     word-wrap: break-word;
   }
 	.img-people img {
