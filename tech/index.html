@@ -25,46 +25,13 @@
 <meta property="og:locale" content="en">
 
 
-<meta property="og:type" content="article" />
-<meta property="og:description" content=""/>
-<meta property="og:article:published_time" content="2018-03-26T00:00:00Z" />
-<meta property="og:article:modified_time" content="2018-03-26T00:00:00Z" />
-
-  
-
-  
-<meta name="twitter:card" content="summary" />
-<meta name="twitter:site" content="@Myprofile" />
-<meta name="twitter:creator" content="@Myprofile" />
-<meta name="twitter:title" content="Ursa Labs Technology" />
-<meta name="twitter:description" content="" />
-<meta name="twitter:url" content="https://ursalabs.org/tech/" />
-<meta name="twitter:domain" content="https://ursalabs.org/">
-  
-
-  
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Article",
-    "headline": "Ursa Labs Technology",
-    "author": {
-      "@type": "Person",
-      "name": "http://profiles.google.com/+Myprofile?rel=author"
-    },
-    "datePublished": "2018-03-26",
-    "description": "",
-    "wordCount": 3416
-  }
-</script>
-  
-
+<meta property="og:type" content="website" />
 
 
 <link rel="canonical" href="https://ursalabs.org/tech/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
-<meta name="generator" content="Hugo 0.50-DEV" />
+<meta name="generator" content="Hugo 0.56.0-DEV" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -80,14 +47,11 @@
 <link rel="stylesheet" href="https://ursalabs.org/css/style.css">
 
 
-<link rel="stylesheet" href="https://ursalabs.org/css/style_custom.css">
-
 
 
   <link rel="stylesheet" href="https://ursalabs.org/css/highlight/default.css">
 
 
-  <meta name="google-site-verification" content="dMsYngVi-9XtvjbEVJYRt-YCZdlaLl_JwQptTus4T3k" />
 </head>
 <body>
     <header id="main-header">
@@ -116,6 +80,15 @@
                 <a href="https://ursalabs.org/about/" >
                   
                   About
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/blog/" >
+                  
+                  Blog
                 </a>
               
             </li>
@@ -157,28 +130,207 @@
 
 </header>
 
-      <div class="content">
-  <div class="row">
-<div style="padding-top: 40px;" class="col-sm-3">
-<nav id="myScrollspy">
-      <ul id="tech-nav" class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="120" data-offset-bottom="220">
-        <li><a href="#apache-arrow-platform">Apache Arrow Development Platform</a></li>
-        <li><a href="#low-level-storage-interfaces">Storage Interfaces</a></li>
-        <li><a href="#serialization-formats-and-other-data-access">Data Access</a></li>
-        <li><a href="#shared-memory-ipc-object-store">Shared Memory and IPC</a></li>
-        <li><a href="#arrow-native-computation-engine">Arrow-native Computation Engine</a></li>
-        <li><a href="#subgraph-compilation-code-generation">Subgraph Compiler / Code-generation</a></li>
-        <li><a href="#python-support">Python Support</a></li>
-        <li><a href="#r-support">R Support</a></li>
-        <li><a href="#javascript-support">JavaScript Support</a></li>
-        <li><a href="#build-systems-continuous-integration-and-software-delivery">Builds, CI, Packaging</a></li>
-        <li><a href="#performance-testing-and-benchmarking">Performance and Benchmarking</a></li>
-      </ul>
-    </nav>
+      <div class="row">
+      <div style="padding-top: 40px;" class="col-sm-3">
+        <aside>
+          
 
+
+
+<div class="table-of-contents toc bd-callout">
+   
+   <nav id="myScrollspy">
+     <ul id="tech-nav" class="nav nav-pills nav-stacked" data-spy="affix" data-offset-top="120" data-offset-bottom="220">
+       
+           
+           
+               
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   <li><a href="https://ursalabs.org/tech/#apache-arrow-platform">
+                       Apache Arrow Platform
+                   </a></li>
+                   
+                   
+               
+           
+       
+           
+           
+               
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   <li><a href="https://ursalabs.org/tech/#storage-interfaces">
+                       Storage Interfaces
+                   </a></li>
+                   
+                   
+               
+           
+       
+           
+           
+               
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   <li><a href="https://ursalabs.org/tech/#serialization-formats-and-data-access">
+                       Serialization Formats and Data Access
+                   </a></li>
+                   
+                   
+               
+           
+       
+           
+           
+               
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   <li><a href="https://ursalabs.org/tech/#arrow-native-computation-engine">
+                       Arrow-native Computation Engine
+                   </a></li>
+                   
+                   
+               
+           
+       
+           
+           
+               
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   <li><a href="https://ursalabs.org/tech/#python-support">
+                       Python Support
+                   </a></li>
+                   
+                   
+               
+           
+       
+           
+           
+               
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   <li><a href="https://ursalabs.org/tech/#r-support">
+                       R Support
+                   </a></li>
+                   
+                   
+               
+           
+       
+           
+           
+               
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   <li><a href="https://ursalabs.org/tech/#javascript-support">
+                       JavaScript Support
+                   </a></li>
+                   
+                   
+               
+           
+       
+           
+           
+               
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   <li><a href="https://ursalabs.org/tech/#continuous-integration-and-packaging">
+                       Continuous Integration and Packaging
+                   </a></li>
+                   
+                   
+               
+           
+       
+           
+           
+               
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   <li><a href="https://ursalabs.org/tech/#performance-and-benchmarking">
+                       Performance and Benchmarking
+                   </a></li>
+                   
+                   
+               
+           
+       
+           
+           
+               
+                   
+                   
+                   
+                   
+                   
+                   
+                   
+                   <li><a href="https://ursalabs.org/tech/#talks-and-other-references">
+                       Talks and Other References
+                   </a></li>
+                   
+                   
+               
+           
+       
+     </ul>
+   </nav>
 </div>
 
-<div class="long-article col-sm-8">
+        </aside>
+      </div>
+
+      <div class="long-article col-sm-8">
+        
 
 <p>The Ursa Labs team has been creating popular open source data science tools for
 over a decade.</p>
@@ -199,7 +351,7 @@ create software artifacts focused more specifically on the data science domain.<
 <p>In addition to providing the foundation for the technology stack described in
 this document, the Arrow project serves as a unifying, high-performance data
 interoperability layer beyond the data science world. Systems using Arrow as a
-native memory format will be more interoperable with each other and have more
+native memory format are more interoperable with each other and have more
 opportunities for collaboration and code reuse. As more systems adopt Arrow,
 Arrow-based data science tools will reap the benefits. Read more about the
 Arrow project in general at <a href="http://arrow.apache.org">http://arrow.apache.org</a>.</p>
@@ -236,16 +388,18 @@ generally called the &laquo;Arrow binary format&raquo; or the &laquo;wire format
 tests</em> between reference implementations in languages like Java, C++, and
 JavaScript.</p>
 
-<p>We have refined and expanded many of these details since commencing development
-at the beginning of 2016. As time goes on, we must grow the columnar format
+<p>We have refined and expanded many of these details since commencing development.
+As time goes on, we must grow the columnar format
 responsibly and sustainably to support our own needs as well as the needs of
 other Arrow users (which are developers of other data systems). The objective
 is to build a large, robust, and stable Arrow ecosystem.</p>
 
 <p>We plan to work with the Apache Arrow community to reach binary format
-stability and make a 1.0 release later in 2018 or in 2019. Many users (other
+stability and make a 1.0 release in 2019. Many users (other
 OSS projects and companies) have indicated that they will begin to adopt Arrow
-more wholeheartedly once the binary format is stable.</p>
+more wholeheartedly once the binary format is declared stable.</p>
+
+<!-- TODO: make discussion of Flight not hypothetical -->
 
 <p>There are some other things that we have contemplated adding to Arrow (which
 may increase over time), such as:</p>
@@ -268,7 +422,7 @@ receive data between themselves and with data access layers supporting these
 native Arrow RPC protocols (vs. proprietary protocols, like ODBC, that must be
 deserialized to Arrow format).</p>
 
-<h2 id="low-level-storage-interfaces">Low-level Storage Interfaces</h2>
+<h2 id="storage-interfaces">Storage Interfaces</h2>
 
 <p>In C++, we have developed abstractions for managing memory lifetime using RAII
 and smart pointers (<a href="http://en.cppreference.com/w/cpp/language/raii">http://en.cppreference.com/w/cpp/language/raii</a>). This also
@@ -297,13 +451,13 @@ each data source. Among other things, this includes:</p>
 <li>Azure Blob Storage</li>
 </ul>
 
-<h2 id="serialization-formats-and-other-data-access">Serialization Formats and other Data Access</h2>
+<h2 id="serialization-formats-and-data-access">Serialization Formats and Data Access</h2>
 
 <p>With Arrow as our runtime memory format for analytics and interchange, we must
 be able to convert between various popular storage and raw data input formats,
 and back.</p>
 
-<p>For file formats, these include, but are not limited to:</p>
+<p>For file formats, these include but are not limited to:</p>
 
 <ul>
 <li>CSV / Delimited Files</li>
@@ -370,10 +524,10 @@ ingest functions, pandas’s equivalent functions)</li>
 </ul>
 
 <p>In some cases, a deferred evaluation system has been created. A good example is
-dplyr (<a href="http://dplyr.tidyverse.org/">http://dplyr.tidyverse.org/</a> and <a href="https://github.com/tidyverse/dplyr">https://github.com/tidyverse/dplyr</a>),
+dplyr (<a href="https://dplyr.tidyverse.org/">https://dplyr.tidyverse.org/</a>),
 which is specific to the R language and R’s data frame representation.</p>
 
-<p>We propose to develop portable, embeddable computation engine in C++ with the
+<p>We plan to develop portable, embeddable computation engine in C++ with the
 following features:</p>
 
 <ul>
@@ -548,6 +702,8 @@ existing “one operator at at time” execution approach.</p>
 
 <h3 id="subgraph-compilation-code-generation">Subgraph Compilation / Code Generation</h3>
 
+<!-- Talk about Gandiva -->
+
 <p>Operator pipelining (combining multiple tasks into one, elimination of
 temporaries) yields some of the most significant performance improvements over
 the current naive approaches.</p>
@@ -635,7 +791,7 @@ of what is in this document is “back end” tech) comparatively, and focus on
 data streaming and manipulations necessary to support interactive data
 visualizations and other forms of data display.</p>
 
-<h2 id="build-systems-continuous-integration-and-software-delivery">Build Systems, Continuous Integration, and Software Delivery</h2>
+<h2 id="continuous-integration-and-packaging">Continuous Integration and Packaging</h2>
 
 <p>Pursuing this technology roadmap wholeheartedly will require a significant
 amount of development on build systems, packaging, continuous integration and
@@ -710,7 +866,7 @@ any breakages will be made known to the development team within 24 hours.</p>
 <p>This nightly process integration testing should also be available for ad hoc
 validation of &laquo;sensitive&raquo; patches.</p>
 
-<h2 id="performance-testing-and-benchmarking">Performance Testing and Benchmarking</h2>
+<h2 id="performance-and-benchmarking">Performance and Benchmarking</h2>
 
 <p>In addition to validating the correctness and well-functioning of this
 software, we must also continuously monitor and improve its performance in
@@ -735,15 +891,8 @@ automating benchmark data collection and analysis</p></li>
 <li><a href="https://www.slideshare.net/wesm/shared-infrastructure-for-data-science">https://www.slideshare.net/wesm/shared-infrastructure-for-data-science</a></li>
 </ul>
 
-
-
-</div>
-</div>
-</div>
-
-</div>
-
-
+      </div>
+      </div>
       
     </div>
     
@@ -768,7 +917,7 @@ automating benchmark data collection and analysis</p></li>
 <div class="container footline">
 	<div class="row">
 	    <div class="col-md-2">
-	    	<a class="footer-brand-img" href="https://ursalabs.org">
+	    	<a class="footer-brand-img" href="https://ursalabs.org/">
             <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
           </a>
 	    </div>
@@ -786,7 +935,7 @@ automating benchmark data collection and analysis</p></li>
     
 <div class="container copyright">
     <small>
-  &copy; 2018 Copyright Ursa Labs LLC.
+  &copy; 2018-2019 Ursa Labs
 
   </small>
 </div>
@@ -815,7 +964,7 @@ automating benchmark data collection and analysis</p></li>
 
 
 <script>
-  var _gaq=[['_setAccount','Your Google Analytics tracking code'],['_trackPageview']];
+  var _gaq=[['_setAccount','UA-107500873-2'],['_trackPageview']];
   (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
   g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
   s.parentNode.insertBefore(g,s)}(document,'script'));
