@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>(c) 2018-2019 Ursa Labs</copyright>
-    <lastBuildDate>Tue, 04 Jun 2019 20:26:53 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 08 Aug 2019 12:00:00 -0400</lastBuildDate>
     
 	<atom:link href="https://ursalabs.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ursa Labs June and July 2019 Report</title>
+      <link>https://ursalabs.org/blog/2019-06-07-monthly-report/</link>
+      <pubDate>Thu, 08 Aug 2019 12:00:00 -0400</pubDate>
+      
+      <guid>https://ursalabs.org/blog/2019-06-07-monthly-report/</guid>
+      <description>&lt;p&gt;Like April and May, I&amp;rsquo;m continuing to give bimonthly rather than monthly
+reports. As usual it was a busy couple of months. See the end of the report for
+the team&amp;rsquo;s full changelog of patches contributed to Apache Arrow.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Ursa Labs April-May 2019 Report</title>
@@ -43,7 +54,7 @@ changelog of patches later in the post.&lt;/p&gt;</description>
       
       <guid>https://ursalabs.org/blog/2019-02/</guid>
       <description>&lt;p&gt;The team had a busy 28 days this February. The Apache Arrow community is
-discussing a 0.13 release toward the end of March, so we spend February helping
+discussing a 0.13 release toward the end of March, so we spent February helping
 the project toward the next release milestone. We have been pushing projects on
 multiple fronts and discuss some of those here.&lt;/p&gt;</description>
     </item>

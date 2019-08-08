@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Ursa Labs June and July 2019 Report  &middot; Ursa Labs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Ursa Labs June and July 2019 Report  &middot; Ursa Labs ">
+<meta property="og:site_name" content="Ursa Labs"/>
+<meta property="og:url" content="https://ursalabs.org/blog/2019-06-07-monthly-report/" />
+<meta property="og:locale" content="en">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content=""/>
+<meta property="og:article:published_time" content="2019-08-08T12:00:00-04:00" />
+<meta property="og:article:modified_time" content="2019-08-08T12:00:00-04:00" />
+
+  
+
+  
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107500873-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-107500873-2');
+</script>
+
+
+<link rel="canonical" href="https://ursalabs.org/blog/2019-06-07-monthly-report/" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
+<link rel="icon" href="https://ursalabs.org/favicon.ico">
+<meta name="generator" content="Hugo 0.56.0-DEV" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="https://ursalabs.org/css/bootswatch/flatly/bootstrap.min.css">
+
+
+<link rel="stylesheet" href="https://ursalabs.org/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ursalabs.org/css/style.css">
+
+
+
+
+  <link rel="stylesheet" href="https://ursalabs.org/css/highlight/default.css">
+
+
+</head>
+<body>
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+          
+          <a class="navbar-brand-img" href="https://ursalabs.org/">
+            <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
+            
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/about/" >
+                  
+                  About
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/blog/" >
+                  
+                  Blog
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/support/" >
+                  
+                  Support
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/tech/" >
+                  
+                  Technology
+                </a>
+              
+            </li>
+            
+            
+              
+          </ul>
+        </div>
+        
+      </div>
+    </nav>
+  </header>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="blog-post-title">Ursa Labs June and July 2019 Report</h1>
+      <div class="blog-post-meta">
+        <span>Wes McKinney</span><br/>
+        <span>August 8, 2019</span>
+      </div>
+      <div class="blog-post-content">
+        <p>Like April and May, I&rsquo;m continuing to give bimonthly rather than monthly
+reports. As usual it was a busy couple of months. See the end of the report for
+the team&rsquo;s full changelog of patches contributed to Apache Arrow.</p>
+
+<h2 id="development-highlights">Development Highlights</h2>
+
+<p>One of our major focuses in June was the <a href="http://arrow.apache.org/blog/2019/07/02/0.14.0-release/">Arrow 0.14.0 major release</a>, which
+covered 3 months of development. We encountered some issues with our Python
+wheel packages, in addition to Parquet backward and forward compatibility, so
+we felt it necessary to quickly make a <a href="http://arrow.apache.org/release/0.14.1.html">0.14.1 bugfix release</a>. As you might
+imagine, getting these releases out the door consumed a lot of energy.</p>
+
+<p>Some development highlights from the last two months include:</p>
+
+<ul>
+<li>Continued development of &ldquo;Ursabot&rdquo; automated testing and build framework. We
+are discussing the future of Apache Arrow&rsquo;s continuous integration with the
+Arrow community</li>
+<li>Formally added <a href="http://arrow.apache.org/docs/format/Metadata.html#extension-types">&ldquo;Extension Types&rdquo;</a> to the Arrow columnar format
+metadata. Added support for defining extension types in Python (it was
+already implemented for C++)</li>
+<li>The new <a href="http://arrow.apache.org/docs/format/Flight.html">Arrow Flight RPC</a> messaging framework is available in our C++ and
+Python packages. You can read more about Flight in a <a href="https://www.dremio.com/is-time-to-replace-odbc-jdbc/">recent Dremio blog
+post</a>.</li>
+<li>Implemented <code>Map&lt;K, V&gt;</code> type in C++</li>
+<li>Implement <code>LargeBinary</code>, <code>LargeString</code>, and <code>LargeList</code> types which support
+64-bit variable size offsets, allowing for arbitrarily large binary arrays</li>
+<li>New C++ computational kernels: boolean filter and array selection with
+integer indices</li>
+</ul>
+
+<h2 id="arrow-r-package-on-cran">Arrow R Package on CRAN</h2>
+
+<p>As of this week, the Apache Arrow R library is <a href="https://cran.r-project.org/package=arrow">available on CRAN</a> for
+installation on Windows, macOS, and Linux. This is the result of many months of
+effort by a number of people at Ursa Labs and in the broader Arrow community.
+See the Arrow blog for more details.</p>
+
+<h2 id="near-future-arrow-1-0-0-format-stable-release">Near future: Arrow 1.0.0 Format Stable Release</h2>
+
+<p>We are working with the Arrow community to reach a &ldquo;columnar format stability&rdquo;
+milestone with backward and forward compatibility guarantees for library
+users. While Arrow has been stable for the majority of its lifetime, we hope
+that this stability will ease concerns from downstream projects adopting the
+Arrow format.</p>
+
+<p>We will likely be making a 0.15.0 major release followed by a 1.0.0 release
+later this year. One purpose of this 0.15.0 release is to address an 8-byte
+alignment problem in the Arrow binary protocol having to do with
+Flatbuffers. This will be non-backwards-compatible with old releases of Arrow,
+but we hope to provide a compatibility flag so that old readers can be
+supported in some cases. See the <a href="https://lists.apache.org/thread.html/8440be572c49b7b2ffb76b63e6d935ada9efd9c1c2021369b6d27786@%3Cdev.arrow.apache.org%3E">mailing list discussion</a> for more on this.</p>
+
+<h2 id="preview-faster-more-memory-efficient-parquet-reads">Preview: faster, more memory-efficient Parquet reads</h2>
+
+<p>The Apache Parquet format uses &ldquo;dictionary encoding&rdquo; (also known as &ldquo;dictionary
+compression&rdquo;) to save space when there are many repeated instances of the same
+value in a column of a table. It is a common gotcha that reading this data into
+memory can cause memory use problems as many copies of the same values
+(particularly when those values are strings) are materialized. For example, we
+might have this data:</p>
+
+<pre><code>['something', 'something', 'something', 'something', 'whatever']
+</code></pre>
+
+<p>This can be dictionary encoded like so:</p>
+
+<pre><code>dictionary: ['something', 'whatever']
+indices: [0, 0, 0, 0, 1]
+</code></pre>
+
+<p>Parquet further uses run-length encoding and bit-packing on the dictionary
+indices, saving even more space. It&rsquo;s not uncommon to see 10x or 100x
+compression factor when using Parquet to store datasets with a lot of repeated
+values; this is part of why Parquet has been such a successful storage format.</p>
+
+<p>Over the last several months we have been working to enable reading
+dictionary-encoded data from Parquet more efficiently. As context, the
+<code>pandas.Categorical</code> type has become popular as a way to reduce memory use and
+improve performance in analytics. The Arrow <code>DictionaryArray</code> object in C++ is
+analogous to <code>pandas.Categorical</code> or R&rsquo;s <code>factor</code> type, though it allows for
+the category (dictionary) values to be different from data chunk to data
+chunk. This is especially effective when you have many occurrences of the same
+string.</p>
+
+<p>The next release of Apache Arrow will have support for reading binary / string
+columns directly to DictionaryArray, resulting in much better performance and
+significantly less memory use. In Python, this looks like:</p>
+
+<pre><code class="language-python">
+import pyarrow.parquet as pq
+table = pq.read_table(path, read_dictionary=['f0', 'f1', 'f2'])
+</code></pre>
+
+<p>In <a href="https://gist.github.com/wesm/450d85e52844aee685c0680111cbb1d7">one benchmark</a>, a column with many repeated values uses 40MB of memory
+read as dictionary-encoded (categorical) instead of over 500MB. It is also
+nearly 20x faster to read.</p>
+
+<h2 id="ursa-labs-discontinuing-pyarrow-wheel-maintenance-efforts">Ursa Labs discontinuing pyarrow wheel maintenance efforts</h2>
+
+<p>Our team has spent a significant amount of effort since last year on work
+related to producing packages for many different platforms and operating
+systems. For Python, we have supported both conda and wheel binary packages.</p>
+
+<p>As the Apache Arrow project has grown larger it has accumulated an increasingly
+deep stack of C++ library dependencies. We have found that supporting Python&rsquo;s
+wheel packages has required a disproportionate amount of work compared with the
+other packages. As the team&rsquo;s changelog below shows, over a quarter (16/59) of
+the Python issues we closed were to fix wheel-specific issues.</p>
+
+<p>To summarize some of the problems with wheels:</p>
+
+<ul>
+<li>We are responsible for maintaining our building our entire dependency
+toolchain in a specialized Linux Docker container to produce wheels complying
+with the manylinux1 standard</li>
+<li>The developers of projects like TensorFlow and PyTorch have been deploying
+wheels to the Python Package Index that do not comply with the manylinux1
+standard, causing conflicts due to symbols in the C++ standard library.</li>
+<li>The Python wheel standard require that wheel packages have no external
+dependencies. This means that we must either statically link our dependencies
+or &ldquo;bundle&rdquo; them in the wheel. This &ldquo;toolchain bundling&rdquo; carries a lot of
+risk as we have such critical dependencies as LLVM, OpenSSL, and Protocol
+buffers. Toolchain bundling causes other problems.</li>
+<li>Because of toolchain bundling, we have had a number of conflicts with other
+packages over dependencies such as LLVM.</li>
+</ul>
+
+<p>By contrast, maintaining conda packages in conda-forge has been largely a
+non-issue for us. It is possible that wheels will evolve to address some of the
+above problems, but that will not be an overnight change. In general, we believe
+that conda is a better way to obtain the software we are building.</p>
+
+<p>Consequently, we (Ursa Labs) have decided to focus our efforts elsewhere
+and to leave Python wheel maintenance to others in the Apache Arrow
+community. Since <code>pyarrow</code> has become a dependency of many downstream projects,
+there are others who have a vested interest in helping out with package
+maintenance. We are eager to facilitate their engagement in supporting Python
+wheels, but our engineering team must invest its efforts in other parts of the
+project.</p>
+
+<h2 id="upcoming-projects">Upcoming projects</h2>
+
+<p>In addition to the 1.0.0 format stability milestone, we will be working on a
+number of different areas:</p>
+
+<ul>
+<li>The C++ Datasets project <a href="https://ursalabs.org/blog/2019-04-05/">discussed in previous updates</a>, with an initial
+goal of reaching feature parity between Python and R when working with
+multi-file Parquet datasets</li>
+<li>Supporting Arrow Flight development and documentation</li>
+<li>Continuing to expand our library of analytical kernels</li>
+<li>Improving testing, continuous integration, and other automation in the project</li>
+</ul>
+
+<h2 id="sponsor-acknowledgements">Sponsor Acknowledgements</h2>
+
+<p>We are grateful to the support of our sponsors:</p>
+
+<ul>
+<li>RStudio</li>
+<li>NVIDIA AI Labs</li>
+<li>ODSC Conference</li>
+<li>Two Sigma Investments</li>
+</ul>
+
+<p>We will be announcing some new sponsors in the near future.</p>
+
+<p>If you or your company would be interested in sponsoring the work of Ursa Labs,
+please contact us at <strong>info@ursalabs.org</strong>.</p>
+
+<h2 id="team-changelog">Team Changelog</h2>
+
+<p>The team had 181 commits merged into Apache Arrow in June and July
+2019. You can click on the ASF JIRA links to learn more about the discussion on
+a particular issue or the commit hash to see each patch.</p>
+
+<ul>
+<li>2019-06-03: <a href="https://issues.apache.org/jira/browse/ARROW-5441">ARROW-5441</a>: [C++] Implement FindArrowFlight.cmake (<a href="https://github.com/apache/arrow/commit/4d60c8c0aaad5472d9887ad933a04a5c80d7f6db">4d60c8</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-03: <a href="https://issues.apache.org/jira/browse/ARROW-3814">ARROW-3814</a>: [R] RecordBatch$from_arrays() (<a href="https://github.com/apache/arrow/commit/894b6e70d6e93d7c1f2af3abc4b3302cfa1f57c8">894b6e</a> by <a href="https://github.com/romainfrancois">romainfrancois</a>)</li>
+<li>2019-06-03: <a href="https://issues.apache.org/jira/browse/ARROW-4504">ARROW-4504</a>: [C++] Reduce number of C++ unit test executables from 128 to 82 (<a href="https://github.com/apache/arrow/commit/10ed2565c3764a837c8769980c2920cfd4e8ca03">10ed25</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-03: <a href="https://issues.apache.org/jira/browse/ARROW-2835">ARROW-2835</a>: [C++] Make file position undefined after ReadAt() (<a href="https://github.com/apache/arrow/commit/518df0c14994e4d0752493f8f6ebd2e0535fd320">518df0</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-03: <a href="https://issues.apache.org/jira/browse/ARROW-5487">ARROW-5487</a>: [Docs] Fix Sphinx failure (<a href="https://github.com/apache/arrow/commit/f8874e081552d9ff237a90e7f18cf589732ae171">f8874e</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-03: <a href="https://issues.apache.org/jira/browse/ARROW-5390">ARROW-5390</a>: [CI] Stop testing Python 2.7 on Travis-CI <a href="[4dda72][114] by [pitrou][100]">skip appveyor</a></li>
+<li>2019-06-04: <a href="https://issues.apache.org/jira/browse/ARROW-5334">ARROW-5334</a>: [C++] Ensure all type classes end with Type&rdquo;&rdquo; (<a href="https://github.com/apache/arrow/commit/6727f90ddf78b2ec4ae703f387fc255fac3fc71e">6727f9</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-04: <a href="https://issues.apache.org/jira/browse/ARROW-5507">ARROW-5507</a>: [Plasma] [CUDA] Fix compile error (<a href="https://github.com/apache/arrow/commit/f22aee606375bdceedb799b2a47dcb1980c7ad07">f22aee</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-04: <a href="https://issues.apache.org/jira/browse/ARROW-5020">ARROW-5020</a>: [CI] Split Gandiva-related packages into separate .yml file (<a href="https://github.com/apache/arrow/commit/a4dad3277f32b79e7da2488846f68e1987400786">a4dad3</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-05: <a href="https://issues.apache.org/jira/browse/ARROW-5496">ARROW-5496</a>: [R][CI] Fix relative paths in R codecov.io reporting (<a href="https://github.com/apache/arrow/commit/714ef667680b15124657ea2fc5c7a4d3c9593ffd">714ef6</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-05: <a href="https://issues.apache.org/jira/browse/ARROW-5452">ARROW-5452</a>: [R] Add API documentation website (pkgdown) (<a href="https://github.com/apache/arrow/commit/5a024f79199205c403c31f3797ea8fcc128af5bc">5a024f</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-05: <a href="https://issues.apache.org/jira/browse/ARROW-4990">ARROW-4990</a>: [C++] Support Array-Array comparison (<a href="https://github.com/apache/arrow/commit/a2ef7d9ab4cda9980a2602625c593a246e282847">a2ef7d</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
+<li>2019-06-06: <a href="https://issues.apache.org/jira/browse/ARROW-5521">ARROW-5521</a>: [Packaging] Use Apache RAT 0.13 (<a href="https://github.com/apache/arrow/commit/052130ad4980b70ace2074220ee2db7b912b2c57">052130</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-06: <a href="https://issues.apache.org/jira/browse/ARROW-5436">ARROW-5436</a>: [Python] parquet.read_table add filters keyword (<a href="https://github.com/apache/arrow/commit/d235f69bc7ebfbbd03f031b2191c69244861cf4f">d235f6</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-06: <a href="https://issues.apache.org/jira/browse/ARROW-5495">ARROW-5495</a>: [C++] Update some dependency URLs from http to https (<a href="https://github.com/apache/arrow/commit/f65c9cf5bfb058e7490ddaeaef06264cbfade708">f65c9c</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-06: <a href="https://issues.apache.org/jira/browse/ARROW-5449">ARROW-5449</a>: [C++] Test extended-length paths on Windows (<a href="https://github.com/apache/arrow/commit/b492975faa68913a91c7a4758f125b4678f06a8b">b49297</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-07: <a href="https://issues.apache.org/jira/browse/ARROW-2818">ARROW-2818</a>: [Python] Better error message when trying to convert sparse pandas data to arrow Table (<a href="https://github.com/apache/arrow/commit/6a2b98ee1a0c2f33452ccbafb0120fc1b9d90ea0">6a2b98</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-10: <a href="https://issues.apache.org/jira/browse/ARROW-973">ARROW-973</a>: [Website] Add FAQ page (<a href="https://github.com/apache/arrow/commit/bf2bff7b06f381fd25127224ecf25d586bfe2f8f">bf2bff</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-11: <a href="https://issues.apache.org/jira/browse/ARROW-5544">ARROW-5544</a>: [Archery] Don&rsquo;t return non-zero on regressions (<a href="https://github.com/apache/arrow/commit/f838c995c5b4fd81b0c7ec5d78ed6564f963a9ca">f838c9</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
+<li>2019-06-11: <a href="https://issues.apache.org/jira/browse/ARROW-1207">ARROW-1207</a>: [C++] Implement MapArray, MapBuilder, MapType classes, and IPC support (<a href="https://github.com/apache/arrow/commit/dede1e695140246ddf7caac8db94b81ce093a727">dede1e</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-06-11: <a href="https://issues.apache.org/jira/browse/ARROW-3650">ARROW-3650</a>: [Python] warn on converting DataFrame with mixed type column names (<a href="https://github.com/apache/arrow/commit/27daba047533bf4e9e1cf4485cc9d4bc5c416ec9">27daba</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-11: <a href="https://issues.apache.org/jira/browse/ARROW-1774">ARROW-1774</a>: [C++] Add Array::View() (<a href="https://github.com/apache/arrow/commit/60671d5b9041c577f1899e903cf09fcaa2f8b7fe">60671d</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-11: <a href="https://issues.apache.org/jira/browse/ARROW-5407">ARROW-5407</a>: [C++] Allow building only integration test targets (<a href="https://github.com/apache/arrow/commit/e4f10c3a88576b8a23ea5228f9aab393c6b08677">e4f10c</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-12: <a href="https://issues.apache.org/jira/browse/ARROW-4324">ARROW-4324</a>: [Python] Triage broken type inference logic in presence of a mix of NumPy dtype-having objects and other scalar values (<a href="https://github.com/apache/arrow/commit/25b4a46805a3be01c83e53a92524d4d7b021c74d">25b4a4</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-12: <a href="https://issues.apache.org/jira/browse/ARROW-5339">ARROW-5339</a>: [C++] Add jemalloc URL to thirdparty/versions.txt so download_dependencies.sh gets it (<a href="https://github.com/apache/arrow/commit/4ea86ffeb8fa7a371243ac65052536c409ac2c1f">4ea86f</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-12: <a href="https://issues.apache.org/jira/browse/ARROW-4787">ARROW-4787</a>: [C++] Add support for Null in MemoTable and related kernels (<a href="https://github.com/apache/arrow/commit/ceaed810e6e7a654d0f45db4c8e2f4bae7edefe5">ceaed8</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
+<li>2019-06-12: <a href="https://issues.apache.org/jira/browse/ARROW-4194">ARROW-4194</a>: [Format][Docs] Remove duplicated / out-of-date logical type information from documentation (<a href="https://github.com/apache/arrow/commit/c2da956ac061fe8128edf8ce7527a563e791e170">c2da95</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-12: <a href="https://issues.apache.org/jira/browse/ARROW-5465">ARROW-5465</a>: [Crossbow] Support writing submitted job definition yaml to a file (<a href="https://github.com/apache/arrow/commit/9709e96356b3b975a16b36389cd06cb1e94a94f5">9709e9</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-06-12: <a href="https://issues.apache.org/jira/browse/ARROW-5556">ARROW-5556</a>: [Doc] [Python] Document JSON reader (<a href="https://github.com/apache/arrow/commit/ac4a9ef1096128a1a4b563eaf83f1503e1db953f">ac4a9e</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-13: <a href="https://issues.apache.org/jira/browse/ARROW-5512">ARROW-5512</a>: [C++] Rough API skeleton for C++ Datasets API / framework (<a href="https://github.com/apache/arrow/commit/053cd2354cfc6803d7961344672c13f78be8bd38">053cd2</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-13: <a href="https://issues.apache.org/jira/browse/ARROW-5514">ARROW-5514</a>: [C++] Fix pretty-printing uint64 values (<a href="https://github.com/apache/arrow/commit/35e0c7cf4cf0811b4a2daf63ffd0227e356db53a">35e0c7</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-13: <a href="https://issues.apache.org/jira/browse/ARROW-5242">ARROW-5242</a>: [C++] Update vendored HowardHinnant/date to master (<a href="https://github.com/apache/arrow/commit/4331cb5a8edf15a05c97d52045f665a81661dfc6">4331cb</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-13: <a href="https://issues.apache.org/jira/browse/ARROW-5577">ARROW-5577</a>: [C++][Alpine] Correct googletest shared library paths on non-Windows to fix Alpine build (<a href="https://github.com/apache/arrow/commit/509513fab616b462f2be1f11db32ae182d4411f9">509513</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-13: <a href="https://issues.apache.org/jira/browse/ARROW-5526">ARROW-5526</a>: [GitHub] Add more prominent notice to ISSUE_TEMPLATE.md to direct bug reports to JIRA (<a href="https://github.com/apache/arrow/commit/740e7293c885a96d4a79637d0e984422f2b3fe64">740e72</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-13: <a href="https://issues.apache.org/jira/browse/ARROW-5531">ARROW-5531</a>: [Python] Implement Array.from_buffers for varbinary and nested types, add DataType.num_buffers property (<a href="https://github.com/apache/arrow/commit/f068424de7fea2a3d76eef6dc437745141a3d1d3">f06842</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-13: <a href="https://issues.apache.org/jira/browse/ARROW-5596">ARROW-5596</a>: [Python] Fix Python-3 syntax only in test_flight.py (<a href="https://github.com/apache/arrow/commit/66753993f0138936c6bafec926eae954cbee8883">667539</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-13: <a href="https://issues.apache.org/jira/browse/ARROW-5083">ARROW-5083</a>: [Developer] PR merge script improvements: set already-released Fix Version, display warning when no components set (<a href="https://github.com/apache/arrow/commit/d14ba3ae0073451636fc01c24c189703862cf1ee">d14ba3</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-13: <a href="https://issues.apache.org/jira/browse/ARROW-1278">ARROW-1278</a>: [Integration] Adding integration tests for fixed_size_list (<a href="https://github.com/apache/arrow/commit/d20963def802bb18a7ee3d4f2609b192d4a49760">d20963</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-06-14: <a href="https://issues.apache.org/jira/browse/ARROW-5615">ARROW-5615</a>: [C++] gcc 5.4.0 doesn&rsquo;t want to parse inline C++11 string R literal (<a href="https://github.com/apache/arrow/commit/2e06f2000f42d33a1c3b137e761622dd36f66192">2e06f2</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-14: <a href="https://issues.apache.org/jira/browse/ARROW-3686">ARROW-3686</a>: [Python] support masked arrays in pa.array (<a href="https://github.com/apache/arrow/commit/663b27ba694565bc4a3569a6b51679afe7cb4846">663b27</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-14: <a href="https://issues.apache.org/jira/browse/ARROW-5341">ARROW-5341</a>: [C++][Documentation] developers/cpp.rst should mention documentation warnings (<a href="https://github.com/apache/arrow/commit/8c5271d96649bf68e17d678ceb1057834a9095b3">8c5271</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-06-14: <a href="https://issues.apache.org/jira/browse/ARROW-2981">ARROW-2981</a>: [C++] improve clang-tidy usability (<a href="https://github.com/apache/arrow/commit/72b553147e4bd47e100fbfd58ed49041561b7bc4">72b553</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-06-14: <a href="https://issues.apache.org/jira/browse/ARROW-5616">ARROW-5616</a>: [C++][Python] Fix -Wwrite-strings warning when building against Python 2.7 headers (<a href="https://github.com/apache/arrow/commit/571afd65e4bab6f7bf06106c0da668582d02836a">571afd</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-14: <a href="https://issues.apache.org/jira/browse/ARROW-5603">ARROW-5603</a>: [Python] Register custom pytest markers to avoid warnings (<a href="https://github.com/apache/arrow/commit/1423df1a83173cbd9f76f81274acabdf9259cb5a">1423df</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-14: <a href="https://issues.apache.org/jira/browse/ARROW-5342">ARROW-5342</a>: [Format] Formalize extension types&rdquo; in Arrow protocol metadata&rdquo; (<a href="https://github.com/apache/arrow/commit/6fb850cf57fd6227573cca6d43a46e1d5d2b0a66">6fb850</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-14: <a href="https://issues.apache.org/jira/browse/ARROW-5565">ARROW-5565</a>: [Python][Docs] Add instructions how to use gdb to debug C++ libraries when running Python unit tests (<a href="https://github.com/apache/arrow/commit/c9384641e44707c41f78703a8be738e77a072896">c93846</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-14: <a href="https://issues.apache.org/jira/browse/ARROW-5576">ARROW-5576</a>: [C++] Query ASF mirror system for URL and use when downloading Thrift (<a href="https://github.com/apache/arrow/commit/38b019df4e7a7da45ee0002c3161d87426561eac">38b019</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-14: <a href="https://issues.apache.org/jira/browse/ARROW-5517">ARROW-5517</a>: [C++] Only check header basename for &lsquo;internal&rsquo; when collecting public headers (<a href="https://github.com/apache/arrow/commit/03c08285c692862a72cc794d9fe05961ec0ceb8e">03c082</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-06-14: <a href="https://issues.apache.org/jira/browse/ARROW-840">ARROW-840</a>: [Python] Expose extension types (<a href="https://github.com/apache/arrow/commit/eb5dd508ee3f592bf1c2a04cce09ee95e137e89b">eb5dd5</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-16: <a href="https://issues.apache.org/jira/browse/ARROW-5590">ARROW-5590</a>: [R] Run no libarrow&rdquo; R build in the same CI entry if possible&rdquo; (<a href="https://github.com/apache/arrow/commit/99ee6624340cd2d92fd25083fa3a9e54a30e70a6">99ee66</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-16: <a href="https://issues.apache.org/jira/browse/ARROW-5524">ARROW-5524</a>: [C++] Turn off PARQUET_BUILD_ENCRYPTION in CMake if OpenSSL not found (#4494) (<a href="https://github.com/apache/arrow/commit/9b912a728809e4cfd7cf2013dd6ee182f8c6d0d5">9b912a</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-17: <a href="https://issues.apache.org/jira/browse/ARROW-5624">ARROW-5624</a>: [C++] Fix typo causing build failure when -Duriparser_SOURCE=BUNDLED (<a href="https://github.com/apache/arrow/commit/61781d4ac0d5b7617340c840820b781a1f60161a">61781d</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-17: <a href="https://issues.apache.org/jira/browse/ARROW-5606">ARROW-5606</a>: [Python] deal with deprecated RangeIndex._start/_stop/_step (<a href="https://github.com/apache/arrow/commit/a6f043a19cc75cea65bfe7f312be968926b042f6">a6f043</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-17: <a href="https://issues.apache.org/jira/browse/ARROW-4343">ARROW-4343</a>: [C++] Add docker-compose test for gcc 4.8 / Ubuntu 14.04 (Trusty), expand Xenial/16.04 Dockerfile to test Flight (<a href="https://github.com/apache/arrow/commit/2ca62eb7ad8f2b35c22eae9cdac6fbb773e3ac4b">2ca62e</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-17: <a href="https://issues.apache.org/jira/browse/ARROW-5629">ARROW-5629</a>: [C++] Fix Coverity issues (<a href="https://github.com/apache/arrow/commit/67f920e8dc72c9857daba792014c86b994a4213b">67f920</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-17: <a href="https://issues.apache.org/jira/browse/ARROW-4912">ARROW-4912</a>: [C++] add method for easy renaming of a Table&rsquo;s columns (<a href="https://github.com/apache/arrow/commit/5c562e832f16ce881d0cae9237307e4290ac3dd2">5c562e</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-06-17: <a href="https://issues.apache.org/jira/browse/ARROW-5557">ARROW-5557</a>: [C++] Add VisitBits benchmark (<a href="https://github.com/apache/arrow/commit/bffe31ba5a18ee09195a9583ef43f58baba73af1">bffe31</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-18: <a href="https://issues.apache.org/jira/browse/ARROW-3052">ARROW-3052</a>: [C++] Detect Apache ORC C++ libraries in system/conda toolchain, add to conda requirements (<a href="https://github.com/apache/arrow/commit/463c17b7a2ac9b8fa9bac555d185be9d395fe07c">463c17</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-18: <a href="https://issues.apache.org/jira/browse/ARROW-5082">ARROW-5082</a>: [Python] Stop exporting copies of shared libraries in wheel (<a href="https://github.com/apache/arrow/commit/18ccbb9d1d7a9dc361d32c2c33e1d603bc448b52">18ccbb</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
+<li>2019-06-18: <a href="https://issues.apache.org/jira/browse/ARROW-3759">ARROW-3759</a>: [R][CI] Build and test (no libarrow) on Windows in Appveyor (<a href="https://github.com/apache/arrow/commit/83c211c30cbd39a88603011b42c534519ec174e0">83c211</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-18: <a href="https://issues.apache.org/jira/browse/ARROW-4076">ARROW-4076</a>: [Python] Validate ParquetDataset schema after filtering (<a href="https://github.com/apache/arrow/commit/694bfc824164f2a6a27089f769451abb6299f2d5">694bfc</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-18: <a href="https://issues.apache.org/jira/browse/ARROW-5309">ARROW-5309</a>: [Python] clarify that Schema.append returns new object (<a href="https://github.com/apache/arrow/commit/520feeccafc6b3b2f19aee10f31253dc6504b8b9">520fee</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-18: <a href="https://issues.apache.org/jira/browse/ARROW-2057">ARROW-2057</a>: [Python] Expose option to configure data page size threshold in parquet.write_table (<a href="https://github.com/apache/arrow/commit/26b55d6f45794c39719c33173557de358864ae15">26b55d</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-19: <a href="https://issues.apache.org/jira/browse/ARROW-1558">ARROW-1558</a>: [C++] Implement boolean filter (selection) kernel, rename comparison kernel-related functions (<a href="https://github.com/apache/arrow/commit/a6b210d5e8afdd0326ac9fa62dc5f4c0580a59cf">a6b210</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-06-19: <a href="https://issues.apache.org/jira/browse/ARROW-5652">ARROW-5652</a>: [CI] Fix lint docker image (<a href="https://github.com/apache/arrow/commit/cd88d2efba659217c4f5019c1a52d22f7982a234">cd88d2</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-19: <a href="https://issues.apache.org/jira/browse/ARROW-5648">ARROW-5648</a>: [C++] Avoid using codecvt (<a href="https://github.com/apache/arrow/commit/eb23ea952441cdc0e1046467d688445288db9742">eb23ea</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-19: <a href="https://issues.apache.org/jira/browse/ARROW-3150">ARROW-3150</a>: [Python] Enable Flight in Python wheels for Linux and Windows (<a href="https://github.com/apache/arrow/commit/eced2aa41b1ac9c2060001769f9709b48141d3ca">eced2a</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-19: <a href="https://issues.apache.org/jira/browse/ARROW-4350">ARROW-4350</a>: [Python] Fix conversion from Python to Arrow with nested lists and NumPy dtype=object items (<a href="https://github.com/apache/arrow/commit/c5d2fc57abe9521a28d75bbdea0ecdfa9ff0453a">c5d2fc</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-19: <a href="https://issues.apache.org/jira/browse/ARROW-5474">ARROW-5474</a>: [C++] Document Boost 1.58 as minimum supported version, add docker-compose entry for it, fix broken cpp/Dockerfile* builds (<a href="https://github.com/apache/arrow/commit/5b2bf32f72856589bb50ffd1b47868e5393d04e3">5b2bf3</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-19: <a href="https://issues.apache.org/jira/browse/ARROW-4675">ARROW-4675</a>: [Python] Fix pyarrow.deserialize failure when reading payload in Python 3 payload generated in Python 2 (<a href="https://github.com/apache/arrow/commit/831774b51cf7f74a88059bfbb6c9cc56d65a8554">831774</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-19: <a href="https://issues.apache.org/jira/browse/ARROW-5241">ARROW-5241</a>: [Python] expose option to disable writing statistics to parquet file (<a href="https://github.com/apache/arrow/commit/1a911058eee1f596e515a791b3f90882d0f7540c">1a9110</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-19: <a href="https://issues.apache.org/jira/browse/ARROW-4823">ARROW-4823</a>: [C++][Python] Do not close raw file handle in ReadaheadSpooler, check that file handles passed to read_csv are not closed (<a href="https://github.com/apache/arrow/commit/a155182f6955cca170fe7662cad4cb5f453eaffe">a15518</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-20: <a href="https://issues.apache.org/jira/browse/ARROW-5633">ARROW-5633</a>: [Python] Enable bz2 in Linux wheels (<a href="https://github.com/apache/arrow/commit/a0e1fbb9ef51d05a3f28e221cf8c5d4031a50c93">a0e1fb</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-20: <a href="https://issues.apache.org/jira/browse/ARROW-5650">ARROW-5650</a>: [Python] Update manylinux dependency versions (<a href="https://github.com/apache/arrow/commit/d0d7245ac199c0a2c0117e995aa7ca470e54ad6d">d0d724</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-20: <a href="https://issues.apache.org/jira/browse/ARROW-5669">ARROW-5669</a>: [Python][Packaging] Add ARROW_TEST_DATA env variable to Crossbow Linux Wheel build (<a href="https://github.com/apache/arrow/commit/1fddb34a13644cbe99478c120940cfdddaa713f3">1fddb3</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-20: [Crossbow][Docs] Add note to remind users not to use SSH URLs with Crossbow queue (<a href="https://github.com/apache/arrow/commit/f44bf5ee03bf1d4d1e6ee698f29464b59ae80527">f44bf5</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-21: <a href="https://issues.apache.org/jira/browse/ARROW-3758">ARROW-3758</a>: [R] Build R library and dependencies on Windows in Appveyor CI (<a href="https://github.com/apache/arrow/commit/1d588ab35241792f2e702e90ba331e9dc659354a">1d588a</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-21: <a href="https://issues.apache.org/jira/browse/ARROW-5631">ARROW-5631</a>: [C++] Fix FindBoost targets with cmake3.2 (<a href="https://github.com/apache/arrow/commit/00db153824475800a2a0974a5180d669b156b3ec">00db15</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
+<li>2019-06-21: <a href="https://issues.apache.org/jira/browse/ARROW-5678">ARROW-5678</a>: [R][Lint] Fix hadolint docker linting error (<a href="https://github.com/apache/arrow/commit/9fd7357757bc1dcd1e1c8e4612a2f1bea38ccd04">9fd735</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-21: <a href="https://issues.apache.org/jira/browse/ARROW-5668">ARROW-5668</a> [C++/Python] Include &lsquo;not null&rsquo; in schema fields pretty print (<a href="https://github.com/apache/arrow/commit/a6d1b9c789af3108c95263c97cea5d9fd3cde760">a6d1b9</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-21: <a href="https://issues.apache.org/jira/browse/ARROW-5656">ARROW-5656</a>: [Python][Packaging] Fix macOS wheel builds, add Flight support (<a href="https://github.com/apache/arrow/commit/3a37bf29c512b4c72c8da5b2a8657b21548cc47a">3a37bf</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-21: <a href="https://issues.apache.org/jira/browse/ARROW-5654">ARROW-5654</a>: [C++][Python] Add ChunkedArray::Validate method that checks chunk types for consistency, invoke in Python (<a href="https://github.com/apache/arrow/commit/1718fe35ce3d3a894be15a078ff2e7ab4f0fc598">1718fe</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-21: <a href="https://issues.apache.org/jira/browse/ARROW-5664">ARROW-5664</a>: [Crossbow] Execute nightly crossbow tests on CircleCI instead of Travis (<a href="https://github.com/apache/arrow/commit/b9926b4a7526e8b85758b976063669163371851d">b9926b</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-06-21: <a href="https://issues.apache.org/jira/browse/ARROW-5674">ARROW-5674</a>: [Python] Missing pandas pytest markers from test_parquet.py (<a href="https://github.com/apache/arrow/commit/be16de0bdcbf872412ab6d3da99514218ed3ce8b">be16de</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-06-22: <a href="https://issues.apache.org/jira/browse/ARROW-5687">ARROW-5687</a>: [C++] Remove remaining uses of ARROW_BOOST_VENDORED (<a href="https://github.com/apache/arrow/commit/53ac71a8371a0da4df7dcf1873d76518bddd8407">53ac71</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-22: <a href="https://issues.apache.org/jira/browse/ARROW-5169">ARROW-5169</a>: [Python] preserve field nullability of specified schema in Table.from_pandas (<a href="https://github.com/apache/arrow/commit/a566bc21bf7b5113c76b85a5bbe4bbea13411f9b">a566bc</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-23: <a href="https://issues.apache.org/jira/browse/ARROW-5698">ARROW-5698</a>: [R] Fix docker-compose build (<a href="https://github.com/apache/arrow/commit/1cb762aec27a62684eec6fce4d6b962361904223">1cb762</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-23: <a href="https://issues.apache.org/jira/browse/ARROW-3572">ARROW-3572</a>: [Crossbow] Raise more helpful exception if Crossbow queue has an SSH origin URL (<a href="https://github.com/apache/arrow/commit/ba4e0f3f1f0ce8fd846cc6fadf70ad4383809c4a">ba4e0f</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-24: <a href="https://issues.apache.org/jira/browse/ARROW-5709">ARROW-5709</a>: [C++] Fix gandiva-date_time_test failure on Windows (<a href="https://github.com/apache/arrow/commit/073cf78c035c13c208faeb5b9a1f108a3e36af8c">073cf7</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-24: <a href="https://issues.apache.org/jira/browse/ARROW-5335">ARROW-5335</a>: [Python] Raise exception on variable dictionaries in conversion to Python/pandas (<a href="https://github.com/apache/arrow/commit/bd0cbc95862c0a22b80413ca535057417235cd58">bd0cbc</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-24: <a href="https://issues.apache.org/jira/browse/ARROW-5208">ARROW-5208</a>: [Python] Add mask argument to pyarrow.infer_type, do not look at masked values when inferring output type in pyarrow.array (<a href="https://github.com/apache/arrow/commit/7e4039b32ef20e48944d12c64ffd78d5efb4ebd0">7e4039</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-24: <a href="https://issues.apache.org/jira/browse/ARROW-5683">ARROW-5683</a>: [R] Add snappy to Rtools Windows builds (<a href="https://github.com/apache/arrow/commit/a91f78fa52dc8b9c059bb08ea6972c746977b968">a91f78</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-25: <a href="https://issues.apache.org/jira/browse/ARROW-5427">ARROW-5427</a>: [Python] pandas conversion preserve_index=True to force RangeIndex serialization (<a href="https://github.com/apache/arrow/commit/a02cfe05deacea52008586a79cec8fa09fc00b59">a02cfe</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-25: <a href="https://issues.apache.org/jira/browse/ARROW-5702">ARROW-5702</a>: [C++] parquet::arrow::FileReader::GetSchema() (<a href="https://github.com/apache/arrow/commit/58c89028e5fb31507d973e80a155e903309a8ebe">58c890</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-25: <a href="https://issues.apache.org/jira/browse/ARROW-4847">ARROW-4847</a>: [Python] Add pyarrow.table factory function (<a href="https://github.com/apache/arrow/commit/ff78d30a65dd834a6518181a31f0e4a75d327d8b">ff78d3</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-06-25: <a href="https://issues.apache.org/jira/browse/ARROW-5727">ARROW-5727</a>: [Python] [CI] Install pytest-faulthandler before running tests (<a href="https://github.com/apache/arrow/commit/3f38bd4751a17766682eacc4775176acf09e703e">3f38bd</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-25: <a href="https://issues.apache.org/jira/browse/ARROW-5724">ARROW-5724</a>: [R] [CI] AppVeyor build should use ccache (<a href="https://github.com/apache/arrow/commit/a2c964a0a060d5b503a55b2b901738fbed9edc7e">a2c964</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-25: <a href="https://issues.apache.org/jira/browse/ARROW-5555">ARROW-5555</a>: [R] Add install_arrow() function to assist the user in obtaining C++ runtime libraries (<a href="https://github.com/apache/arrow/commit/c9290cb9ff8d756bdabcff30b776b297198a7a8d">c9290c</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-25: <a href="https://issues.apache.org/jira/browse/ARROW-5710">ARROW-5710</a>: [C++] Allow compiling Gandiva with Ninja on Windows (<a href="https://github.com/apache/arrow/commit/0fc5bc429fbe527b1e42db4307cde8d0ce2818c6">0fc5bc</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-25: <a href="https://issues.apache.org/jira/browse/ARROW-4139">ARROW-4139</a>: [Python][Parquet] Wrap new parquet::LogicalType, cast min/max statistics based on LogicalType (<a href="https://github.com/apache/arrow/commit/74841f5bfcfdeab7d90fda9e469a92aef02a23f3">74841f</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-25: <a href="https://issues.apache.org/jira/browse/ARROW-2461">ARROW-2461</a>: [Python] Build manylinux2010 wheels (<a href="https://github.com/apache/arrow/commit/0568544531437366d3b6ded87f6f9ced8d749d72">056854</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-25: <a href="https://issues.apache.org/jira/browse/ARROW-2136">ARROW-2136</a>: [Python] Check null counts for non-nullable fields when converting from pandas.DataFrame with supplied schema (<a href="https://github.com/apache/arrow/commit/a7f354fc7d7275e8677e34e12e78ca1c6ed9bf34">a7f354</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-25: <a href="https://issues.apache.org/jira/browse/ARROW-5728">ARROW-5728</a>: [Python] Pin jpype1 version to 0.6.3 due to CI breakage from 0.7.0 (<a href="https://github.com/apache/arrow/commit/403f31ac5759b6d1ecbbe93614c3aa98345dd84a">403f31</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-25: <a href="https://issues.apache.org/jira/browse/ARROW-2298">ARROW-2298</a>: [Python] Add unit tests to assert that float64 with NaN values can be safely coerced to integer types when converting from pandas (<a href="https://github.com/apache/arrow/commit/b72544fa4696fb37e229b8727a670dae3d1c6c1d">b72544</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-26: <a href="https://issues.apache.org/jira/browse/ARROW-5725">ARROW-5725</a>: [Crossbow] Port conda recipes to azure pipelines (<a href="https://github.com/apache/arrow/commit/ebff606ec47308e5ef260a45d6c2ea14bb745718">ebff60</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-06-26: <a href="https://issues.apache.org/jira/browse/ARROW-5142">ARROW-5142</a>, ARROW-5732, ARROW-5735: [CI] Emergency fixes (<a href="https://github.com/apache/arrow/commit/f3e152685afe017cdd0af6444d3445f831a149e0">f3e152</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-26: <a href="https://issues.apache.org/jira/browse/ARROW-5739">ARROW-5739</a>: [CI] Fix python docker image (<a href="https://github.com/apache/arrow/commit/4b3fbf3c274407d014da5759975029626ec8960d">4b3fbf</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
+<li>2019-06-26: <a href="https://issues.apache.org/jira/browse/ARROW-5738">ARROW-5738</a>: [Crossbow][Conda] OSX package builds are failing with missing intrinsics (<a href="https://github.com/apache/arrow/commit/eb57fff1e512bf5361ebe396661f510256c72563">eb57ff</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-06-26: <a href="https://issues.apache.org/jira/browse/ARROW-5257">ARROW-5257</a>: [Website] Update site to use official&rdquo; Apache Arrow logo, add clearly marked links to logo&rdquo; (<a href="https://github.com/apache/arrow/commit/c40d8e4c453122cb33ae3802cd488b43d678c89c">c40d8e</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-5500">ARROW-5500</a>: [R] read_csv_arrow() signature should match readr::read_csv() (<a href="https://github.com/apache/arrow/commit/d8b3be9069f6172e41d5f1dda05ab37810d900ce">d8b3be</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-5765">ARROW-5765</a>: [C++] Fix TestDictionary.Validate in release mode, add docker-compose job for testing C++ release build (<a href="https://github.com/apache/arrow/commit/cb224870e2dfe3c12fe3de06d04986c49f69ba7d">cb2248</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-4788">ARROW-4788</a>: [C++] Less verbose API for constructing StructArray (<a href="https://github.com/apache/arrow/commit/fec7a0eb06ff033ceede7aff75865fc1eceab7bb">fec7a0</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-27: [Website] Update committer roster (#4729) (<a href="https://github.com/apache/arrow/commit/9541358179bfab7b1f20bc14334c4600ea7c98af">954135</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-5511">ARROW-5511</a>: [Packaging] Enable Flight in Conda packages (<a href="https://github.com/apache/arrow/commit/a0c1c04feb30a08a64c8ff73b041ed2dff205067">a0c1c0</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-5138">ARROW-5138</a>: [Python] Add documentation about pandas preserve_index option (<a href="https://github.com/apache/arrow/commit/e12d52fbede8e22c83d167b91b958360ac662747">e12d52</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-5490">ARROW-5490</a>: [C++] Remove ARROW_BOOST_HEADER_ONLY (<a href="https://github.com/apache/arrow/commit/b8cadbbfce2f01095c5bbd6b816de70d36bf071f">b8cadb</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-5700">ARROW-5700</a>: [C++] Try to produce better errors on Windows (<a href="https://github.com/apache/arrow/commit/263c28721048b042a586264439c65115123d39b8">263c28</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-5751">ARROW-5751</a>: [Python][Packaging] Ensure that c-ares is linked statically in Python wheels (<a href="https://github.com/apache/arrow/commit/68c95b285761307519356aee9a92ded04e944d7f">68c95b</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-2104">ARROW-2104</a>: [C++] take kernel functions for nested types (<a href="https://github.com/apache/arrow/commit/da752fddab34d71e5c5f648b2cb20740c16ce11e">da752f</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-5730">ARROW-5730</a>: [Python][CI] Selectively skip test cases in the dask integration test (<a href="https://github.com/apache/arrow/commit/f8628fbb3a5c61fb99496c9b9cbaafd5fbe6af88">f8628f</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-5145">ARROW-5145</a>: [C++] More input validation in release mode (<a href="https://github.com/apache/arrow/commit/f77c3427ca801597b572fb197b92b0133269049b">f77c34</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-3762">ARROW-3762</a>: [C++] manage ChunkedArrayBuilder capacity explicitly (<a href="https://github.com/apache/arrow/commit/a634f925d06e58141261e60dec322186e22b750c">a634f9</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-06-27: <a href="https://issues.apache.org/jira/browse/ARROW-5697">ARROW-5697</a>: [GLib] Use system pkg-config in c_glib/Dockerfile to correctly find system libraries such as libglib (<a href="https://github.com/apache/arrow/commit/83e4158d002741b5e5f673a91fe86966baafc4f0">83e415</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-06-28: <a href="https://issues.apache.org/jira/browse/ARROW-5773">ARROW-5773</a>: [R] Clean up documentation before release (<a href="https://github.com/apache/arrow/commit/2e9059278735bceb521562b326650449898cce44">2e9059</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-28: <a href="https://issues.apache.org/jira/browse/ARROW-5781">ARROW-5781</a>: [Archery] Ensure benchmark clone accepts remote in revision (<a href="https://github.com/apache/arrow/commit/db5379fd50f506b811bbd2fed1320b66ae9657cc">db5379</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
+<li>2019-06-28: <a href="https://issues.apache.org/jira/browse/ARROW-5415">ARROW-5415</a>: [Release] Release script should update R version everywhere (<a href="https://github.com/apache/arrow/commit/a0a395e53d89944ab7890bef52bff8c44dd19f64">a0a395</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-06-28: <a href="https://issues.apache.org/jira/browse/ARROW-5771">ARROW-5771</a>: [Python] Add pytz to conda_env_python.yml to fix python-nopandas build (<a href="https://github.com/apache/arrow/commit/da9b5f0f4fbec6aac3fa76aabd7409d9d771592f">da9b5f</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-04: <a href="https://issues.apache.org/jira/browse/ARROW-5816">ARROW-5816</a>: [Release] Do not curl in background in verify-release-candidate.sh (<a href="https://github.com/apache/arrow/commit/b6bdef91abc8804908688a64e0fc979ba57bc552">b6bdef</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-04: <a href="https://issues.apache.org/jira/browse/ARROW-5564">ARROW-5564</a>: [C++] Use uriparser from conda-forge (<a href="https://github.com/apache/arrow/commit/88fcb096c4f24861bc7f8181cba1ad8be0e4048a">88fcb0</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-04: [Release] Test Arrow Flight in Windows release verification script (<a href="https://github.com/apache/arrow/commit/7bb71ce751f8509c867f720fc6f9e5871a3218d2">7bb71c</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-04: <a href="https://issues.apache.org/jira/browse/ARROW-5466">ARROW-5466</a>: [Java][CI] Dockerize Java CI, run all JDK builds in single Travis entry (<a href="https://github.com/apache/arrow/commit/a148982d2d3690b1fa6f8e257b7de3afbecf0d3b">a14898</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-04: [Release] Set C++ libraries runtime path to LD_LIBRARY_PATH when running integration tests (#4775) (<a href="https://github.com/apache/arrow/commit/14baf5e2cc43e4b32a4f0dbef8f95c4dffe255d5">14baf5</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-04: <a href="https://issues.apache.org/jira/browse/ARROW-5848">ARROW-5848</a>: [C++] SO versioning schema after release 1.0.0 (<a href="https://github.com/apache/arrow/commit/380d0a7af14d76df2f6ee0e4eac0e6ff09376435">380d0a</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-07-05: <a href="https://issues.apache.org/jira/browse/ARROW-5849">ARROW-5849</a>: [C++] Fix compiler warnings on mingw32 (<a href="https://github.com/apache/arrow/commit/094ce087dceeb655c554b029203d73fe1ed2918c">094ce0</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-05: <a href="https://issues.apache.org/jira/browse/ARROW-4187">ARROW-4187</a>: [C++] Enable file-benchmark on Windows (<a href="https://github.com/apache/arrow/commit/9cbc42e48de26d022ab94aa88576179d70ae4521">9cbc42</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-05: <a href="https://issues.apache.org/jira/browse/ARROW-5851">ARROW-5851</a>: [C++] Fix compilation of reference benchmarks (<a href="https://github.com/apache/arrow/commit/e6d033f77b0380807d1335c7a65191d16437d562">e6d033</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-05: <a href="https://issues.apache.org/jira/browse/ARROW-5833">ARROW-5833</a>: [C++] Factor out Status-enriching code (<a href="https://github.com/apache/arrow/commit/4319066360d799c7b3632619c32a1c99caec20a2">431906</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-05: <a href="https://issues.apache.org/jira/browse/ARROW-5817">ARROW-5817</a>: [Python] Use pytest mark for flight tests (<a href="https://github.com/apache/arrow/commit/f44c9c76a97af0bca84f0ecfc3f6e7019f4e3679">f44c9c</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-07-05: <a href="https://issues.apache.org/jira/browse/ARROW-5775">ARROW-5775</a>: [C++] Fix thread-unsafe cached data (<a href="https://github.com/apache/arrow/commit/0028b2b65a87c07582ce7da9d53970305022dd26">0028b2</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-05: <a href="https://issues.apache.org/jira/browse/ARROW-5850">ARROW-5850</a>: [CI][R] R appveyor job is broken after release (<a href="https://github.com/apache/arrow/commit/3ac3099b73b10d2525ebc03946b59cf5d7184441">3ac309</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-07-08: <a href="https://issues.apache.org/jira/browse/ARROW-5874">ARROW-5874</a>: [Python] Fix macOS wheels to depend on system or Homebrew OpenSSL (<a href="https://github.com/apache/arrow/commit/00505b55625ed47d239ca2fb8087bd708097b414">00505b</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-07-08: <a href="https://issues.apache.org/jira/browse/ARROW-5863">ARROW-5863</a>: [Python] Use atexit module for extension type finalization to avoid segfault (<a href="https://github.com/apache/arrow/commit/90affbd2c41e80aa8c3fac1e4dbff60aafb415d3">90affb</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-09: <a href="https://issues.apache.org/jira/browse/ARROW-5868">ARROW-5868</a>: [Python] Correctly remove liblz4 shared libraries from manylinux2010 image so lz4 is statically linked (<a href="https://github.com/apache/arrow/commit/7838886bf6862d3bdc1225caf24e2c6150d6ef33">783888</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-10: <a href="https://issues.apache.org/jira/browse/ARROW-5873">ARROW-5873</a>: [Python] Guard for passed None in Schema.equals (<a href="https://github.com/apache/arrow/commit/69c9ef4ef21fd4fce84379b58dc8183db1370b83">69c9ef</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-07-10: <a href="https://issues.apache.org/jira/browse/ARROW-5790">ARROW-5790</a>: [Python] Raise error when trying to convert 0-dim array in pa.array (<a href="https://github.com/apache/arrow/commit/167bad1a4db9f4aa597d90d6c4a5f8bcd41dccbf">167bad</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-07-10: <a href="https://issues.apache.org/jira/browse/ARROW-5803">ARROW-5803</a>: [CI] Dockerize C++ with clang 7 Travis CI (<a href="https://github.com/apache/arrow/commit/5e639059a0330cad256703516996fbed11c8fd83">5e6390</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
+<li>2019-07-11: <a href="https://issues.apache.org/jira/browse/ARROW-5899">ARROW-5899</a>: [Python][Packaging] Build and link uriparser statically in Windows wheel builds (<a href="https://github.com/apache/arrow/commit/4221db9ac7e92a00eae2bd69929e2ac88118c820">4221db</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-07-12: [CI] Fix cmake-format issue in python/CMakeLists.txt (<a href="https://github.com/apache/arrow/commit/3e703572494837fecee1442e5ea8fb8d810d0e1a">3e7035</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-12: <a href="https://issues.apache.org/jira/browse/ARROW-5878">ARROW-5878</a>: [C++][Parquet] Restore pre-0.14.0 Parquet forward compatibility by adding option to unconditionally set TIMESTAMP_MICROS/TIMESTAMP_MILLIS ConvertedType (<a href="https://github.com/apache/arrow/commit/9189e0083120689f5d76291024d165f69279d03f">9189e0</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-12: <a href="https://issues.apache.org/jira/browse/ARROW-5886">ARROW-5886</a>: [Python][Packaging] Manylinux1/2010 compliance issue with libz (<a href="https://github.com/apache/arrow/commit/45ae5c60733b7e9fceebf0c12d547a138211f818">45ae5c</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-07-12: <a href="https://issues.apache.org/jira/browse/ARROW-5588">ARROW-5588</a>: [C++] Better support for building union arrays (<a href="https://github.com/apache/arrow/commit/1bcfbe107067af4a6de486623683fe744614f500">1bcfbe</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-07-15: <a href="https://issues.apache.org/jira/browse/ARROW-5934">ARROW-5934</a>: [Python] Bundle arrow&rsquo;s LICENSE with the wheels (<a href="https://github.com/apache/arrow/commit/a1f96d1233f3436562b76ec40d77eb783d222e3f">a1f96d</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-07-16: <a href="https://issues.apache.org/jira/browse/ARROW-5856">ARROW-5856</a>: [Python] [Packaging] Fix use of C++ / Cython API from wheels (<a href="https://github.com/apache/arrow/commit/690823ce5e863db89d9617818bfe7186d0544cca">690823</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-16: <a href="https://issues.apache.org/jira/browse/ARROW-5958">ARROW-5958</a>: [Python] Link zlib statically in the wheels (<a href="https://github.com/apache/arrow/commit/223ae744cc2a12c60cecb5db593263a03c13f85a">223ae7</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-07-16: <a href="https://issues.apache.org/jira/browse/ARROW-5930">ARROW-5930</a>: [Python] Make Flight server init phase explicit (<a href="https://github.com/apache/arrow/commit/ec78e1306fb2c4573af2c6a8fc72c527501ebcfe">ec78e1</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-16: <a href="https://issues.apache.org/jira/browse/ARROW-5893">ARROW-5893</a>: [C++][Python][GLib][Ruby][MATLAB][R] Remove arrow::Column class (<a href="https://github.com/apache/arrow/commit/c350bbaaa9b1155b9f54d4b312abc8208e13bea7">c350bb</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-17: <a href="https://issues.apache.org/jira/browse/ARROW-5963">ARROW-5963</a>: [R] R Appveyor job does not test changes in the C++ library (<a href="https://github.com/apache/arrow/commit/1abf18ff902e82fee0f23646f12011cbdc9b64d8">1abf18</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-07-17: <a href="https://issues.apache.org/jira/browse/ARROW-3032">ARROW-3032</a>: [C++] Clean up Numpy-related headers (<a href="https://github.com/apache/arrow/commit/906eda2ac5bada52c2b42ef48ceca772b2dc3549">906eda</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-17: <a href="https://issues.apache.org/jira/browse/ARROW-5864">ARROW-5864</a>: [Python] Simplify Result class cython wrapper (<a href="https://github.com/apache/arrow/commit/0f568819336bf0e654f88439243d00e3b25332cb">0f5688</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-07-17: <a href="https://issues.apache.org/jira/browse/ARROW-5969">ARROW-5969</a>: [R] Fix R lint Failures (<a href="https://github.com/apache/arrow/commit/9984d815d7d3fafa9316f27d0ea8266f98e0bf74">9984d8</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-17: <a href="https://issues.apache.org/jira/browse/ARROW-5962">ARROW-5962</a>: [CI][Python] Remove manylinux1 builds from Travis CI (<a href="https://github.com/apache/arrow/commit/fc9d938815f3d0ae1e34bdea4b7f30cec1062930">fc9d93</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-18: <a href="https://issues.apache.org/jira/browse/ARROW-5716">ARROW-5716</a>: [Developer] Improve merge PR script to attribute multiple authors (<a href="https://github.com/apache/arrow/commit/30ba931863d19416ce024ee8d7fad1f4fd96cc3a">30ba93</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-19: <a href="https://issues.apache.org/jira/browse/PARQUET-1468">PARQUET-1468</a>: [C++] Clean up ColumnReader/internal::RecordReader code duplication (<a href="https://github.com/apache/arrow/commit/360db0dd036f0034decdf0d2f1cdb00903d88b0f">360db0</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-23: <a href="https://issues.apache.org/jira/browse/ARROW-6012">ARROW-6012</a>: [C++] Fall back on known Apache mirror for Thrift downloads (<a href="https://github.com/apache/arrow/commit/d4414f605bf9b095ff4bcd99efaf3640c34b7f78">d4414f</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-23: [Website] Add release note for 0.14.1 (#4922) (<a href="https://github.com/apache/arrow/commit/2746a2361a8e42f2d6684749d6ad8e5d3307858c">2746a2</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-07-23: <a href="https://issues.apache.org/jira/browse/ARROW-5999">ARROW-5999</a>: [C++] decouple Iterator from ARROW_DATASETS (<a href="https://github.com/apache/arrow/commit/ee983159bb353859175c5376332685adfce30f4d">ee9831</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-07-24: <a href="https://issues.apache.org/jira/browse/ARROW-6016">ARROW-6016</a>: [Python] Fix get_library_dirs() when Arrow installed as a system package (<a href="https://github.com/apache/arrow/commit/5c005fbca3dc5b5ae4cae524884894bccd1db25e">5c005f</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-24: <a href="https://issues.apache.org/jira/browse/ARROW-5747">ARROW-5747</a>: [C++] Improve CSV header and column names options (<a href="https://github.com/apache/arrow/commit/f35dd92ecb5178a798d747d8728ee6343385a565">f35dd9</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-25: <a href="https://issues.apache.org/jira/browse/ARROW-5594">ARROW-5594</a>: [C++] add UnionArrays support to Take/Filter kernels (<a href="https://github.com/apache/arrow/commit/bc837e64f5a2b6bf3d9cebe69c491600f645a8c8">bc837e</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-07-25: <a href="https://issues.apache.org/jira/browse/ARROW-6032">ARROW-6032</a>: [C++] Ensure 64-bit pointer alignment in CountSetBits() (<a href="https://github.com/apache/arrow/commit/1341fc13029f31f672f110571ecc27898074fd18">1341fc</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-26: <a href="https://issues.apache.org/jira/browse/ARROW-3772">ARROW-3772</a>: [C++][Parquet] Write Parquet dictionary indices directly to DictionaryBuilder rather than routing through dense form (<a href="https://github.com/apache/arrow/commit/38b01764da445ce6383b60a50d1e9b313857a3d7">38b017</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-29: <a href="https://issues.apache.org/jira/browse/ARROW-6006">ARROW-6006</a>: [C++] Do not fail to read empty IPC stream with schema having dictionary types (<a href="https://github.com/apache/arrow/commit/7f30a536b78d4fa313b706e0ec34627d58742712">7f30a5</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-29: <a href="https://issues.apache.org/jira/browse/ARROW-6042">ARROW-6042</a>: [C++][Parquet] Add Dictionary32Builder that always returns 32-bit dictionary indices (<a href="https://github.com/apache/arrow/commit/089e3db8859f48ad32657165788bb50373ddef75">089e3d</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-30: <a href="https://issues.apache.org/jira/browse/ARROW-750">ARROW-750</a>: [Format] [C++] Add LargeBinary and LargeString types (<a href="https://github.com/apache/arrow/commit/6e8607f83363903737fa9392a8a7ba5031665e0b">6e8607</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-30: <a href="https://issues.apache.org/jira/browse/ARROW-6065">ARROW-6065</a>: [C++][Parquet] Clean up parquet/arrow/reader.cc, reduce code duplication, improve readability (<a href="https://github.com/apache/arrow/commit/dbd93e3b8f8690681bd09a6fb596afd141318dbd">dbd93e</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-07-30: <a href="https://issues.apache.org/jira/browse/ARROW-5961">ARROW-5961</a>: [R] Be able to run R-only tests even without C++ library (<a href="https://github.com/apache/arrow/commit/091b25d91cc710d6b56033cc52f0886509be2945">091b25</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-07-30: <a href="https://issues.apache.org/jira/browse/ARROW-6029">ARROW-6029</a>: [R] Improve R docs on how to fix library version mismatch (<a href="https://github.com/apache/arrow/commit/e806f2f778ae99051fcd48355f5f66e63c2ee613">e806f2</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-07-31: <a href="https://issues.apache.org/jira/browse/ARROW-6026">ARROW-6026</a>: [Doc] Add CONTRIBUTING.md (<a href="https://github.com/apache/arrow/commit/5ef58e841fb690d33a2f7f26dd58f02f7ea7f382">5ef58e</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-31: <a href="https://issues.apache.org/jira/browse/ARROW-6066">ARROW-6066</a>: [Website] Fix blog post author header (<a href="https://github.com/apache/arrow/commit/9d7e77cbf8046520b8042c9dd8140c460b47cbaa">9d7e77</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-07-31: <a href="https://issues.apache.org/jira/browse/ARROW-6004">ARROW-6004</a>: [C++] Turn non-ignored empty CSV lines into null/empty values (<a href="https://github.com/apache/arrow/commit/f9384586b9773e12db2ad2e5fabaeaa89793d57f">f93845</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-07-31: <a href="https://issues.apache.org/jira/browse/ARROW-4810">ARROW-4810</a>: [Format] [C++] Add LargeList type (<a href="https://github.com/apache/arrow/commit/8cdf567480cfa4d1d6921fcc8b91f1c714225baa">8cdf56</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+</ul>
+      </div>
+      
+    </div>
+    
+  </div>
+</div>
+    
+<footer class="footer hidden-print">
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+
+</div>
+<div class="pull-right">
+
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              
+    
+<div class="container footline">
+	<div class="row">
+	    <div class="col-md-2">
+	    	<a class="footer-brand-img" href="https://ursalabs.org/">
+            <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
+          </a>
+	    </div>
+	    <div class="col-md-10">
+	    	<h4>Innovating Open Source Data Science Tools</h4>
+	    </div>
+	    <div class="col-md-12">
+	    	<hr>
+	    </div>
+
+	 </div>
+</div>
+
+
+    
+<div class="container copyright">
+    <small>
+  &copy; 2018-2019 Ursa Labs
+
+  </small>
+</div>
+<div class="container copyright tm-info">
+    <small>
+  Apache Arrow, Arrow, Apache, the Apache feather logo, and the Apache Arrow project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.
+
+  </small>
+</div>
+
+
+
+        </div>
+    </div>
+  </div>
+</footer>
+
+    
+
+<script src="https://ursalabs.org/js/jquery.min.js"></script>
+<script src="https://ursalabs.org/js/bootstrap.min.js"></script>
+
+<script src="https://ursalabs.org/js/highlight.pack.js"></script>
+<script src="https://ursalabs.org/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+CONTENTLANGUAGE =  null ; 
+</script>
+
+
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/config/TeX-AMS-MML_HTMLorMML.js"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    for(var all in MathJax.Hub.getAllJax()) {
+        all.SourceElement().parentNode.className += ' has-jax';
+
+    }
+});
+</script>
+
+
+
+
+
+
+  </body>
+</html>
+
