@@ -71,5 +71,27 @@ good chunk of our time was spent fighting fires (in packaging and builds)
 related to the continued expansion of the project in recent months.&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>Announcing Ursa Labs&#39;s partnership with NVIDIA</title>
+      <link>https://ursalabs.org/blog/ursa-labs-partner-nvidia/</link>
+      <pubDate>Wed, 10 Oct 2018 20:26:53 -0400</pubDate>
+      
+      <guid>https://ursalabs.org/blog/ursa-labs-partner-nvidia/</guid>
+      <description>I&amp;rsquo;m excited to announce that NVIDIA AI Labs has signed on as a supporter of Ursa Labs. NVIDIA&amp;rsquo;s new open source RAPIDS data science platform uses Apache Arrow for an interoperable representation of tabular data (data frames). We are looking forward to collaborating on our respective development roadmaps and growing the ecosystem of projects that use Arrow.
+This new financial support will enable us to grow our team of full-time open source software developers.</description>
+    </item>
+    
+    <item>
+      <title>Announcing Ursa Labs: an innovation lab for open source data science</title>
+      <link>https://ursalabs.org/blog/announcing-ursalabs/</link>
+      <pubDate>Thu, 19 Apr 2018 20:26:53 -0400</pubDate>
+      
+      <guid>https://ursalabs.org/blog/announcing-ursalabs/</guid>
+      <description>&lt;p&gt;Funding open source software development is a complicated subject. I’m excited
+to announce that I’ve founded &lt;a href=&#34;https://ursalabs.org&#34;&gt;Ursa Labs&lt;/a&gt;, an
+independent development lab with the mission of innovation in data science
+tooling.&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>

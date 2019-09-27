@@ -138,13 +138,14 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-10 col-lg-10">
       <h1 class="blog-post-title">Ursa Labs June and July 2019 Report</h1>
       <div class="blog-post-meta">
         <span>Wes McKinney</span><br/>
         <span>August 8, 2019</span>
       </div>
       <div class="blog-post-content">
+        
         <p>Like April and May, I&rsquo;m continuing to give bimonthly rather than monthly
 reports. As usual it was a busy couple of months. See the end of the report for
 the team&rsquo;s full changelog of patches contributed to Apache Arrow.</p>
@@ -234,8 +235,7 @@ string.</p>
 columns directly to DictionaryArray, resulting in much better performance and
 significantly less memory use. In Python, this looks like:</p>
 
-<pre><code class="language-python">
-import pyarrow.parquet as pq
+<pre><code class="language-python">import pyarrow.parquet as pq
 table = pq.read_table(path, read_dictionary=['f0', 'f1', 'f2'])
 </code></pre>
 
@@ -508,7 +508,6 @@ a particular issue or the commit hash to see each patch.</p>
       </div>
       
     </div>
-    
   </div>
 </div>
     
