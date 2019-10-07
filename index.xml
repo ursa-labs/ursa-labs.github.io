@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>(c) 2018-2019 Ursa Labs</copyright>
-    <lastBuildDate>Thu, 08 Aug 2019 12:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 07 Oct 2019 00:00:00 -0500</lastBuildDate>
     
 	<atom:link href="https://ursalabs.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Columnar File Performance Check-in for Python and R: Parquet, Feather, and FST</title>
+      <link>https://ursalabs.org/blog/2019-10-columnar-perf/</link>
+      <pubDate>Mon, 07 Oct 2019 00:00:00 -0500</pubDate>
+      
+      <guid>https://ursalabs.org/blog/2019-10-columnar-perf/</guid>
+      <description>Since the founding of Ursa Labs in 2018, one of our focus areas has been accelerating data access to binary file formats for Python and R programmers. My first semi-formal collaboration with the R community was the creation of the Feather file format with Hadley Wickham shortly after the Apache Arrow project was started. Since then I have focused my energy on the Arrow project to build high performance data processing infrastructure.</description>
+    </item>
     
     <item>
       <title>Ursa Labs June and July 2019 Report</title>

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Columnar File Performance Check-in for Python and R: Parquet, Feather, and FST  &middot; Ursa Labs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="In this blog post I do some performance investigations of a few binary columnar formats (Parquet, Feather, and FST) in Python and R" />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Columnar File Performance Check-in for Python and R: Parquet, Feather, and FST  &middot; Ursa Labs ">
+<meta property="og:site_name" content="Ursa Labs"/>
+<meta property="og:url" content="https://ursalabs.org/blog/2019-10-columnar-perf/" />
+<meta property="og:locale" content="en">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="In this blog post I do some performance investigations of a few binary columnar formats (Parquet, Feather, and FST) in Python and R"/>
+<meta property="og:article:published_time" content="2019-10-07T00:00:00-05:00" />
+<meta property="og:article:modified_time" content="2019-10-07T00:00:00-05:00" />
+
+  
+
+  
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107500873-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-107500873-2');
+</script>
+
+
+<link rel="canonical" href="https://ursalabs.org/blog/2019-10-columnar-perf/" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
+<link rel="icon" href="https://ursalabs.org/favicon.ico">
+<meta name="generator" content="Hugo 0.56.0-DEV" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="https://ursalabs.org/css/bootswatch/flatly/bootstrap.min.css">
+
+
+<link rel="stylesheet" href="https://ursalabs.org/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ursalabs.org/css/style.css">
+
+
+
+
+  <link rel="stylesheet" href="https://ursalabs.org/css/highlight/default.css">
+
+
+</head>
+<body>
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+          
+          <a class="navbar-brand-img" href="https://ursalabs.org/">
+            <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
+            
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/about/" >
+                  
+                  About
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/blog/" >
+                  
+                  Blog
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/support/" >
+                  
+                  Support
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/tech/" >
+                  
+                  Technology
+                </a>
+              
+            </li>
+            
+            
+              
+          </ul>
+        </div>
+        
+      </div>
+    </nav>
+  </header>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-lg-10">
+      <h1 class="blog-post-title">Columnar File Performance Check-in for Python and R: Parquet, Feather, and FST</h1>
+      <div class="blog-post-meta">
+        <span>
+          Wes McKinney
+          
+            (<a href="https://twitter.com/wesmckinn">@wesmckinn</a>)
+          
+        </span>
+        <br/>
+        <span>October 7, 2019</span>
+      </div>
+      <div class="blog-post-content">
+        
+        
+
+<p>Since the founding of Ursa Labs in 2018, one of our focus areas has been
+accelerating data access to binary file formats for Python and R
+programmers. My first semi-formal collaboration with the R community was the
+<a href="https://blog.rstudio.com/2016/03/29/feather/">creation of the Feather file format</a> with <a href="https://twitter.com/hadleywickham">Hadley Wickham</a> shortly after
+the Apache Arrow project was started. Since then I have focused my energy on
+the Arrow project to build high performance data processing infrastructure.</p>
+
+<p>We have a number of motivations in working through <a href="https://github.com/apache/arrow">Apache Arrow</a> to
+accelerate data access:</p>
+
+<ul>
+<li>Take advantage of the memory- and CPU-efficient Arrow columnar memory layout
+to speed up processing especially of non-numeric (e.g. string) data</li>
+<li>Utilize a common C++ codebase in both Python and R and maintain that codebase
+with a large community of developers. We&rsquo;ve had active collaborations with
+the Ruby and MATLAB on this codebase, which has been a lot of fun.</li>
+</ul>
+
+<p>In August 2019, the R community <a href="https://cran.r-project.org/package=arrow">published Apache Arrow to CRAN</a>. Since the
+project is about to make its 0.15.0 release with a number of performance
+optimizations relating to Parquet files, we wanted to do some simple
+benchmarking to show how reading popular file formats performs in various scenarios.</p>
+
+<h2 id="file-formats">File formats</h2>
+
+<p>The four columnar formats I look at are:</p>
+
+<ul>
+<li><a href="http://parquet.apache.org/">Apache Parquet</a> (simply &ldquo;Parquet&rdquo; from now on), a popular open standard
+columnar file format used widely in data warehousing. It began originally in
+the Apache Hadoop ecosystem but has been widely adopted by Apache Spark and
+by the cloud vendors (Amazon, Google, and Microsoft).</li>
+<li><a href="https://blog.rstudio.com/2016/03/29/feather/">Feather</a>: a simple columnar format that Hadley and I created that can be
+described as &ldquo;putting Arrow on disk&rdquo;. Compared with Parquet it does not
+feature any encoding or compression; the Arrow data structures are written to
+disk unmodified, so a Feather file occupies the same amount of space on disk
+as it does in-memory</li>
+<li><a href="https://www.fstpackage.org/">FST</a>: a binary columnar format designed for use in R</li>
+<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html">RDS</a>: R&rsquo;s native serialization format</li>
+</ul>
+
+<p>Note that out of the four of these, only Parquet and RDS support nested
+data (i.e. arrays, structs, etc.). The benchmarks in this post, therefore, only
+deal with flat / non-nested data.</p>
+
+<p>Since we&rsquo;re evaluating read performance, we&rsquo;ll also compare reading the same
+data from CSV with <code>data.table::fread()</code>, even though CSV is not a columnar
+file format.</p>
+
+<h2 id="example-datasets-and-methodology">Example Datasets and Methodology</h2>
+
+<p>I look at two large (&gt; 1 Gigabyte) datasets containing a mix of numeric and
+string data:</p>
+
+<ul>
+<li><a href="https://loanperformancedata.fanniemae.com/">Fannie Mae Loan Performance</a>. I use the 2016Q4 &ldquo;Performance&rdquo; dataset
+which is a 1.52 GB uncompressed CSV and 208 MB when gzipped</li>
+<li><a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC Yellow Taxi Trip Data</a>: I use the &ldquo;January 2010 Yellow Taxi Trip
+Records&rdquo; which is a 2.54 GB uncompressed CSV</li>
+</ul>
+
+<p>For each dataset, I generate files for each file format without any data
+preparation or cleansing. Some of these files would benefit from columns being
+converted to &ldquo;dictionary-encoded&rdquo; in Arrow directly, or equivalently &ldquo;factor&rdquo;
+in R or &ldquo;categorical&rdquo; in pandas, but I leave them as normal strings since this
+is more representative of what the average user will experience.</p>
+
+<p>As far as hardware, I use the following machine:</p>
+
+<ul>
+<li>i9-9880H laptop with 8 physical cores. I will test performance using 1, 4,
+and 8 cores</li>
+<li>Ubuntu 18.04 with CPU governor set to &ldquo;performance&rdquo;</li>
+</ul>
+
+<p>Many thanks to Dell for donating this hardware to Ursa Labs!</p>
+
+<h2 id="difference-in-file-sizes">Difference in file sizes</h2>
+
+<p>Before digging into the benchmark results and analysis, I want to point out the
+significant differences in on-disk file sizes of each of the file formats under
+consideration.</p>
+
+<p>In the case of the Fannie Mae dataset, we have:</p>
+
+<ul>
+<li>208 MB as gzipped CSV</li>
+<li>503 MB as FST file</li>
+<li>114 MB as Parquet (with dictionary-encoding and Snappy data page compression)</li>
+<li>3.96 GB as a Feather file (due to the absence of any encoding or
+compression). Note that adding compression to Feather files would be a
+straightforward affair and we would be happy to accept a pull request for
+this</li>
+</ul>
+
+<p>That is, the Parquet file is half as big as even the gzipped CSV.
+One of the reasons that the Parquet file is so small is because of
+<strong>dictionary-encoding</strong> (also called &ldquo;dictionary compression&rdquo;). Dictionary
+compression can yield substantially better compression than using a general
+purpose bytes compressor like LZ4 or ZSTD (which are used in the FST
+format). Parquet was designed to produce very small files that are fast to
+read.</p>
+
+<h2 id="benchmark-results">Benchmark results</h2>
+
+<p>I read the files in several different ways:</p>
+
+<ul>
+<li>Read Parquet to Arrow using <code>pyarrow.parquet</code></li>
+<li>Read Parquet to Arrow using <code>pyarrow.parquet</code> and convert to
+<code>pandas.DataFrame</code></li>
+<li>Read Feather to pandas using <code>pyarrow.feather</code></li>
+<li>Read Parquet to R <code>data.frame</code> using <code>arrow::read_parquet</code></li>
+<li>Read Feather to R <code>data.frame</code> using <code>feather::read_feather</code>, the old
+implementation before we reimplemented Feather in Apache Arrow</li>
+<li>Read Feather to R <code>data.frame</code> using <code>arrow::read_feather</code>, to show the
+performance improvements of the <code>arrow</code> package over the <code>feather</code> package</li>
+<li>Read FST to R <code>data.frame</code> using <code>fst::read_fst</code></li>
+<li>Read CSV file with <code>data.table::fread</code></li>
+<li>Read uncompressed R RDS file created with <code>saveRDS</code></li>
+</ul>
+
+<p>The benchmarking scripts (a bit messy, sorry) are <a href="https://github.com/wesm/notebooks/tree/master/20190919file_benchmarks">located on GitHub</a>. If I
+made any mistakes, please let me know and I will fix it!</p>
+
+<p>In each benchmark, I read the file 5 times and compute the average of the 5
+runs. By reading the file many times I hopefully partially mitigate the impact
+of disk caching in the Linux kernel, but this could be improved.</p>
+
+<p>Here are the performance results. The bars are color-coded by the type of data
+structure created. Note that generating Apache Arrow columnar format is
+significantly more efficient than either R <code>data.frame</code> or <code>pandas.DataFrame</code>. I
+will discuss some reasons why this is below.</p>
+
+<p>The results are split by dataset: see the facet titles on the right. The colors
+indicate what kind of object is produced at the end.
+On the left you can see each case as above. The measurement is the
+average read time; shorter bars indicate faster performance. When possible, the
+libraries use all available CPU cores to improve performance.</p>
+
+<p>Note that these benchmarks were run with Apache Arrow 0.15.0, which includes
+some <a href="http://arrow.apache.org/blog/2019/09/05/faster-strings-cpp-parquet/">performance and memory use-related bug fixes</a> to the previous 0.14.1
+release.</p>
+
+<p><strong>Results with 8 threads (<code>OMP_NUM_THREADS=8</code>)</strong></p>
+
+<div align="center">
+<img src="https://ursalabs.org/20190925_8.png"
+     alt="201909 Columnar Benchmarks"
+     width="100%" class="img-responsive">
+</div>
+
+<p><strong>Results with 4 threads (<code>OMP_NUM_THREADS=4</code>)</strong></p>
+
+<div align="center">
+<img src="https://ursalabs.org/20190925_4.png"
+     alt="201909 Columnar Benchmarks"
+     width="100%" class="img-responsive">
+</div>
+
+<p><strong>Results with 1 thread (<code>OMP_NUM_THREADS=1</code>)</strong></p>
+
+<div align="center">
+<img src="https://ursalabs.org/20190925_1.png"
+     alt="201909 Columnar Benchmarks"
+     width="100%" class="img-responsive">
+</div>
+
+<h2 id="performance-result-discussion">Performance result discussion</h2>
+
+<p>When controlling by output type (e.g. comparing all R <code>data.frame</code> outputs with
+each other) we see the the performance of Parquet, Feather, and FST falls within a relatively small margin
+of each other. The same is true of the <code>pandas.DataFrame</code> outputs.
+<code>data.table::fread</code> is impressively competitive with the 1.5 GB file size but
+lags the others on the 2.5 GB CSV.</p>
+
+<p>There are a few things I would like to comment on:</p>
+
+<ul>
+<li>Why should you use Parquet over the other columnar formats?</li>
+<li>If you are a current user of the <code>feather</code> R package, is it worth upgrading
+to the <code>arrow</code> package for dealing with Feather files?</li>
+<li>Why is reading to Arrow format <strong>so much faster</strong> than to the other data
+frame formats?</li>
+<li>Why are the pandas benchmarks faster than the R benchmarks?</li>
+</ul>
+
+<h3 id="parquet-versus-the-other-formats">Parquet versus the other formats</h3>
+
+<p>Now that there is a well-supported Parquet implementation available for both
+Python and R, we recommend it as a &ldquo;gold standard&rdquo; columnar storage
+format. These benchmarks show that the performance of reading the Parquet
+format is similar to other &ldquo;competing&rdquo; formats, but comes with additional
+benefits:</p>
+
+<ul>
+<li>The size of Parquet files is significantly smaller in almost all cases, due
+to Parquet&rsquo;s compression schemes</li>
+<li>Parquet is an industry-standard data format for data warehousing, so you can
+use Parquet files with Apache Spark and nearly any modern analytic SQL engine
+(Apache Impala, Google BigQuery, Presto, Amazon Redshift, etc.)</li>
+</ul>
+
+<h3 id="from-feather-to-arrow-in-r">From <code>feather</code> to <code>arrow</code> in R</h3>
+
+<p>The <code>arrow::read_feather</code> function can be up to 50% faster than the
+<code>feather::read_feather</code> function, particularly on multi-core CPU
+environments. We recommend all <code>feather</code> users upgrade to use the <code>arrow</code>
+package in R to take advantage of the optimization work we will continue to do
+there.</p>
+
+<h3 id="arrow-versus-the-other-output-types">Arrow versus the other output types</h3>
+
+<p>I used the Linux <code>perf</code> tool to investigate and found that
+the main difference has to do with how strings are handled. As discussed in a
+<a href="http://arrow.apache.org/blog/2019/02/05/python-string-memory-0.12/">past Arrow blog post</a>, string-heavy datasets are expensive to work with
+when using pandas. This can be mitigated by using <code>pandas.Categorical</code>, but
+this won&rsquo;t necessarily help in data where the cardinality of the &ldquo;unique set&rdquo;
+is high.</p>
+
+<p>By contrast, the Apache Arrow string layout is extremely efficient. Each string
+value has a small amount of storage overhead (4 bytes plus 1 bit) and values
+are guaranteed to be adjacent to each other in memory, so the CPU won&rsquo;t have as
+many &ldquo;cache misses&rdquo; when constructing or processing a string column.</p>
+
+<p>I don&rsquo;t know the exact details of how R deals with strings, but my
+understanding is that there is a &ldquo;global string hash table&rdquo; and so strings in R
+feature pointer indirection and likely a similarly high incidence of cache
+misses like pandas does. Note that because of R&rsquo;s global hash table, string
+data in R in general may use less memory than in Python.</p>
+
+<h3 id="pandas-dataframe-vs-r-data-frame">pandas.DataFrame vs. R data.frame</h3>
+
+<p>I haven&rsquo;t done enough analysis to determine exactly where the performance
+difference between Python and R lies. Both implementations use the same Arrow
+C++ code to read the Parquet and Feather files into Arrow format. So the
+difference likely has to do with conversion of strings from Arrow into the
+other data frames&rsquo; representations.</p>
+
+<p>Compared with the Arrow R library, we have spent a significant amount of time
+optimizing the performance of converting from C++ Arrow data structures to
+<code>pandas.DataFrame</code>. I expect there are some performance gains to be found in
+the <a href="https://github.com/apache/arrow/tree/master/r/src">Arrow-to-R conversion C++ code</a>.</p>
+
+<h2 id="conclusion-and-acknowledgements">Conclusion and Acknowledgements</h2>
+
+<p>We hope this analysis is useful for Python and R programmers, and look forward
+to continuing to work with the open source community to make data processing
+faster and more productive!</p>
+
+<p>This work was supported by some of our generous sponsors:</p>
+
+<ul>
+<li>RStudio</li>
+<li>NVIDIA</li>
+<li>Bloomberg</li>
+<li>Two Sigma</li>
+</ul>
+
+<p>If you would like to help fund Arrow development, please drop us a line at
+info@ursalabs.org.</p>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+    
+<footer class="footer hidden-print">
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+
+</div>
+<div class="pull-right">
+
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              
+    
+<div class="container footline">
+	<div class="row">
+	    <div class="col-md-2">
+	    	<a class="footer-brand-img" href="https://ursalabs.org/">
+            <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
+          </a>
+	    </div>
+	    <div class="col-md-10">
+	    	<h4>Innovating Open Source Data Science Tools</h4>
+	    </div>
+	    <div class="col-md-12">
+	    	<hr>
+	    </div>
+
+	 </div>
+</div>
+
+
+    
+<div class="container copyright">
+    <small>
+  &copy; 2018-2019 Ursa Labs
+
+  </small>
+</div>
+<div class="container copyright tm-info">
+    <small>
+  Apache Arrow, Arrow, Apache, the Apache feather logo, and the Apache Arrow project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.
+
+  </small>
+</div>
+
+
+
+        </div>
+    </div>
+  </div>
+</footer>
+
+    
+
+<script src="https://ursalabs.org/js/jquery.min.js"></script>
+<script src="https://ursalabs.org/js/bootstrap.min.js"></script>
+
+<script src="https://ursalabs.org/js/highlight.pack.js"></script>
+<script src="https://ursalabs.org/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+CONTENTLANGUAGE =  null ; 
+</script>
+
+
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/config/TeX-AMS-MML_HTMLorMML.js"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    for(var all in MathJax.Hub.getAllJax()) {
+        all.SourceElement().parentNode.className += ' has-jax';
+
+    }
+});
+</script>
+
+
+
+
+
+
+  </body>
+</html>
+
