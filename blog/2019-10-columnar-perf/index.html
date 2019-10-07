@@ -231,6 +231,18 @@ and 8 cores</li>
 
 <p>Many thanks to Dell for donating this hardware to Ursa Labs!</p>
 
+<p>Version information:</p>
+
+<ul>
+<li>Python interpreter 3.7.4</li>
+<li>Python pyarrow 0.15.0</li>
+<li>Python pandas 0.24.2</li>
+<li>R interpreter 3.6.1</li>
+<li>R arrow 0.15.0</li>
+<li>R data.table 1.12.2</li>
+<li>R fst 0.9.0</li>
+</ul>
+
 <h2 id="difference-in-file-sizes">Difference in file sizes</h2>
 
 <p>Before digging into the benchmark results and analysis, I want to point out the
@@ -247,6 +259,7 @@ consideration.</p>
 compression). Note that adding compression to Feather files would be a
 straightforward affair and we would be happy to accept a pull request for
 this</li>
+<li>4.68 GB as an uncompressed R RDS file</li>
 </ul>
 
 <p>That is, the Parquet file is half as big as even the gzipped CSV.
