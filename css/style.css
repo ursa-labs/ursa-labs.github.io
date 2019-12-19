@@ -186,6 +186,7 @@ footer hr {
 	padding: 40px 40px 40px 0;
 /*	float: left;*/
 	display: inline-block;
+  vertical-align: middle;
 }
 
 .form-group label {

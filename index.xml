@@ -7,10 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>(c) 2018-2019 Ursa Labs</copyright>
-    <lastBuildDate>Mon, 07 Oct 2019 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 19 Dec 2019 00:00:00 -0400</lastBuildDate>
     
 	<atom:link href="https://ursalabs.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ursa Labs Team Report August to December 2019</title>
+      <link>https://ursalabs.org/blog/2019-12-19-eoy-report/</link>
+      <pubDate>Thu, 19 Dec 2019 00:00:00 -0400</pubDate>
+      
+      <guid>https://ursalabs.org/blog/2019-12-19-eoy-report/</guid>
+      <description>&lt;p&gt;With a busy fall full of development and some travel I wasn&amp;rsquo;t able to keep up
+with monthly or bi-monthly reports, so this report gives highlights about the
+Ursa Labs team&amp;rsquo;s work from August up until now. With 2019 nearly behind us,
+this also gives us a moment to reflect on everything that&amp;rsquo;s been accomplished
+this year and look forward to next year. We hope to write a blog post soon
+discussing the big picture plan ahead for 2020.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Columnar File Performance Check-in for Python and R: Parquet, Feather, and FST</title>
