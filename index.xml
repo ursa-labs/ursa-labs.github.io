@@ -13,6 +13,23 @@
     
     
     <item>
+      <title>Announcing New Ursa Labs Sponsors</title>
+      <link>https://ursalabs.org/blog/2020-new-sponsors/</link>
+      <pubDate>Thu, 19 Dec 2019 00:00:00 -0400</pubDate>
+      
+      <guid>https://ursalabs.org/blog/2020-new-sponsors/</guid>
+      <description>&lt;p&gt;We are excited to announce that Ursa Labs has several new sponsors supporting
+our work on Apache Arrow over the coming year:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bloomberg&lt;/li&gt;
+&lt;li&gt;G-Research&lt;/li&gt;
+&lt;li&gt;Intel&lt;/li&gt;
+&lt;li&gt;OneSixtyTwo Technologies&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
       <title>Ursa Labs Team Report August to December 2019</title>
       <link>https://ursalabs.org/blog/2019-12-19-eoy-report/</link>
       <pubDate>Thu, 19 Dec 2019 00:00:00 -0400</pubDate>
