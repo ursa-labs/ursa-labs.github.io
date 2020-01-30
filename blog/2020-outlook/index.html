@@ -274,38 +274,38 @@ us. You can find our 2019 reports here:</p>
 </ul>
 <p>Some of the most significant milestones from 2019 include:</p>
 <ul>
-<li>R bindings development and CRAN release: In August 2019, we made the <a href="http://arrow.apache.org/blog/2019/08/08/r-package-on-cran/">first
-release of Apache Arrow on the CRAN package repository</a>. This was a large
-effort that involved a lot of R-specific packaging work to enable
+<li><strong>R bindings development and CRAN release</strong>: In August 2019, we made the
+<a href="http://arrow.apache.org/blog/2019/08/08/r-package-on-cran/">first release of Apache Arrow on the CRAN package repository</a>. This was a
+large effort that involved a lot of R-specific packaging work to enable
 installation on Linux, macOS, and Windows.  We have most recently been
 working to make the installation process more seamless on Linux. While past
-releases required first installing the Arrow C++ library using a Linux package
-manager like <code>apt</code> or <code>yum</code>, the 0.16 release does not require external
-system dependencies.</li>
-<li>Arrow Flight: We have collaborated over the last 2 years with Dremio and our
-sponsor Two Sigma to create <a href="https://arrow.apache.org/blog/2019/10/13/introducing-arrow-flight/">Arrow Flight, a framework for building high
+releases required first installing the Arrow C++ library using a Linux
+package manager like <code>apt</code> or <code>yum</code>, the 0.16 release does not require
+external system dependencies.</li>
+<li><strong>Arrow Flight</strong>: We have collaborated over the last 2 years with Dremio and
+our sponsor Two Sigma to create <a href="https://arrow.apache.org/blog/2019/10/13/introducing-arrow-flight/">Arrow Flight, a framework for building high
 performance data services</a>. We are very excited about this as it makes it
 easy to use Arrow for faster data transport in distributed systems, blowing
 away legacy data protocols that are bogged down by serialization overhead.</li>
-<li>Filesystems API and S3 support: In C++ we developed a <a href="https://github.com/apache/arrow/pull/4225">standardized
+<li><strong>Filesystems API and S3 support</strong>: In C++ we developed a <a href="https://github.com/apache/arrow/pull/4225">standardized
 filesystem API</a> to tie together local and remove raw file storage with a
 common interface. This is an essential dependency of the Datasets API and
 therefore transitively of the compute APIs.</li>
-<li><a href="https://docs.google.com/document/d/1bVhzifD38qDypnSjtf8exvpP3sSB5x_Kw9m-n66FB2c/edit?usp=sharing">Datasets API</a>: in August we launched this development effort to provide
-efficient access to large datasets consisting potentially of multiple files,
-file formats, or storage backends. This includes intelligent schema
+<li><strong><a href="https://docs.google.com/document/d/1bVhzifD38qDypnSjtf8exvpP3sSB5x_Kw9m-n66FB2c/edit?usp=sharing">Datasets API</a></strong>: in August we launched this development effort to
+provide efficient access to large datasets consisting potentially of multiple
+files, file formats, or storage backends. This includes intelligent schema
 projections and row filtering. We are designing this API to be suitable to
 support streaming analytics as well as fully in-memory data frame-style
 analytics.</li>
-<li>GitHub Actions for Continuous Integration (CI): As the project has grown in
-size and number of active developers, we found ourselves dragged down by long
-build queues on Travis CI and Appveyor. In August 2019, GitHub announced
+<li><strong>GitHub Actions for Continuous Integration (CI)</strong>: As the project has grown
+in size and number of active developers, we found ourselves dragged down by
+long build queues on Travis CI and Appveyor. In August 2019, GitHub announced
 their new integrated CI offering GitHub Actions, and have provided ample
 compute firepower to the Apache Software Foundation. Krisztián Szűcs led a
 mass migration of almost all of our CI tasks to use GitHub Actions, and we
 are very happy with the results.</li>
-<li>Apache Parquet improvements: in addition to improving Parquet performance and
-memory use, we worked to enable deeper integration with Apache Arrow’s
+<li><strong>Apache Parquet improvements</strong>: in addition to improving Parquet performance
+and memory use, we worked to enable deeper integration with Apache Arrow’s
 <a href="https://arrow.apache.org/blog/2019/09/05/faster-strings-cpp-parquet/">dictionary-encoded data types</a>.</li>
 </ul>
 <p>Aside from some of these specific feature areas, we have also made significant
@@ -316,33 +316,34 @@ accessibility to new contributors.</p>
 design documents referenced above and working to deepen our integrations with
 Python and R libraries.</p>
 <ul>
-<li><a href="https://docs.google.com/document/d/1bVhzifD38qDypnSjtf8exvpP3sSB5x_Kw9m-n66FB2c/edit?usp=sharing">Datasets API</a>: We will expand to support all of the file formats for which
-there is an Arrow-based interface. We will also enable writing datasets
+<li><strong><a href="https://docs.google.com/document/d/1bVhzifD38qDypnSjtf8exvpP3sSB5x_Kw9m-n66FB2c/edit?usp=sharing">Datasets API</a></strong>: We will expand to support all of the file formats for
+which there is an Arrow-based interface. We will also enable writing datasets
 instead of only reading them. Deeper support for cloud filesystems (and
 filesystems beyond Amazon S3) is also a priority.</li>
-<li>Kernels and Query Engine Components: Expand our suite of Arrow-native compute
-functions. Implement some essential query engine components such as hash
-aggregation, projection, and sorting.</li>
-<li>C++ DataFrame API: We plan to develop an initial alpha version of this API to
-work in tandem with the compute kernel development. As stated above, the
-DataFrame API provides a convenience API for evaluating analytical operations
-against in-memory datasets.</li>
-<li>Multithreading improvements: Apache Arrow in C++ needs to move beyond simple
-thread pools to manage granular computation tasks and asynchronous IO
+<li><strong>Kernels and Query Engine Components</strong>: Expand our suite of Arrow-native
+compute functions. Implement some essential query engine components such as
+hash aggregation, projection, and sorting.</li>
+<li><strong>C++ DataFrame API</strong>: We plan to develop an initial alpha version of this
+API to work in tandem with the compute kernel development. As stated above,
+the DataFrame API provides a convenience API for evaluating analytical
+operations against in-memory datasets.</li>
+<li><strong>Multithreading improvements</strong>: Apache Arrow in C++ needs to move beyond
+simple thread pools to manage granular computation tasks and asynchronous IO
 operations performed by different steps in an in-memory data pipeline. We
 will work with the community to develop a more forward looking solution to
 parallel task execution.</li>
-<li>C API / Data Interface: We are developing a C-based data interface to make it
-easier for third party systems to exchange Arrow data at C call sites without
-taking on any additional code dependencies. We believe this will simplify
-Arrow adoption in a number of different settings. The Arrow community has
-reached consensus about this and we are working to adopt it formally and
-commit the initial implementation.</li>
-<li>Parquet improvements: We plan to work with the community to enable complete
-support for reading and writing nested data types. This has been a notable
-gap in existing Parquet functionality that is important to have filled.</li>
-<li>Benchmark Dashboard: given the amount of performance-sensitive code that we
-are writing, we intend to develop tooling to begin collecting benchmark
+<li><strong>C API / Data Interface</strong>: We are developing a C-based data interface to
+make it easier for third party systems to exchange Arrow data at C call sites
+without taking on any additional code dependencies. We believe this will
+simplify Arrow adoption in a number of different settings. The Arrow
+community has reached consensus about this and we are working to adopt it
+formally and commit the initial implementation.</li>
+<li><strong>Parquet improvements</strong>: We plan to work with the community to enable
+complete support for reading and writing nested data types. This has been a
+notable gap in existing Parquet functionality that is important to have
+filled.</li>
+<li><strong>Benchmark Dashboard</strong>: given the amount of performance-sensitive code that
+we are writing, we intend to develop tooling to begin collecting benchmark
 outputs from multiple programming languages with the goal of tracking
 performance over time and on different kinds of hardware configurations and
 architectures (e.g. both x86 and ARM). This will be increasingly important to
