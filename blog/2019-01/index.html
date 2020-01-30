@@ -46,7 +46,7 @@
 <link rel="canonical" href="https://ursalabs.org/blog/2019-01/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
-<meta name="generator" content="Hugo 0.59.0-DEV" />
+<meta name="generator" content="Hugo 0.63.0-DEV" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -154,14 +154,10 @@
 of development, we helped release <a href="http://arrow.apache.org/release/0.12.0.html">Apache Arrow 0.12</a> on January 20th. A
 good chunk of our time was spent fighting fires (in packaging and builds)
 related to the continued expansion of the project in recent months.</p>
-
 <p>The 0.12 release contains a new <a href="http://arrow.apache.org/docs/">merged documentation site</a> where you can
 expect more project-level documentation to appear this year.</p>
-
 <h2 id="upcoming-focus-areas">Upcoming Focus Areas</h2>
-
 <p>The team is working in a number of areas in the near future:</p>
-
 <ul>
 <li>Building out the gRPC-based Flight RPC system</li>
 <li>Computational kernels in C++ in support of a future Arrow-native in-memory
@@ -170,19 +166,16 @@ query engine</li>
 support for reading and writing nested types, which currently have only
 limited support</li>
 <li>Reading line-delimited JSON datasets to the Arrow format</li>
-<li>Automation and bot-based job triggering in our physical build cluster. We&rsquo;re
+<li>Automation and bot-based job triggering in our physical build cluster. We're
 hoping to have GitHub bots that we can ask to run various builds in Arrow
 pull requests</li>
 <li>Packaging Gandiva (LLVM expression compiler) and gRPC in conda and wheel
 Python packages</li>
 <li>Work toward getting the R Arrow package on CRAN</li>
 </ul>
-
 <h2 id="c-highlights">C++ highlights</h2>
-
 <p>We made many improvements to our build system and developer tools. Outside of
 some of these esoteric details, some highlights include:</p>
-
 <ul>
 <li>Improve columnar array builder performance</li>
 <li>Gandiva LLVM compiler support on Windows</li>
@@ -191,84 +184,60 @@ for pandas users</li>
 <li>Toolchain improvements to support the gRPC-based Flight initiative</li>
 <li>Alpine Linux support</li>
 </ul>
-
 <p>Hardening the new Flight RPC system for production and making it available to
 C++, Python, and Java developers is a major area of upcoming development
 interest.</p>
-
 <h2 id="python-highlights">Python highlights</h2>
-
 <p>In Python we are working with the Ray, TensorFlow, and PyTorch communities to
 resolve some packaging issues related to the manylinux1 standard for wheel
 binary packages. The outcome there is as yet uncertain.</p>
-
 <p>Some other highlights include:</p>
-
 <ul>
 <li>Bindings for buffered input and output stream classes for better performance
 with high latency file systems like S3 and Google Cloud</li>
 <li>Support for pandas 0.24.x</li>
 </ul>
-
 <h2 id="r-highlights">R highlights</h2>
-
 <p>After a very busy fall, January was a lighter month for R:</p>
-
 <ul>
 <li>Bindings for the Arrow C++ CSV parser</li>
 <li>Multithreaded conversions from <code>arrow::Table</code> to R <code>data.frame.</code></li>
 <li>Bindings for compressed input and output streams, which can be used in many
 contexts</li>
 </ul>
-
 <p>We are working on a plan to get Arrow into CRAN to make it easier for R users
 to install the software. There are some hurdles including getting the Arrow C++
 libraries into Debian, Fedora, and Homebrew. If you could like to help with
 packaging, we would appreciate the assistance.</p>
-
 <h2 id="ursa-labs-development-infrastructure">Ursa Labs Development Infrastructure</h2>
-
 <p>Thanks to generous donations of hardware from NVIDIA, Ursa Labs now has 2 DGX
 Station machines hosted in Nashville, Tennessee, for the team to develop
 on. Each has a 20-core Xeon processor, 4 GPUs, and 256 GB of RAM. NVIDIA has
 also donated a Jetson TX2 dev kit for development and testing on Aarch64.</p>
-
 <p>Our build cluster is growing and we intend to use this hardware to make the
 Apache Arrow community more productive.</p>
-
 <h2 id="conference-talks-blog-posts-and-other-reading">Conference Talks, Blog Posts, and other reading</h2>
-
 <p>Wes spoke at two conferences</p>
-
 <ul>
 <li><a href="https://www.slideshare.net/wesm/ursa-labs-and-apache-arrow-in-2019">Ursa Labs and Apache Arrow 2019</a> at PyData Miami 2019</li>
 <li>The same talk, tailored for the R community, at RStudio Conference 2019</li>
 </ul>
-
 <p>We also published a blog post about some work in Arrow 0.12</p>
-
 <ul>
 <li><a href="http://arrow.apache.org/blog/2019/02/05/python-string-memory-0.12/">Reducing Python String Memory Use in Apache Arrow 0.12</a></li>
 </ul>
-
 <h2 id="apache-arrow-community-notes">Apache Arrow community notes</h2>
-
 <p>As Apache Arrow approaches its third birthday as a top-level Apache project, we
 have surpassed 3000 stars on GitHub with over 240 unique contributors.</p>
-
 <p>There is a discussion happening about building a benchmark database to test the
 different Arrow libraries on many different kinds of hardware, including
 different CPU and GPU architectures</p>
-
 <p>We are just receiving the donation of a Rust-based in-memory query engine,
 DataFusion.</p>
-
 <h2 id="team-changelog">Team Changelog</h2>
-
 <p>The team had 86 commits merged into Apache Arrow in January. You
 can click on the ASF JIRA links to learn more about the discussion on a
 particular issue or the commit hash to see each patch.</p>
-
 <ul>
 <li>2019-01-01: <a href="https://issues.apache.org/jira/browse/ARROW-3910">ARROW-3910</a>: [Python] Set date_as_objects=True as default in to_pandas methods (<a href="https://github.com/apache/arrow/commit/9376d85c409f4b9b272297b3acb6a0f70dcedc32">9376d8</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-01-03: <a href="https://issues.apache.org/jira/browse/ARROW-4148">ARROW-4148</a>: [CI/Python] Disable ORC on nightly Alpine builds (<a href="https://github.com/apache/arrow/commit/6ca8fcdeccc54a80ce90711441a41ec6ffbd216b">6ca8fc</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
@@ -280,10 +249,10 @@ particular issue or the commit hash to see each patch.</p>
 <li>2019-01-04: <a href="https://issues.apache.org/jira/browse/ARROW-4149">ARROW-4149</a>: [CI/C++] Parquet test misses ZSTD compression codec in CMake 3.2 nightly builds (<a href="https://github.com/apache/arrow/commit/1e9a23612d258cd51a20b9eccf7a13bd5be52007">1e9a23</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
 <li>2019-01-04: <a href="https://issues.apache.org/jira/browse/ARROW-4158">ARROW-4158</a>: Allow committers to set ARROW_GITHUB_API_TOKEN for merge script, better debugging output (<a href="https://github.com/apache/arrow/commit/c322aecd82c93f96a6d8b8852c8336a750ebfbb1">c322ae</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-01-07: <a href="https://issues.apache.org/jira/browse/ARROW-4179">ARROW-4179</a>: [Python] Use more public API to determine whether a test has a pytest mark or not (<a href="https://github.com/apache/arrow/commit/1aecb987790bb78c084a2c8f4ce224acc2dfd13b">1aecb9</a> by <a href="https://github.com/wesm">wesm</a>)</li>
-<li>2019-01-07: <a href="https://issues.apache.org/jira/browse/ARROW-4125">ARROW-4125</a>: [Python] Don&rsquo;t fail ASV if Plasma extension is not built (e.g. on Windows) (<a href="https://github.com/apache/arrow/commit/b92b1f5b08a64004c8b35db24a34ac71de7bd0e3">b92b1f</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-01-07: <a href="https://issues.apache.org/jira/browse/ARROW-4125">ARROW-4125</a>: [Python] Don't fail ASV if Plasma extension is not built (e.g. on Windows) (<a href="https://github.com/apache/arrow/commit/b92b1f5b08a64004c8b35db24a34ac71de7bd0e3">b92b1f</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-01-08: <a href="https://issues.apache.org/jira/browse/ARROW-4178">ARROW-4178</a>: [C++] Fix TSan and UBSan errors (<a href="https://github.com/apache/arrow/commit/4f2f53336f2293eea33235e86e41aa9f08e98a1a">4f2f53</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-01-08: <a href="https://issues.apache.org/jira/browse/ARROW-4200">ARROW-4200</a>: [C++/Python] Enable conda_env_python.yml to work on Windows, simplify python/development.rst (<a href="https://github.com/apache/arrow/commit/090a8c020611b2f75ec0e36d765cc6d48adbe9a7">090a8c</a> by <a href="https://github.com/wesm">wesm</a>)</li>
-<li>2019-01-08: <a href="https://issues.apache.org/jira/browse/ARROW-4186">ARROW-4186</a>: [C++] BitmapWriter shouldn&rsquo;t clobber data when length == 0 (<a href="https://github.com/apache/arrow/commit/326015cfc66e1f657cdd6811620137e9e277b43d">326015</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-01-08: <a href="https://issues.apache.org/jira/browse/ARROW-4186">ARROW-4186</a>: [C++] BitmapWriter shouldn't clobber data when length == 0 (<a href="https://github.com/apache/arrow/commit/326015cfc66e1f657cdd6811620137e9e277b43d">326015</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-01-09: <a href="https://issues.apache.org/jira/browse/ARROW-3233">ARROW-3233</a>: [Python] Add prose documentation for CUDA support (<a href="https://github.com/apache/arrow/commit/bcfacaafcb181a39d43dbb3d0540c018a5afe157">bcfaca</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-01-09: <a href="https://issues.apache.org/jira/browse/ARROW-4118">ARROW-4118</a>: [Python] Fix benchmark setup for asv run&rdquo;&rdquo; (<a href="https://github.com/apache/arrow/commit/3330d660643a034168b472b52aebfe0fea84b8cf">3330d6</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-01-09: <a href="https://issues.apache.org/jira/browse/ARROW-3997">ARROW-3997</a>: [Documentation] Clarify dictionary index type (<a href="https://github.com/apache/arrow/commit/6b496f7c1929a0a371fe708ae653228a9e722150">6b496f</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
@@ -399,7 +368,7 @@ particular issue or the commit hash to see each patch.</p>
     
 <div class="container copyright">
     <small>
-  &copy; 2018-2019 Ursa Labs
+  (c) 2018-2019 Ursa Labs
 
   </small>
 </div>

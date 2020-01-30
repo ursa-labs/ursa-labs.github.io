@@ -46,7 +46,7 @@
 <link rel="canonical" href="https://ursalabs.org/blog/2019-02/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
-<meta name="generator" content="Hugo 0.59.0-DEV" />
+<meta name="generator" content="Hugo 0.63.0-DEV" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -156,16 +156,13 @@
 discussing a 0.13 release toward the end of March, so we spent February helping
 the project toward the next release milestone. We have been pushing projects on
 multiple fronts and discuss some of those here.</p>
-
 <p>The <a href="https://globenewswire.com/news-release/2019/02/19/1734042/0/en/The-Apache-Software-Foundation-Announces-Apache-Arrow-Momentum.html">Apache Arrow project just had its 3rd birthday</a>, and we are pleased
 to report that the community is thriving and growing fast after only a short
-time as a top-level project in The Apache Software Foundation. We&rsquo;re really
+time as a top-level project in The Apache Software Foundation. We're really
 looking forward to what the next few years will bring as the Arrow columnar
 format and cross-language development platform becomes even more widely
 adopted.</p>
-
 <h2 id="development-highlights">Development Highlights</h2>
-
 <p>One significant project not represented in the Apache Arrow open source project
 is setting up a <strong>physical build and test cluster</strong> for Ursa Labs. NVIDIA has
 provided us two DGX stations and a Jetson TX2 (Aarch64-based computer). To this
@@ -174,9 +171,7 @@ build cluster will be used for nightly tests and packaging builds as well as
 performance benchmarking. The Arrow community has been discussion public daily
 performance benchmarking and there is a <a href="https://github.com/apache/arrow/tree/master/dev/benchmarking">new SQL schema</a> for a proposed
 benchmark database.</p>
-
 <p>In Apache Arrow, we have been working in several areas:</p>
-
 <ul>
 <li><strong>Line-delimited JSON reader</strong>: <a href="https://github.com/apache/arrow/commit/9c19bb65c128f9e9a82e19b0c0caf575817e8fb2">an initial C++ implementation</a> of
 reading JSON files to the Arrow columnar format. We have more work to do
@@ -204,13 +199,10 @@ too) that are backed by one of the one of the built-in Arrow columnar data types
 <li><strong>LLVM 7 migration</strong>: we have upgraded the project, including Gandiva, to use
 the stable LLVM 7 version</li>
 </ul>
-
 <h2 id="upcoming-focus-areas">Upcoming Focus Areas</h2>
-
 <p>In March one of our main priorities will be working with the Arrow community to
 get the 0.13 release out the door. We will be focusing in several areas to
 follow on with the above:</p>
-
 <ul>
 <li>Getting our build cluster up and running, to help make Arrow developers more
 productive, and helping set up automated daily performance benchmarks with
@@ -223,30 +215,22 @@ new-and-improved timedelta or interval type, as well as a &ldquo;packed C struct
 data type. We are interested in helping implement these new data types. See
 the Arrow developer mailing list for more</li>
 </ul>
-
 <h2 id="sponsor-acknowledgements">Sponsor Acknowledgements</h2>
-
 <p>We are grateful to the support of our sponsors:</p>
-
 <ul>
 <li>RStudio</li>
 <li>NVIDIA AI Labs</li>
 <li>ODSC Conference</li>
 <li>Two Sigma Investments</li>
 </ul>
-
 <p>If you or your company would be interested in sponsoring the work of Ursa Labs,
-please contact us at <strong>info@ursalabs.org</strong>.</p>
-
+please contact us at <strong><a href="mailto:info@ursalabs.org">info@ursalabs.org</a></strong>.</p>
 <h2 id="team-changelog">Team Changelog</h2>
-
 <p>The team had 68 commits merged into Apache Arrow in February 2019. You can
 click on the ASF JIRA links to learn more about the discussion on a particular
 issue or the commit hash to see each patch.</p>
-
 <p>(Note of the patches from early in the month have &ldquo;February 8&rdquo; commit date due
 to a rebase)</p>
-
 <ul>
 <li>2019-02-08: <a href="https://issues.apache.org/jira/browse/ARROW-4431">ARROW-4431</a>: [C++] Fixes for gRPC vendored builds (<a href="https://github.com/apache/arrow/commit/5d742dd52a59803ba2d0cfb0fa4f886d41e7a8fa">5d742d</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-02-08: <a href="https://issues.apache.org/jira/browse/ARROW-4446">ARROW-4446</a>: [C++][Python] Run Gandiva C++ unit tests in Appveyor, get build and tests working in Python (<a href="https://github.com/apache/arrow/commit/2b9155a3f0ab5c8b15986aa683dcdcbeeec967ff">2b9155</a> by <a href="https://github.com/wesm">wesm</a>)</li>
@@ -286,7 +270,7 @@ to a rebase)</p>
 <li>2019-02-18: <a href="https://issues.apache.org/jira/browse/ARROW-4546">ARROW-4546</a>: Update LICENSE.txt with parquet-cpp licenses (<a href="https://github.com/apache/arrow/commit/d0d810bc589253841571ef6d8d8919d6236dadba">d0d810</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
 <li>2019-02-18: <a href="https://issues.apache.org/jira/browse/ARROW-4531">ARROW-4531</a>: [C++] Support slices for SumKernel (<a href="https://github.com/apache/arrow/commit/5680042584cda6cebdf452a782e43a05ba9751d6">568004</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
 <li>2019-02-18: <a href="https://issues.apache.org/jira/browse/ARROW-4565">ARROW-4565</a>: [R] Fix decimal record batches with no null values (<a href="https://github.com/apache/arrow/commit/aeb40ed8bdb939662f43c6a38fd960294542e01b">aeb40e</a> by <a href="https://github.com/javierluraschi">javierluraschi</a>)</li>
-<li>2019-02-18: <a href="https://issues.apache.org/jira/browse/ARROW-4420">ARROW-4420</a>: [INTEGRATION] Make spark integration test pass and test against spark&rsquo;s master branch (<a href="https://github.com/apache/arrow/commit/76979c924ef64da8a6fa2f5133e681cf0649c057">76979c</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-02-18: <a href="https://issues.apache.org/jira/browse/ARROW-4420">ARROW-4420</a>: [INTEGRATION] Make spark integration test pass and test against spark's master branch (<a href="https://github.com/apache/arrow/commit/76979c924ef64da8a6fa2f5133e681cf0649c057">76979c</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
 <li>2019-02-19: <a href="https://issues.apache.org/jira/browse/ARROW-4624">ARROW-4624</a>: [C++] Fix building benchmarks (<a href="https://github.com/apache/arrow/commit/707bac28caab94b6aaa1951a91726cd66178a9ee">707bac</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-02-19: <a href="https://issues.apache.org/jira/browse/ARROW-4347">ARROW-4347</a>: [CI][Python] Also run Python builds when Java affected. (<a href="https://github.com/apache/arrow/commit/6fd5070db28001c1258628a58db78c575887c56d">6fd507</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-02-19: <a href="https://issues.apache.org/jira/browse/ARROW-4623">ARROW-4623</a>: [R] update Rcpp version (<a href="https://github.com/apache/arrow/commit/bd57703b702b00d5d2fdaac2f46314525f32fdad">bd5770</a> by <a href="https://github.com/romainfrancois">romainfrancois</a>)</li>
@@ -310,7 +294,7 @@ to a rebase)</p>
 <li>2019-02-26: <a href="https://issues.apache.org/jira/browse/ARROW-3816">ARROW-3816</a>: [R] nrow.RecordBatch method (<a href="https://github.com/apache/arrow/commit/41fc38f05afdf1cc4955216d744b2e17901d7882">41fc38</a> by <a href="https://github.com/romainfrancois">romainfrancois</a>)</li>
 <li>2019-02-27: <a href="https://issues.apache.org/jira/browse/ARROW-2392">ARROW-2392</a>: [C++] Check schema compatibility when writing a RecordBatch (<a href="https://github.com/apache/arrow/commit/4a084b79f9ab5c1f73658a5e5ff3581f5b875c42">4a084b</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-02-27: <a href="https://issues.apache.org/jira/browse/ARROW-4672">ARROW-4672</a>: [CI] Fix clang-7 build entry (<a href="https://github.com/apache/arrow/commit/e648a762586d1af3a294dd96054a78b90f6e71ec">e648a7</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
-<li>2019-02-27: <a href="https://issues.apache.org/jira/browse/ARROW-4657">ARROW-4657</a>: Don&rsquo;t build benchmarks in release verify script (<a href="https://github.com/apache/arrow/commit/b3f3dbc0fd58b28d109517f2fb7152be83dc1184">b3f3db</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
+<li>2019-02-27: <a href="https://issues.apache.org/jira/browse/ARROW-4657">ARROW-4657</a>: Don't build benchmarks in release verify script (<a href="https://github.com/apache/arrow/commit/b3f3dbc0fd58b28d109517f2fb7152be83dc1184">b3f3db</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
 <li>2019-02-27: <a href="https://issues.apache.org/jira/browse/ARROW-3361">ARROW-3361</a>: [R] Also run cpplint on Rcpp source files (<a href="https://github.com/apache/arrow/commit/d092dd021e310b48bd9152c28696b9e18b534c8e">d092dd</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-02-27: <a href="https://issues.apache.org/jira/browse/ARROW-4560">ARROW-4560</a>: [R] array() needs to take single input, not &hellip; (<a href="https://github.com/apache/arrow/commit/2a14c7ba47d106730adc6c154e74df8d21c45d55">2a14c7</a> by <a href="https://github.com/romainfrancois">romainfrancois</a>)</li>
 <li>2019-02-27: <a href="https://issues.apache.org/jira/browse/ARROW-2627">ARROW-2627</a>: [Python] Add option to pass memory_map argument to ParquetDataset (<a href="https://github.com/apache/arrow/commit/f2fb02b82b60ba9a90c8bad6e5b11e37fc3ea9d3">f2fb02</a> by <a href="https://github.com/wesm">wesm</a>)</li>
@@ -359,7 +343,7 @@ to a rebase)</p>
     
 <div class="container copyright">
     <small>
-  &copy; 2018-2019 Ursa Labs
+  (c) 2018-2019 Ursa Labs
 
   </small>
 </div>

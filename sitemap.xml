@@ -1,19 +1,24 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ursalabs.org/blog/2020-new-sponsors/</loc>
-    <lastmod>2019-12-19T00:00:00-04:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://ursalabs.org/</loc>
-    <lastmod>2019-12-19T00:00:00-04:00</lastmod>
+    <lastmod>2020-01-30T00:00:00-05:00</lastmod>
   </url>
   
   <url>
     <loc>https://ursalabs.org/blog/</loc>
+    <lastmod>2020-01-30T00:00:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ursalabs.org/blog/2020-outlook/</loc>
+    <lastmod>2020-01-30T00:00:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ursalabs.org/blog/2020-new-sponsors/</loc>
     <lastmod>2019-12-19T00:00:00-04:00</lastmod>
   </url>
   
