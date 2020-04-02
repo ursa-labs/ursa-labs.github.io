@@ -5,25 +5,32 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Ursa Labs Blog  &middot; Ursa Labs</title>
+  <title>Ultrafast pandas DataFrame loading from Apache Arrow  &middot; Ursa Labs</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="description" content="" />
+<meta name="description" content="In this blog post, we discuss the work we&#39;ve done in Apache Arrow to efficient construct pandas DataFrame objects. In some cases, we can do it faster than pandas itself." />
 
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Ursa Labs Blog  &middot; Ursa Labs ">
+<meta property="og:title" content="Ultrafast pandas DataFrame loading from Apache Arrow  &middot; Ursa Labs ">
 <meta property="og:site_name" content="Ursa Labs"/>
-<meta property="og:url" content="https://ursalabs.org/blog/" />
+<meta property="og:url" content="https://ursalabs.org/blog/fast-pandas-loading/" />
 <meta property="og:locale" content="en">
 
 
-<meta property="og:type" content="website" />
+<meta property="og:type" content="article" />
+<meta property="og:description" content="In this blog post, we discuss the work we&#39;ve done in Apache Arrow to efficient construct pandas DataFrame objects. In some cases, we can do it faster than pandas itself."/>
+<meta property="og:article:published_time" content="2020-04-02T00:00:00-05:00" />
+<meta property="og:article:modified_time" content="2020-04-02T00:00:00-05:00" />
+
+  
+
+  
 
 
 
@@ -36,7 +43,7 @@
 </script>
 
 
-<link rel="canonical" href="https://ursalabs.org/blog/" />
+<link rel="canonical" href="https://ursalabs.org/blog/fast-pandas-loading/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
 <meta name="generator" content="Hugo 0.63.0-DEV" />
@@ -92,7 +99,7 @@
               
             </li>
             
-            <li class="active">
+            <li class="">
               
                 <a href="https://ursalabs.org/blog/" >
                   
@@ -129,90 +136,90 @@
   </header>
 
 
-<section class="bgimage-support" >
-  <div class="container-fluid">
-    <div class="row">
-      <div class="align-middle center-block col-xs-12">
-        <header class="container hat">
-  <h1>Ursa Labs Blog
-</h1>
-
-</header>
-
-      </div>
-    </div>
-  </div>
-</section>
-<div id="main-content" class="container">
+<div class="container">
   <div class="row">
     <div class="col-md-10 col-lg-10">
-      <ul>
+      <h1 class="blog-post-title">Ultrafast pandas DataFrame loading from Apache Arrow</h1>
+      <div class="blog-post-meta">
+        <span>
+          Wes McKinney
+          
+        </span>
+        <br/>
+        <span>April 2, 2020</span>
+      </div>
+      <div class="blog-post-content">
         
-        <div class="blog-list">
-          <a href="https://ursalabs.org/blog/ursa-labs-partner-nvidia/"><h4 class="post-title">Announcing Ursa Labs's partnership with NVIDIA</h4></a>
-          <span>October 10, 2018</span>
-          
-            <p>I&#39;m excited to announce that NVIDIA AI Labs has signed on as a supporter of Ursa Labs. We are looking forward to collaborating on our respective development roadmaps and growing the ecosystem of projects that use Arrow.</p>
-          
-        
-        <div class="blog-list">
-          <a href="https://ursalabs.org/blog/announcing-ursalabs/"><h4 class="post-title">Announcing Ursa Labs: an innovation lab for open source data science</h4></a>
-          <span>April 19, 2018</span>
-          
-            <p>Funding open source software development is a complicated subject. I’m excited
-to announce that I’ve founded <a href="https://ursalabs.org">Ursa Labs</a>, an
-independent development lab with the mission of innovation in data science
-tooling.</p>
-          
-        
-      </ul>
+        <h2 id="a-surprising-performance-experiment">A Surprising Performance Experiment</h2>
+<p>To start off this blog post, I'll present a surprising fact. The pyarrow
+library is able to construct a <code>pandas.DataFrame</code> faster than using
+<code>pandas.DataFrame</code> directly in some cases. Let's have a look:</p>
+<p>First, I make a dict of 100 NumPy arrays of <code>float64</code> type, a little under 800
+megabytes of data:</p>
+<pre><code>import pandas as pd
+import pyarrow as pa
+import numpy as np
+
+num_rows = 1_000_000
+num_columns = 100
+arr = np.random.randn(num_rows)
+dict_of_numpy_arrays = {
+    'f{}'.format(i): arr
+    for i in range(num_columns)
+}
+</code></pre><p>Then, I measure the time to create a <code>pandas.DataFrame</code> from this dict:</p>
+<pre><code>In [3]: timeit df = pd.DataFrame(dict_of_numpy_arrays)
+82.5 ms ± 865 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+</code></pre><p>You might be wondering why <code>pd.DataFrame(dict_of_numpy_arrays)</code> allocates
+memory or performs computation. More on that later.</p>
+<p>I'll use <code>pyarrow.Table.to_pandas</code> to do the same thing:</p>
+<pre><code>In [4]: timeit df = pa.table(dict_of_numpy_arrays).to_pandas()
+50.2 ms ± 2.63 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
+</code></pre><p>Are you disturbed? Well I'm cheating a little bit by using all 8 cores of my
+laptop. So I'll do the same thing with a single thread:</p>
+<pre><code>In [5]: timeit df = pa.table(dict_of_numpy_arrays).to_pandas(use_threads=False)
+63.4 ms ± 579 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+</code></pre><p>It's still about 24% faster, even single-threaded. It's important to note here
+that conversion to an Arrow array from a contiguous numeric NumPy array without
+nulls is a zero-copy operation.</p>
+<h2 id="what-is-this-sorcery">What is this sorcery?</h2>
+<p>The internals of <code>pandas.DataFrame</code> are a bit complicated. At some point during
+the library's development, it was decided to collect or &ldquo;consolidate&rdquo; columns
+of the same type into two-dimensional NumPy arrays internally. So when you call
+<code>pd.DataFrame(dict_of_numpy_arrays)</code>, pandas internally concatenates these 100
+arrays together into a 1,000,000 by 100 NumPy array.</p>
+<p>We were able to circumvent this logic in pandas to go 25-35% faster from
+pyarrow through a few tactics.</p>
+<ul>
+<li>Constructing the exact internal &ldquo;block&rdquo; structure of a pandas DataFrame, and
+using pandas's developer APIs to construct a DataFrame without any further
+computation or memory allocation.</li>
+<li>Using multiple threads to copy memory</li>
+<li>Using a faster memory allocator than the system allocator used by NumPy (we
+use jemalloc on Linux and macOS)</li>
+</ul>
+<p>You can see all the <a href="https://github.com/apache/arrow/blob/master/cpp/src/arrow/python/arrow_to_pandas.cc">gory details in the Apache Arrow codebase</a>.</p>
+<h2 id="conclusions">Conclusions</h2>
+<p>One of the reasons we did all of this engineering to construct
+<code>pandas.DataFrame</code> as fast as possible is to reduce the number of bespoke
+&ldquo;pandas DataFrame converters&rdquo; that have to be implemented. Systems can produce
+the Apache Arrow columnar format, which can be done in any programming language
+and <a href="https://github.com/apache/arrow/blob/master/docs/source/format/CDataInterface.rst">even without depending on any Apache Arrow libraries</a>, and then use
+functions like <code>pyarrow.Table.to_pandas</code> to convert to pandas.</p>
+<p>The idea is that by going via Arrow, in most cases you'll be able to construct
+<code>pandas.DataFrame</code> much faster than the custom pandas conversion code you might
+write yourself. This is a win-win: you can produce pandas objects faster and we
+collectively have less code overall to maintain. We like to think we did the
+hard work of dealing with pandas's internals so you don't have to.</p>
+<p>Of course, supporting Arrow in your project can have benefits beyond fast
+connectivity to pandas, since more and more projects are adding Arrow support
+as time goes by.</p>
+<p>At Ursa Labs we're interested to hear about the interoperability challenges you
+have and how you might be better served by the computational infrastructure
+we're building in the Apache Arrow project.</p>
+
+      </div>
       
-<nav>
-  <ul class="pagination">
-    
-
-
-<li >
-  <a aria-label="First" href="https://ursalabs.org//blog/">
-    <span aria-hidden="true">&laquo;&laquo;</span>
-  </a>
-</li>
-
-<li >
-  <a aria-label="Previous" href="https://ursalabs.org//blog/">
-    <span aria-hidden="true">&laquo;</span>
-    </a>
-</li>
-
-<li >
-  <a href="https://ursalabs.org//blog/">
-    1
-    </a>
-</li>
-
-<li  class="active" >
-  <a href="https://ursalabs.org//blog/page/2/">
-    2
-    </a>
-</li>
-
-
-<li  class="disabled" >
-  <a aria-label="Next" href="#">
-    <span aria-hidden="true">&raquo;</span>
-    </a>
-</li>
-<li  class="disabled" >
-  <a aria-label="Last" href="https://ursalabs.org//blog/page/2/">
-    <span aria-hidden="true">&raquo;&raquo;</span>
-  </a>
-</li>
-
-
-  </ul>
-</nav>
-
-
     </div>
   </div>
 </div>
