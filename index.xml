@@ -18,7 +18,7 @@
       <pubDate>Thu, 02 Apr 2020 00:00:00 -0500</pubDate>
       
       <guid>https://ursalabs.org/blog/fast-pandas-loading/</guid>
-      <description>A Surprising Performance Experiment To start off this blog post, I&#39;ll present a surprising fact. The pyarrow library is able to construct a pandas.DataFrame faster than using pandas.DataFrame directly in some cases. Let&#39;s have a look:
+      <description>A Surprising Performance Experiment To start off this blog post, I&#39;ll present a surprising fact. The pyarrow library is able to construct a pandas.DataFrame faster than using pandas.DataFrame directly in some cases. Let&#39;s have a look.
 First, I make a dict of 100 NumPy arrays of float64 type, a little under 800 megabytes of data:
 import pandas as pd import pyarrow as pa import numpy as np num_rows = 1_000_000 num_columns = 100 arr = np.</description>
     </item>
