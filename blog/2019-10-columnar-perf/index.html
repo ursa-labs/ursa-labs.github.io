@@ -142,9 +142,11 @@
       <h1 class="blog-post-title">Columnar File Performance Check-in for Python and R: Parquet, Feather, and FST</h1>
       <div class="blog-post-meta">
         <span>
+          
           Wes McKinney
           
             (<a href="https://twitter.com/wesmckinn">@wesmckinn</a>)
+          
           
         </span>
         <br/>
@@ -261,7 +263,7 @@ performance improvements of the <code>arrow</code> package over the <code>feathe
 <li>Read CSV file with <code>data.table::fread</code></li>
 <li>Read uncompressed R RDS file created with <code>saveRDS</code></li>
 </ul>
-<p>The benchmarking scripts (a bit messy, sorry) are <a href="https://github.com/wesm/notebooks/tree/master/20190919file_benchmarks">located on GitHub</a>. If I
+<p>The benchmarking scripts (a bit messy, sorry) are <a href="https://github.com/wesm/notebooks/tree/06c52e03b98797bbbbdd5ffc50011911cd7a1789/20190919file_benchmarks">located on GitHub</a>. If I
 made any mistakes, please let me know and I will fix it!</p>
 <p>In each benchmark, I read the file 5 times and compute the average of the 5
 runs. By reading the file many times I hopefully partially mitigate the impact

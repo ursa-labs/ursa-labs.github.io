@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>(c) 2018-2019 Ursa Labs</copyright>
-    <lastBuildDate>Thu, 02 Apr 2020 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 23 Apr 2020 00:00:00 -0500</lastBuildDate>
     
 	<atom:link href="https://ursalabs.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Feather V2 with Compression Support in Apache Arrow 0.17.0</title>
+      <link>https://ursalabs.org/blog/2020-feather-v2/</link>
+      <pubDate>Thu, 23 Apr 2020 00:00:00 -0500</pubDate>
+      
+      <guid>https://ursalabs.org/blog/2020-feather-v2/</guid>
+      <description>Back in October 2019, we took a look at performance and file sizes for a handful of binary file formats for storing data frames in Python and R. These included Apache Parquet, Feather, and FST.
+In the intervening months, we have developed &amp;ldquo;Feather V2&amp;rdquo;, an evolved version of the Feather format with compression support and complete coverage for Arrow data types. In this post, we explain what Feather V2 is and what you might find it useful.</description>
+    </item>
     
     <item>
       <title>Ultrafast pandas DataFrame loading from Apache Arrow</title>
