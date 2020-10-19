@@ -46,7 +46,7 @@
 <link rel="canonical" href="https://ursalabs.org/blog/2019-12-19-eoy-report/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
-<meta name="generator" content="Hugo 0.63.0-DEV" />
+<meta name="generator" content="Hugo 0.55.6" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -110,6 +110,15 @@
             
             <li class="">
               
+                <a href="https://ursalabs.org/jobs/" >
+                  
+                  Jobs
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
                 <a href="https://ursalabs.org/support/" >
                   
                   Support
@@ -154,14 +163,17 @@
       </div>
       <div class="blog-post-content">
         
-        <p>With a busy fall full of development and some travel I wasn't able to keep up
+        <p>With a busy fall full of development and some travel I wasn&rsquo;t able to keep up
 with monthly or bi-monthly reports, so this report gives highlights about the
-Ursa Labs team's work from August up until now. With 2019 nearly behind us,
-this also gives us a moment to reflect on everything that's been accomplished
+Ursa Labs team&rsquo;s work from August up until now. With 2019 nearly behind us,
+this also gives us a moment to reflect on everything that&rsquo;s been accomplished
 this year and look forward to next year. We hope to write a blog post soon
 discussing the big picture plan ahead for 2020.</p>
+
 <h2 id="development-highlights">Development Highlights</h2>
+
 <h3 id="reading-and-writing-data">Reading and Writing Data</h3>
+
 <ul>
 <li>C++ Datasets API: read multi-file, partitioned datasets as a stream/sequence of
 Arrow columnar batches with minimal exposure of physical details. Enable
@@ -172,24 +184,29 @@ interface to use the common virtual filesystem API</li>
 <li>Parquet improvements: direct-to-<code>DictionaryArray</code> reads, faithful reading and
 writing of <code>pandas</code> Categorical data. See the <a href="https://arrow.apache.org/blog/2019/09/05/faster-strings-cpp-parquet/">blog post</a> for more.</li>
 </ul>
+
 <p>We also worked with the Arrow community to come up with 1.0.0 version plan and
 subsequent backward and forward compatibility guarantees with the Arrow columnar format.</p>
+
 <h3 id="end-user-features">End-user Features</h3>
+
 <ul>
 <li>R bindings include convenience methods for reading Parquet and other file types,
 as well as lower-level classes and methods that wrap the C++ objects. See the
 <a href="https://arrow.apache.org/docs/r/articles/arrow.html">package vignette</a> for details.</li>
 <li><code>dplyr</code> methods for querying Arrow Tables and Datasets in R will be included
 in the next release.</li>
-<li>Integration between Arrow &ldquo;extension types&rdquo; and <code>pandas</code>'s extension (custom)
+<li>Integration between Arrow &ldquo;extension types&rdquo; and <code>pandas</code>&rsquo;s extension (custom)
 arrays.</li>
 </ul>
+
 <h3 id="packaging-and-testing">Packaging and Testing</h3>
+
 <ul>
 <li>R package delivery: now available for download on <a href="https://cran.r-project.org/package=arrow">CRAN</a>; <a href="https://arrow.apache.org/docs/r/">documentation
 website</a> available; nightly binary packages for macOS and Windows
 <a href="https://dl.bintray.com/ursalabs/arrow-r">published</a></li>
-<li>Ported project's continuous integration to GitHub Actions for better
+<li>Ported project&rsquo;s continuous integration to GitHub Actions for better
 maintainability and turnaround time (see ARROW-7101). As part of this, all of
 our Linux CI tasks have been migrated to use Docker Compose for better local
 reproducibility. Reproducing macOS or Windows builds locally still requires
@@ -200,16 +217,21 @@ awareness of failing jobs significantly</li>
 <li>Numerous improvements to C++ build system to enable a &ldquo;zero build dependency&rdquo;
 core build, most optional project components are now disabled by default to
 yield a simpler, faster default build with no external third party
-dependencies. The project's dependence on Boost has been significantly
+dependencies. The project&rsquo;s dependence on Boost has been significantly
 reduced.</li>
 </ul>
+
 <h2 id="releases">Releases</h2>
+
 <ul>
 <li><a href="https://arrow.apache.org/release/0.15.0.html">0.15.0</a> major release on October 5, 2019 (<a href="https://arrow.apache.org/blog/2019/10/06/0.15.0-release/">announcement</a>)</li>
 <li><a href="https://arrow.apache.org/release/0.15.1.html">0.15.1</a> patch release on November 1, 2019</li>
 </ul>
+
 <h2 id="talks-and-blog-posts">Talks and Blog Posts</h2>
+
 <p>Here are some talks and publications from the team during this period:</p>
+
 <ul>
 <li><a href="https://arrow.apache.org/blog/2019/10/13/introducing-arrow-flight/">Introducing Apache Arrow Flight: A Framework for Fast Data Transport</a></li>
 <li><a href="https://arrow.apache.org/blog/2019/10/06/0.15.0-release/">R package initial CRAN release</a></li>
@@ -217,14 +239,20 @@ reduced.</li>
 <li>VLDB 2019 Apache Arrow Tutorial: <a href="https://github.com/wesm/vldb-2019-apache-arrow-workshop">Materials</a> and <a href="https://www.slideshare.net/wesm/apache-arrow-workshop-at-vldb-2019-boss-session-169065658">Slides</a></li>
 <li>OmniSci Converge: <a href="https://www.slideshare.net/wesm/apache-arrow-leveling-up-the-analytics-stack">Slides</a></li>
 </ul>
+
 <h2 id="arrow-maintenance">Arrow Maintenance</h2>
+
 <p>There were 949 overall commits to Apache Arrow during
 the time period. Ursa Labs was responsible for merging 606, so
-63% of the project's overall patch maintenance.</p>
+63% of the project&rsquo;s overall patch maintenance.</p>
+
 <h2 id="team-changelog">Team Changelog</h2>
+
 <p>The team had 468 commits merged into Apache Arrow during this
-period. That is 49% of the project's overall commits.</p>
+period. That is 49% of the project&rsquo;s overall commits.</p>
+
 <p>Here are the most frequently occurring categories of issues:</p>
+
 <ul>
 <li>C++: 220 issues</li>
 <li>CI: 49 issues</li>
@@ -232,8 +260,10 @@ period. That is 49% of the project's overall commits.</p>
 <li>Python: 134 issues</li>
 <li>R: 54 issues</li>
 </ul>
+
 <p>You can click on the ASF JIRA links to learn more about the discussion
 on a particular issue or the commit hash to see each patch.</p>
+
 <ul>
 <li>2019-08-01: <a href="https://issues.apache.org/jira/browse/ARROW-6000">ARROW-6000</a>: [Python] Add support for LargeString and LargeBinary types (<a href="https://github.com/apache/arrow/commit/eb73b962e42b5ae6983bf026ebf825f1f707e245">eb73b9</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-08-01: <a href="https://issues.apache.org/jira/browse/ARROW-6077">ARROW-6077</a>: [C++][Parquet] Build Arrow schema tree&rdquo; from Parquet schema to help with nested data implementation&rdquo; (<a href="https://github.com/apache/arrow/commit/06fd2da5e8e71b660e6eea4b7702ca175e31f3f5">06fd2d</a> by <a href="https://github.com/wesm">wesm</a>)</li>
@@ -246,14 +276,14 @@ on a particular issue or the commit hash to see each patch.</p>
 <li>2019-08-05: <a href="https://issues.apache.org/jira/browse/ARROW-3325">ARROW-3325</a>: [Python][Parquet] Add read_dictionary&rdquo; argument to parquet.read_table, ParquetDataset to enable direct-to-DictionaryArray reads&rdquo; (<a href="https://github.com/apache/arrow/commit/7aefa50a440578ec97a0d713097adb8e89005544">7aefa5</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-08-05: <a href="https://issues.apache.org/jira/browse/ARROW-3204">ARROW-3204</a>: [R] Enable R package to be made available on CRAN (<a href="https://github.com/apache/arrow/commit/60c9356f0b2833667d908409e6af44b1ead23bc6">60c935</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-08-05: <a href="https://issues.apache.org/jira/browse/ARROW-6135">ARROW-6135</a>: [C++] Make KeyValueMetadata::Equals() order-insensitive (<a href="https://github.com/apache/arrow/commit/cf90ea9dbc602b94414ec9c2bd310a03c15ce5b8">cf90ea</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
-<li>2019-08-05: <a href="https://issues.apache.org/jira/browse/ARROW-3325">ARROW-3325</a>: [Python][FOLLOWUP] In Python 2.7, a class's __doc__ member is not writable (#5018) (<a href="https://github.com/apache/arrow/commit/42f4f344f33e6754f28d91ea035e24ded7aa834a">42f4f3</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-08-05: <a href="https://issues.apache.org/jira/browse/ARROW-3325">ARROW-3325</a>: [Python][FOLLOWUP] In Python 2.7, a class&rsquo;s __doc__ member is not writable (#5018) (<a href="https://github.com/apache/arrow/commit/42f4f344f33e6754f28d91ea035e24ded7aa834a">42f4f3</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-08-06: <a href="https://issues.apache.org/jira/browse/ARROW-6084">ARROW-6084</a>: [Python] Support LargeList (<a href="https://github.com/apache/arrow/commit/2774cfb2a2a88af8a72e02010cab7db36b451844">2774cf</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-08-07: <a href="https://issues.apache.org/jira/browse/ARROW-6060">ARROW-6060</a>: [C++] ChunkedBinaryBuilder should only grow when necessary, address runaway memory use in Parquet binary column read (<a href="https://github.com/apache/arrow/commit/49badd25804af85dfe9019ab1390c649a02c89fa">49badd</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
 <li>2019-08-08: <a href="https://issues.apache.org/jira/browse/ARROW-6082">ARROW-6082</a>: [Python] check type of the index_type passed to pa.dictionary() (<a href="https://github.com/apache/arrow/commit/c675df49e0fbbc9e81a2ddcfe8699a17fec22a0f">c675df</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
 <li>2019-08-08: <a href="https://issues.apache.org/jira/browse/ARROW-6152">ARROW-6152</a>: [C++][Parquet] Add parquet::ColumnWriter::WriteArrow method, refactor (<a href="https://github.com/apache/arrow/commit/b4c1763024f6aabb562fb0b83643a71a6e8be5a1">b4c176</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-08-08: <a href="https://issues.apache.org/jira/browse/ARROW-6041">ARROW-6041</a>: [Website] Blog post announcing R library availability on CRAN (<a href="https://github.com/apache/arrow/commit/d63fe6fc8feb79b7f43db957041d1b78e37383a4">d63fe6</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-08-08: <a href="https://issues.apache.org/jira/browse/ARROW-6132">ARROW-6132</a>: [Python] validate result in ListArray.from_arrays (<a href="https://github.com/apache/arrow/commit/3e6d75b6db46dba186ed1a91e77ab95ffeb92888">3e6d75</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
-<li>2019-08-08: <a href="https://issues.apache.org/jira/browse/ARROW-6167">ARROW-6167</a>: [R] macOS binary R packages on CRAN don't have arrow_available (<a href="https://github.com/apache/arrow/commit/13f5e92b87a87669a8fd15c457140dd098408fce">13f5e9</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-08-08: <a href="https://issues.apache.org/jira/browse/ARROW-6167">ARROW-6167</a>: [R] macOS binary R packages on CRAN don&rsquo;t have arrow_available (<a href="https://github.com/apache/arrow/commit/13f5e92b87a87669a8fd15c457140dd098408fce">13f5e9</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-08-08: <a href="https://issues.apache.org/jira/browse/ARROW-6142">ARROW-6142</a>: [R] Install instructions on linux could be clearer (<a href="https://github.com/apache/arrow/commit/908b05838f42abd2f08c4b47cc0cfd1d68043a06">908b05</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-08-08: <a href="https://issues.apache.org/jira/browse/ARROW-6121">ARROW-6121</a>: [Tools] Improve merge tool ergonomics (<a href="https://github.com/apache/arrow/commit/9b3e6927e6657261f4e07d227b1f93f57284997f">9b3e69</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
 <li>2019-08-12: <a href="https://issues.apache.org/jira/browse/ARROW-5977">ARROW-5977</a>: [C++] [Python] Allow specifying which columns to include (<a href="https://github.com/apache/arrow/commit/93688e8c1fa2f22d46394c548a9edbd3d2d7c62d">93688e</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
@@ -265,7 +295,7 @@ on a particular issue or the commit hash to see each patch.</p>
 <li>2019-08-14: <a href="https://issues.apache.org/jira/browse/ARROW-6224">ARROW-6224</a>: [Python] fix deprecated usage of .data (previouly Column.data) (<a href="https://github.com/apache/arrow/commit/c7b937979a8b4a401e455ee3b15a398fab0bb2f2">c7b937</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
 <li>2019-08-15: <a href="https://issues.apache.org/jira/browse/ARROW-6038">ARROW-6038</a>: [C++] Faster type equality (<a href="https://github.com/apache/arrow/commit/91e33dcb6aa3c05eaf9d9d9f09579bb29e3fe175">91e33d</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-08-15: <a href="https://issues.apache.org/jira/browse/ARROW-6237">ARROW-6237</a>: [R] Allow compilation flags to be passed for R package with ARROW_R_CXXFLAGS (<a href="https://github.com/apache/arrow/commit/26666df5b23a25a0f839c24c78874f9ae3df2f29">26666d</a> by <a href="https://github.com/wesm">wesm</a>)</li>
-<li>2019-08-15: <a href="https://issues.apache.org/jira/browse/ARROW-6180">ARROW-6180</a>: [C++][Parquet] Add RandomAccessFile::GetStream that returns InputStream that reads a file segment independent of the file's state, fix concurrent buffered Parquet column reads (<a href="https://github.com/apache/arrow/commit/2c808a2cbd62300a36d682ebd7bd25ad8b6cd500">2c808a</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-08-15: <a href="https://issues.apache.org/jira/browse/ARROW-6180">ARROW-6180</a>: [C++][Parquet] Add RandomAccessFile::GetStream that returns InputStream that reads a file segment independent of the file&rsquo;s state, fix concurrent buffered Parquet column reads (<a href="https://github.com/apache/arrow/commit/2c808a2cbd62300a36d682ebd7bd25ad8b6cd500">2c808a</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-08-15: <a href="https://issues.apache.org/jira/browse/ARROW-6259">ARROW-6259</a>: [C++] Add -Wno-extra-semi-stmt when compiling with clang 8 to work around Flatbuffers bug, suppress other new LLVM 8 warnings (<a href="https://github.com/apache/arrow/commit/fb8cb8968fa28c3b3e943cb86dbe5c57d97ea422">fb8cb8</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-08-15: <a href="https://issues.apache.org/jira/browse/ARROW-5952">ARROW-5952</a>: [Python] fix conversion of chunked dictionary array with 0 chunks (<a href="https://github.com/apache/arrow/commit/5479d3047a23410de00f50687764a4f4300baba5">5479d3</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
 <li>2019-08-16: <a href="https://issues.apache.org/jira/browse/ARROW-6170">ARROW-6170</a>: [R] Faster docker-compose build (<a href="https://github.com/apache/arrow/commit/ea9106798993c9b54127c1a6f1b13a6aa394f9de">ea9106</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
@@ -296,7 +326,7 @@ on a particular issue or the commit hash to see each patch.</p>
 <li>2019-08-21: <a href="https://issues.apache.org/jira/browse/ARROW-6174">ARROW-6174</a>: [C++] Validate chunks in ChunkedArray::Validate. Fix validation of sliced ListArray, values null checks (<a href="https://github.com/apache/arrow/commit/7eb9a1a17b88026d5647ca52a70fb8983822dbb2">7eb9a1</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-08-21: <a href="https://issues.apache.org/jira/browse/ARROW-6092">ARROW-6092</a>: [Python] Fix C++ arrow-python-test on Python 2.7 (<a href="https://github.com/apache/arrow/commit/e0910a3b0d748da070d599d9641f3696be166d92">e0910a</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-08-22: <a href="https://issues.apache.org/jira/browse/ARROW-6291">ARROW-6291</a>: [C++] Do not override ARROW_PARQUET if other PARQUET options are enabled (<a href="https://github.com/apache/arrow/commit/62fd703a4ef0abbecb02397a06a630a9dee382d9">62fd70</a> by <a href="https://github.com/wesm">wesm</a>)</li>
-<li>2019-08-22: <a href="https://issues.apache.org/jira/browse/ARROW-6183">ARROW-6183</a>: [R] Document that you don't have to use tidyselect if you don't want (<a href="https://github.com/apache/arrow/commit/3c9236d198b93ae3f59d39ce958909a1909078f5">3c9236</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-08-22: <a href="https://issues.apache.org/jira/browse/ARROW-6183">ARROW-6183</a>: [R] Document that you don&rsquo;t have to use tidyselect if you don&rsquo;t want (<a href="https://github.com/apache/arrow/commit/3c9236d198b93ae3f59d39ce958909a1909078f5">3c9236</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-08-22: <a href="https://issues.apache.org/jira/browse/ARROW-6178">ARROW-6178</a>: [Developer] Keep prompting for authors in merge script for multi-author PRs if given bad input (<a href="https://github.com/apache/arrow/commit/ad568aeff7db940207fbe279e5cca30dd7a88f9a">ad568a</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-08-22: <a href="https://issues.apache.org/jira/browse/ARROW-3531">ARROW-3531</a>: [Python] add Schema.field() method / deprecate field_by_name (<a href="https://github.com/apache/arrow/commit/6cbaf72514e1f7833c9d173172413730a419291c">6cbaf7</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
 <li>2019-08-23: <a href="https://issues.apache.org/jira/browse/ARROW-4848">ARROW-4848</a>: [C++] Static libparquet not compiled with -DARROW_STATIC on Windows (<a href="https://github.com/apache/arrow/commit/c050244adcd68cb93920c70390c814df049aa749">c05024</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
@@ -311,7 +341,7 @@ on a particular issue or the commit hash to see each patch.</p>
 <li>2019-08-25: <a href="https://issues.apache.org/jira/browse/ARROW-6238">ARROW-6238</a>: [C++][Dataset] Implement SimpleDataSource, SimpleDataFragment and SimpleScanTask (<a href="https://github.com/apache/arrow/commit/e0fa3d19a1bce02bd39ccb88b0721db162f5d9ba">e0fa3d</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
 <li>2019-08-26: <a href="https://issues.apache.org/jira/browse/ARROW-6301">ARROW-6301</a>: [C++][Python] Prevent ExtensionType-related race condition in Python process teardown by exposing shared_ptr to global ExtensionTypeRegistry&rdquo;&rdquo; (<a href="https://github.com/apache/arrow/commit/c9bd6d736cd77371bb9a31cfaa7d47580cc111ae">c9bd6d</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-08-27: <a href="https://issues.apache.org/jira/browse/ARROW-6323">ARROW-6323</a>: [R] Expand file paths when passing to readers (<a href="https://github.com/apache/arrow/commit/6a7f07adaedafcf24bf508898d39f83f962a0018">6a7f07</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
-<li>2019-08-27: <a href="https://issues.apache.org/jira/browse/ARROW-6338">ARROW-6338</a>: [R] Type function names don't match type names (<a href="https://github.com/apache/arrow/commit/cef5f36a1eefea9c10c05f2b7bbc171fa6341103">cef5f3</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-08-27: <a href="https://issues.apache.org/jira/browse/ARROW-6338">ARROW-6338</a>: [R] Type function names don&rsquo;t match type names (<a href="https://github.com/apache/arrow/commit/cef5f36a1eefea9c10c05f2b7bbc171fa6341103">cef5f3</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-08-27: <a href="https://issues.apache.org/jira/browse/ARROW-6363">ARROW-6363</a>: [R] segfault in Table__from_dots with unexpected schema (<a href="https://github.com/apache/arrow/commit/3690fbaa530fe569029746b818919f0e315a87d6">3690fb</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-08-27: <a href="https://issues.apache.org/jira/browse/ARROW-6229">ARROW-6229</a>: [C++][Dataset] implement FileSystemBasedDataSource (<a href="https://github.com/apache/arrow/commit/17a0709dc66c5b2497952653efd2fd1dd978cb15">17a070</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
 <li>2019-08-27: <a href="https://issues.apache.org/jira/browse/ARROW-6364">ARROW-6364</a>: [R] Handling unexpected input to time64() et al: (<a href="https://github.com/apache/arrow/commit/31bdc0b6c657e61c68dccb39c66fdf0b0da049e3">31bdc0</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
@@ -344,7 +374,7 @@ on a particular issue or the commit hash to see each patch.</p>
 <li>2019-09-04: <a href="https://issues.apache.org/jira/browse/ARROW-4836">ARROW-4836</a>: [C++] Support Tell() on compressed streams (<a href="https://github.com/apache/arrow/commit/26f631fef0e718d98a31bd78a5e9d72c9b76054b">26f631</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-09-04: <a href="https://issues.apache.org/jira/browse/ARROW-6450">ARROW-6450</a>: [C++] Use 2x reallocation strategy in BufferBuilder instead of 1.5x (<a href="https://github.com/apache/arrow/commit/ea309ddab5fac1355d8cd39e6f0b7d602c011612">ea309d</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-04: <a href="https://issues.apache.org/jira/browse/ARROW-6432">ARROW-6432</a>: [CI][Crossbow] Remove alpine nightly crossbow jobs (<a href="https://github.com/apache/arrow/commit/c0656afbc29c667c346e825890f6ce3b8d20321d">c0656a</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
-<li>2019-09-04: <a href="https://issues.apache.org/jira/browse/ARROW-6454">ARROW-6454</a>: [LICENSE] Add LLVM's license due to static linkage (<a href="https://github.com/apache/arrow/commit/131ae4d5312404ca49b5750f5037633ec2bf1401">131ae4</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-09-04: <a href="https://issues.apache.org/jira/browse/ARROW-6454">ARROW-6454</a>: [LICENSE] Add LLVM&rsquo;s license due to static linkage (<a href="https://github.com/apache/arrow/commit/131ae4d5312404ca49b5750f5037633ec2bf1401">131ae4</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
 <li>2019-09-04: <a href="https://issues.apache.org/jira/browse/ARROW-6431">ARROW-6431</a>: [Python] Test suite fails without pandas installed (<a href="https://github.com/apache/arrow/commit/243d4885c5287ec91ff4acd2195b36917d10320c">243d48</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
 <li>2019-09-04: <a href="https://issues.apache.org/jira/browse/ARROW-6457">ARROW-6457</a>: [C++] Always set CMAKE_BUILD_TYPE if it is not defined (<a href="https://github.com/apache/arrow/commit/314e9f0e55b619fb0a4a8498bb20f5e4ab724595">314e9f</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-05: <a href="https://issues.apache.org/jira/browse/ARROW-6242">ARROW-6242</a>: [C++][Dataset] Implement Dataset, Scanner and ScannerBuilder (<a href="https://github.com/apache/arrow/commit/2620ed1a93dba5db85f28231429ec186f17eab4e">2620ed</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
@@ -360,7 +390,7 @@ on a particular issue or the commit hash to see each patch.</p>
 <li>2019-09-06: <a href="https://issues.apache.org/jira/browse/ARROW-6476">ARROW-6476</a>: [Java][CI] Fix java docker build script (<a href="https://github.com/apache/arrow/commit/a89300b7e6a33948382fa71e05f7685b93f42b71">a89300</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
 <li>2019-09-06: <a href="https://issues.apache.org/jira/browse/ARROW-6369">ARROW-6369</a>: [C++] Handle Array.to_pandas case for type=list<bool> (<a href="https://github.com/apache/arrow/commit/c0dbf71d115d1f556b6a599134f2b30dcd91517a">c0dbf7</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-06: <a href="https://issues.apache.org/jira/browse/ARROW-6478">ARROW-6478</a>: [C++] Revert to jemalloc stable-4 until we understand 5.2.x performance issues (<a href="https://github.com/apache/arrow/commit/53c5af065462b679fffb2deeda17dd694b51b002">53c5af</a> by <a href="https://github.com/wesm">wesm</a>)</li>
-<li>2019-09-06: <a href="https://issues.apache.org/jira/browse/ARROW-6475">ARROW-6475</a>: [C++] Don't try to dictionary encode dictionary arrays (<a href="https://github.com/apache/arrow/commit/b8ebc9d41b1b9ec60b46986874b4835010a5343e">b8ebc9</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-09-06: <a href="https://issues.apache.org/jira/browse/ARROW-6475">ARROW-6475</a>: [C++] Don&rsquo;t try to dictionary encode dictionary arrays (<a href="https://github.com/apache/arrow/commit/b8ebc9d41b1b9ec60b46986874b4835010a5343e">b8ebc9</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
 <li>2019-09-06: <a href="https://issues.apache.org/jira/browse/ARROW-6120">ARROW-6120</a>: [C++] Forbid use of <iostream> in public header files (<a href="https://github.com/apache/arrow/commit/200e3087a29bc77982be22019cb5a4b535a4ac27">200e30</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-06: <a href="https://issues.apache.org/jira/browse/ARROW-6435">ARROW-6435</a>: [Python] Use pandas null coding consistently on List and Struct types (<a href="https://github.com/apache/arrow/commit/e29e26737ff4fcdf47fa75a14cc26e2ecc559e76">e29e26</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-07: <a href="https://issues.apache.org/jira/browse/ARROW-4880">ARROW-4880</a>: [Python] Rehabilitate ASV benchmark build scripts (<a href="https://github.com/apache/arrow/commit/03e6c0b1cd92881fa2db87a0eb9f23f253f9b778">03e6c0</a> by <a href="https://github.com/wesm">wesm</a>)</li>
@@ -384,12 +414,12 @@ on a particular issue or the commit hash to see each patch.</p>
 <li>2019-09-11: <a href="https://issues.apache.org/jira/browse/ARROW-6015">ARROW-6015</a>: [Python] Add note to python/README.md about installing Visual C++ Redistributable on Windows when using pip (<a href="https://github.com/apache/arrow/commit/2cedd6b70bc19076c83d5da569005f3a219a82a1">2cedd6</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-11: <a href="https://issues.apache.org/jira/browse/ARROW-6522">ARROW-6522</a>: [Python] Fix failing pandas tests on older pandas / older python (<a href="https://github.com/apache/arrow/commit/a6b118baf6734634f51f6efdf6a730464103ee8a">a6b118</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
 <li>2019-09-11: <a href="https://issues.apache.org/jira/browse/ARROW-6506">ARROW-6506</a>: [C++] Fix validation of ExtensionArray with struct storage type (<a href="https://github.com/apache/arrow/commit/1d27386174ef5308b0ce46c35fcf274f04b9bd9f">1d2738</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
-<li>2019-09-11: <a href="https://issues.apache.org/jira/browse/ARROW-6524">ARROW-6524</a>: [Developer][Packaging] Nightly build report's subject should contain Arrow (<a href="https://github.com/apache/arrow/commit/3437c979a6b7d1f7ad5fa378fbf20ed056c09d1e">3437c9</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-09-11: <a href="https://issues.apache.org/jira/browse/ARROW-6524">ARROW-6524</a>: [Developer][Packaging] Nightly build report&rsquo;s subject should contain Arrow (<a href="https://github.com/apache/arrow/commit/3437c979a6b7d1f7ad5fa378fbf20ed056c09d1e">3437c9</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
 <li>2019-09-11: <a href="https://issues.apache.org/jira/browse/ARROW-5450">ARROW-5450</a>: [Python] Always return datetime.datetime in TimestampValue.as_py for units other than nanoseconds (<a href="https://github.com/apache/arrow/commit/6f724576a98651ed32d915aa5367bd3b03bb4a86">6f7245</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-12: <a href="https://issues.apache.org/jira/browse/ARROW-6488">ARROW-6488</a>: [Python] fix equality with pyarrow.NULL to return NULL (<a href="https://github.com/apache/arrow/commit/40718ba628197158384746b2ee0f8c27be62d1e2">40718b</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
 <li>2019-09-12: <a href="https://issues.apache.org/jira/browse/ARROW-6531">ARROW-6531</a>: [Python] Add detach() method to buffered streams (<a href="https://github.com/apache/arrow/commit/0c39156a92841668dd012ae55a615faa5cbf6091">0c3915</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-09-12: <a href="https://issues.apache.org/jira/browse/ARROW-4220">ARROW-4220</a>: [Python] Add buffered IO benchmarks with simulated high latency, allow duck-typed files in input_stream/output_stream (<a href="https://github.com/apache/arrow/commit/8c21776022d50b02feb4f5a199b7aabb54085d7e">8c2177</a> by <a href="https://github.com/wesm">wesm</a>)</li>
-<li>2019-09-12: <a href="https://issues.apache.org/jira/browse/ARROW-6530">ARROW-6530</a>: [CI][Crossbow][R] Nightly R job doesn't install all dependencies (<a href="https://github.com/apache/arrow/commit/c3a68781204d36f568e3b1f15dc517a4c58650a4">c3a687</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-09-12: <a href="https://issues.apache.org/jira/browse/ARROW-6530">ARROW-6530</a>: [CI][Crossbow][R] Nightly R job doesn&rsquo;t install all dependencies (<a href="https://github.com/apache/arrow/commit/c3a68781204d36f568e3b1f15dc517a4c58650a4">c3a687</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-09-12: <a href="https://issues.apache.org/jira/browse/ARROW-6357">ARROW-6357</a>: [C++] Issue S3 file writes in the background by default (<a href="https://github.com/apache/arrow/commit/c2f726471d713d5d5dc51e01f80ac7f810ddc092">c2f726</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-09-12: <a href="https://issues.apache.org/jira/browse/ARROW-6252">ARROW-6252</a>: [C++][Python] Add Array::Diff in C++ and Array.diff in Python to return diff as string (<a href="https://github.com/apache/arrow/commit/3ea70b5dd3b833fa9cfd845980b63ea85c452274">3ea70b</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-12: <a href="https://issues.apache.org/jira/browse/ARROW-6525">ARROW-6525</a>: [C++] Avoid aborting in CloseFromDestructor() (<a href="https://github.com/apache/arrow/commit/d1466ad34bcad1e63acbbeed4101caafb15d30f5">d1466a</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
@@ -428,12 +458,12 @@ on a particular issue or the commit hash to see each patch.</p>
 <li>2019-09-18: <a href="https://issues.apache.org/jira/browse/ARROW-6474">ARROW-6474</a>: [Python] Add option to use legacy / pre-0.15 IPC message format and to set the default using PYARROW_LEGACY_IPC_FORMAT environment variable (<a href="https://github.com/apache/arrow/commit/176adf5a02ea2ab9dadc8add3458a815bab7339c">176adf</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-18: <a href="https://issues.apache.org/jira/browse/ARROW-6527">ARROW-6527</a>: [C++] Add OutputStream::Write(Buffer) (<a href="https://github.com/apache/arrow/commit/825c79e70040a80585e79fef7d8bc373b71794bf">825c79</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-09-18: <a href="https://issues.apache.org/jira/browse/ARROW-6520">ARROW-6520</a>: [Python] More consistent handling of specified schema when creating Table (<a href="https://github.com/apache/arrow/commit/2d8cf1ccbbc050ae29d2f79c87a5d090b2095df0">2d8cf1</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
-<li>2019-09-18: <a href="https://issues.apache.org/jira/browse/ARROW-6570">ARROW-6570</a>: [Python] Use Arrow's allocators for creating NumPy array instead of leaving it to NumPy (<a href="https://github.com/apache/arrow/commit/19545f878d17f99a07e51e818eddc8c77f38f56b">19545f</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-09-18: <a href="https://issues.apache.org/jira/browse/ARROW-6570">ARROW-6570</a>: [Python] Use Arrow&rsquo;s allocators for creating NumPy array instead of leaving it to NumPy (<a href="https://github.com/apache/arrow/commit/19545f878d17f99a07e51e818eddc8c77f38f56b">19545f</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-18: <a href="https://issues.apache.org/jira/browse/ARROW-5344">ARROW-5344</a>: [C++] Use ArrayDataVisitor in dict-to-anything cast (<a href="https://github.com/apache/arrow/commit/95afd4baff3bc67b7a4b16545954bc47bf08fe62">95afd4</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-09-18: <a href="https://issues.apache.org/jira/browse/ARROW-4841">ARROW-4841</a>: [C++] Add arrowOptions.cmake with options used to build arrow (<a href="https://github.com/apache/arrow/commit/d6b057ea6153546134e94fd7b2ed1baa87b483eb">d6b057</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
 <li>2019-09-18: <a href="https://issues.apache.org/jira/browse/ARROW-6597">ARROW-6597</a>: [Python] Sanitize Python datetime handling (<a href="https://github.com/apache/arrow/commit/329c9944554ddb142b0a2ac26a4abdf477636e37">329c99</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-09-18: <a href="https://issues.apache.org/jira/browse/ARROW-6564">ARROW-6564</a>: [Python] Do not require pandas for invoking Array.__array__ (<a href="https://github.com/apache/arrow/commit/1f8856066ab68082714c82cf89b8db0679da7fb2">1f8856</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
-<li>2019-09-18: <a href="https://issues.apache.org/jira/browse/ARROW-5870">ARROW-5870</a>: [C++][Docs] Refine source build instructions, do not tell people to install flex/bison if they don't need them (<a href="https://github.com/apache/arrow/commit/5ddefd77839b00e1d4e4db0445c7caba4be8e289">5ddefd</a> by <a href="https://github.com/wesm">wesm</a>)</li>
+<li>2019-09-18: <a href="https://issues.apache.org/jira/browse/ARROW-5870">ARROW-5870</a>: [C++][Docs] Refine source build instructions, do not tell people to install flex/bison if they don&rsquo;t need them (<a href="https://github.com/apache/arrow/commit/5ddefd77839b00e1d4e4db0445c7caba4be8e289">5ddefd</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-19: <a href="https://issues.apache.org/jira/browse/ARROW-6336">ARROW-6336</a>: [Python] Add notes to pyarrow.serialize/deserialize to clarify that these functions do not read or write the standard IPC protocol (<a href="https://github.com/apache/arrow/commit/86dc9538170539d3794a623b35398c47a76d9750">86dc95</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-19: <a href="https://issues.apache.org/jira/browse/ARROW-5343">ARROW-5343</a>: [C++] Refactor dictionary unification to incremental interface, and use Buffer for transpose map allocations (<a href="https://github.com/apache/arrow/commit/00a3c47b155936fe5544b423e98df86477908b22">00a3c4</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-19: <a href="https://issues.apache.org/jira/browse/ARROW-6618">ARROW-6618</a>: [Python] Fix read_message() segfault on end of stream (<a href="https://github.com/apache/arrow/commit/dbacce65e9fd676e119594ec3858d62803c27be3">dbacce</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
@@ -449,7 +479,7 @@ on a particular issue or the commit hash to see each patch.</p>
 <li>2019-09-21: <a href="https://issues.apache.org/jira/browse/ARROW-4649">ARROW-4649</a>: [C++/CI/R] Add nightly job that tests the homebrew formula (<a href="https://github.com/apache/arrow/commit/b2785d38a110c8fd8a3d7c957cd78d8911607a5e">b2785d</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-09-21: <a href="https://issues.apache.org/jira/browse/ARROW-6651">ARROW-6651</a>: Fix conda R job (<a href="https://github.com/apache/arrow/commit/982a4a97b775e673a0b8d89cfc2d043d50853ae8">982a4a</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-09-21: <a href="https://issues.apache.org/jira/browse/ARROW-6652">ARROW-6652</a>: [Python] Fix Array.to_pandas to retain timezone (<a href="https://github.com/apache/arrow/commit/b95c9bfa5f91910d12fea59e769bbe1627091e9b">b95c9b</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
-<li>2019-09-21: <a href="https://issues.apache.org/jira/browse/ARROW-6642">ARROW-6642</a>: [Python] Link parent objects in Parquet's metadata and statistics objects (<a href="https://github.com/apache/arrow/commit/a5bedfd9a16f1664635f9f30c7cb1c55f006e385">a5bedf</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
+<li>2019-09-21: <a href="https://issues.apache.org/jira/browse/ARROW-6642">ARROW-6642</a>: [Python] Link parent objects in Parquet&rsquo;s metadata and statistics objects (<a href="https://github.com/apache/arrow/commit/a5bedfd9a16f1664635f9f30c7cb1c55f006e385">a5bedf</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
 <li>2019-09-22: <a href="https://issues.apache.org/jira/browse/ARROW-5717">ARROW-5717</a>: [Python] Unify variable dictionaries when converting to pandas (<a href="https://github.com/apache/arrow/commit/5653711a3709f263ac32b3e71480384cc6b99916">565371</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-09-23: <a href="https://issues.apache.org/jira/browse/ARROW-3817">ARROW-3817</a>: [R] Extract methods for RecordBatch and Table (<a href="https://github.com/apache/arrow/commit/f74716628886e229f946bc19d1ec77684cd39791">f74716</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-09-23: <a href="https://issues.apache.org/jira/browse/ARROW-6664">ARROW-6664</a>: [C++] Add CMake option to build without SSE4.2 instructions (<a href="https://github.com/apache/arrow/commit/3129e3ed90219ecfffe2a25ce5820eec8cc947d0">3129e3</a> by <a href="https://github.com/wesm">wesm</a>)</li>
@@ -562,7 +592,7 @@ on a particular issue or the commit hash to see each patch.</p>
 <li>2019-10-24: <a href="https://issues.apache.org/jira/browse/ARROW-6704">ARROW-6704</a>: [C++] Check for out of bounds timestamp in unsafe cast (<a href="https://github.com/apache/arrow/commit/af6fa24be0dbbc021e0844c63d1c0b89fb23a95c">af6fa2</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
 <li>2019-10-24: <a href="https://issues.apache.org/jira/browse/ARROW-6977">ARROW-6977</a>: [C++] Disable jemalloc background_thread on macOS (<a href="https://github.com/apache/arrow/commit/a33bd3acae41f89972c71ad5bd559a3cecf3e197">a33bd3</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-10-24: <a href="https://issues.apache.org/jira/browse/ARROW-6983">ARROW-6983</a>: [C++] Fix ThreadedTaskGroup lifetime issue (<a href="https://github.com/apache/arrow/commit/caefc7f2f1f6eb61e39f90e3d30c76b9979d9c69">caefc7</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
-<li>2019-10-24: <a href="https://issues.apache.org/jira/browse/ARROW-6963">ARROW-6963</a>: [Packaging][Wheel][OSX] Use crossbow's command to deploy artifacts from travis builds (<a href="https://github.com/apache/arrow/commit/2bf344a21369a0ea1d0998720899d44a7ff89124">2bf344</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
+<li>2019-10-24: <a href="https://issues.apache.org/jira/browse/ARROW-6963">ARROW-6963</a>: [Packaging][Wheel][OSX] Use crossbow&rsquo;s command to deploy artifacts from travis builds (<a href="https://github.com/apache/arrow/commit/2bf344a21369a0ea1d0998720899d44a7ff89124">2bf344</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
 <li>2019-10-24: <a href="https://issues.apache.org/jira/browse/ARROW-6964">ARROW-6964</a>: [C++][Dataset] Add multithread support to Scanner::ToTable (<a href="https://github.com/apache/arrow/commit/619cfb07d8cf57d9d9040186c9515e585c6b518b">619cfb</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
 <li>2019-10-24: <a href="https://issues.apache.org/jira/browse/ARROW-6969">ARROW-6969</a>: [C++][Dataset] ParquetScanTask defer memory usage (<a href="https://github.com/apache/arrow/commit/54a54c588bf60237e882f3c52991816846b35a34">54a54c</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
 <li>2019-10-25: <a href="https://issues.apache.org/jira/browse/ARROW-6986">ARROW-6986</a>: [R] Add basic Expression class (<a href="https://github.com/apache/arrow/commit/5e5e526135cee59b4244841909f09da99341e0d4">5e5e52</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
@@ -666,7 +696,7 @@ on a particular issue or the commit hash to see each patch.</p>
 <li>2019-12-05: <a href="https://issues.apache.org/jira/browse/ARROW-7159">ARROW-7159</a>: [CI] Run HDFS tests as cron task (<a href="https://github.com/apache/arrow/commit/6cfe3e08a4c0100716e3f34325a113bffb2f47a1">6cfe3e</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-12-05: <a href="https://issues.apache.org/jira/browse/ARROW-6637">ARROW-6637</a>: [C++] Further streamline default build, add ARROW_CSV CMake option (<a href="https://github.com/apache/arrow/commit/d6caca311356d557507b8d03526655f8184fa16c">d6caca</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-12-05: <a href="https://issues.apache.org/jira/browse/ARROW-7322">ARROW-7322</a>: [CI][Python] Fall back to arrowdev dockerhub organization for manylinux images (<a href="https://github.com/apache/arrow/commit/10ba28279d4b748b7856357b3f5197e027b08fe4">10ba28</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
-<li>2019-12-05: <a href="https://issues.apache.org/jira/browse/ARROW-7077">ARROW-7077</a>: [C++] Casting dictionary to unrelated value type shouldn't crash (<a href="https://github.com/apache/arrow/commit/864eb3130b127dad48603036a02afe67402b7d3f">864eb3</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-12-05: <a href="https://issues.apache.org/jira/browse/ARROW-7077">ARROW-7077</a>: [C++] Casting dictionary to unrelated value type shouldn&rsquo;t crash (<a href="https://github.com/apache/arrow/commit/864eb3130b127dad48603036a02afe67402b7d3f">864eb3</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-12-06: <a href="https://issues.apache.org/jira/browse/ARROW-6637">ARROW-6637</a>: [Packaging][FOLLOWUP] Enable necessary components in Autobrew build for R (<a href="https://github.com/apache/arrow/commit/45607606c346ee02d24debd1b491f85b629cbd14">456076</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-12-06: <a href="https://issues.apache.org/jira/browse/ARROW-7146">ARROW-7146</a>: [R][CI] Various fixes and speedups for the R docker-compose setup (<a href="https://github.com/apache/arrow/commit/e76e1f63dbb30b6683133865f766af00e03b0895">e76e1f</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-12-06: <a href="https://issues.apache.org/jira/browse/ARROW-7341">ARROW-7341</a>: [CI] Unbreak nightly Conda R job (<a href="https://github.com/apache/arrow/commit/a9114be1e2cfb121c0b4ddac348456b058d25c98">a9114b</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
@@ -684,7 +714,7 @@ on a particular issue or the commit hash to see each patch.</p>
 <li>2019-12-11: <a href="https://issues.apache.org/jira/browse/ARROW-5333">ARROW-5333</a>: [C++] Clamp build option summary width to 90 (<a href="https://github.com/apache/arrow/commit/29569e8f3890992c672afda27cda6190bff4efb9">29569e</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
 <li>2019-12-11: <a href="https://issues.apache.org/jira/browse/ARROW-7210">ARROW-7210</a>: [C++][R] Allow Numeric &lt;-&gt; Temporal Scalar casts (<a href="https://github.com/apache/arrow/commit/1accdc93f0dfdb8643696b4122f3bbae86fffa63">1accdc</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
 <li>2019-12-11: <a href="https://issues.apache.org/jira/browse/ARROW-7317">ARROW-7317</a>: [C++] Migrate Iterator to a Result API (<a href="https://github.com/apache/arrow/commit/3d3ecfb157d4fbaaa09c92481f55a5c4db726c1f">3d3ecf</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
-<li>2019-12-11: <a href="https://issues.apache.org/jira/browse/ARROW-7360">ARROW-7360</a>: [R] Can't use dplyr filter() with variables defined in parent scope (<a href="https://github.com/apache/arrow/commit/2287ce2cf0dc41374e42be3955763aa10e751ed2">2287ce</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
+<li>2019-12-11: <a href="https://issues.apache.org/jira/browse/ARROW-7360">ARROW-7360</a>: [R] Can&rsquo;t use dplyr filter() with variables defined in parent scope (<a href="https://github.com/apache/arrow/commit/2287ce2cf0dc41374e42be3955763aa10e751ed2">2287ce</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-12-12: <a href="https://issues.apache.org/jira/browse/ARROW-7310">ARROW-7310</a>: [Python] Expose HDFS implementation for pyarrow.fs (<a href="https://github.com/apache/arrow/commit/54cb9c0d3218c9c1e45cab23139e916506fe7417">54cb9c</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
 <li>2019-12-13: <a href="https://issues.apache.org/jira/browse/ARROW-7381">ARROW-7381</a>: [C++] Unbreak manylinux1 wheels after Iterator refactor (<a href="https://github.com/apache/arrow/commit/f4cfbc4df8dea5fa97a9d99d30a1b843ee89efc4">f4cfbc</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
 <li>2019-12-13: <a href="https://issues.apache.org/jira/browse/ARROW-6341">ARROW-6341</a>: [Python] Implement low-level bindings for Dataset (<a href="https://github.com/apache/arrow/commit/9cb49f3d34dde8d28ac2eb921c4540eada2b19a2">9cb49f</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
@@ -746,7 +776,7 @@ on a particular issue or the commit hash to see each patch.</p>
     
 <div class="container copyright">
     <small>
-  (c) 2018-2019 Ursa Labs
+  &copy; 2018-2020 Ursa Labs
 
   </small>
 </div>

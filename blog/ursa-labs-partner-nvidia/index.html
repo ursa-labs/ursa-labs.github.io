@@ -46,7 +46,7 @@
 <link rel="canonical" href="https://ursalabs.org/blog/ursa-labs-partner-nvidia/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
-<meta name="generator" content="Hugo 0.63.0-DEV" />
+<meta name="generator" content="Hugo 0.55.6" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -110,6 +110,15 @@
             
             <li class="">
               
+                <a href="https://ursalabs.org/jobs/" >
+                  
+                  Jobs
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
                 <a href="https://ursalabs.org/support/" >
                   
                   Support
@@ -156,43 +165,56 @@
         
           <p><i>Originally published on <a href="https://wesmckinney.com/blog/ursa-labs-partner-nvidia/">Wes McKinney&#39;s blog</a>.</i></p><br/>
         
-        <p>I'm excited to announce that <a href="https://nvidia.com">NVIDIA AI Labs</a> has signed on as a supporter
-of <a href="https://ursalabs.org">Ursa Labs</a>. NVIDIA's new open source <a href="https://RAPIDS.ai">RAPIDS</a> data science platform
+        
+
+<p>I&rsquo;m excited to announce that <a href="https://nvidia.com">NVIDIA AI Labs</a> has signed on as a supporter
+of <a href="https://ursalabs.org">Ursa Labs</a>. NVIDIA&rsquo;s new open source <a href="https://RAPIDS.ai">RAPIDS</a> data science platform
 uses <a href="http://arrow.apache.org">Apache Arrow</a> for an interoperable representation of tabular data
 (data frames). We are looking forward to collaborating on our respective
 development roadmaps and growing the ecosystem of projects that use Arrow.</p>
+
 <p>This new financial support will enable us to grow our team of full-time open
 source software developers.</p>
+
 <h2 id="apache-arrow-an-open-standard-for-columnar-data-on-the-gpu">Apache Arrow: An Open Standard for Columnar Data on the GPU</h2>
+
 <p>When NVIDIA and a group of startups embarked on the <a href="http://gpuopenanalytics.com">GPU Open Analytics
 Initiative</a> last year to build libraries of pandas-style analytics for
 CUDA-powered GPU devices, they had to solve the problem of data portability
 between systems. The cost of serialization or memory copying can frequently
 exceed that of the underlying GPU kernel execution.</p>
-<p>Anyone who's been actively following my blog posts, presentations, and <a href="https://twitter.com/wesmckinn">Twitter
+
+<p>Anyone who&rsquo;s been actively following my blog posts, presentations, and <a href="https://twitter.com/wesmckinn">Twitter
 feed</a> will know that Apache Arrow is fundamentally about making it easy to
 share data and share algorithms.</p>
+
 <ul>
-<li>If you can't share data at zero cost, then crossing languages or computation
+<li>If you can&rsquo;t share data at zero cost, then crossing languages or computation
 environments incurs a high penalty</li>
 <li>You generally cannot share algorithms (code) without utilizing common
 in-memory data structures</li>
 </ul>
+
 <p>The Arrow columnar format is an ideal fit for in-memory analytics on GPUs. The
 contiguous columnar memory layout is efficient for the manycore CUDA execution
 model.</p>
+
 <p>Since last year, I have been working to involve GPGPU community with the Apache
 Arrow development community. Initially, <a href="https://graphistry.com">Graphistry</a> contributed a
 TypeScript implementation of Arrow for use in JavaScript. I contributed
 accelerated Arrow-based data ingest to the <a href="https://github.com/omnisci/mapd-core">MapD GPU database</a>. We now have
 a CUDA Arrow extension library in C++ (with Python bindings) for managing
 interprocess communication and CUDA device memory management.</p>
+
 <h2 id="looking-ahead">Looking ahead</h2>
-<p>It's an exciting time both for the Apache Arrow community as well as GPGPU
+
+<p>It&rsquo;s an exciting time both for the Apache Arrow community as well as GPGPU
 developers who might be interested in powering up their feature engineering and
 data preparation with GPU-enabled libraries.</p>
-<p>We're grateful for NVIDIA's support of Ursa Labs and look forward to growing a
+
+<p>We&rsquo;re grateful for NVIDIA&rsquo;s support of Ursa Labs and look forward to growing a
 larger team and continuing to make progress on the <a href="https://ursalabs.org/tech">tech roadmap</a>.</p>
+
 <p>If you or your company would be interested in becoming a sponsor also, please
 get in touch with us at <a href="mailto:info@ursalabs.org">info@ursalabs.org</a>.</p>
 
@@ -238,7 +260,7 @@ get in touch with us at <a href="mailto:info@ursalabs.org">info@ursalabs.org</a>
     
 <div class="container copyright">
     <small>
-  (c) 2018-2019 Ursa Labs
+  &copy; 2018-2020 Ursa Labs
 
   </small>
 </div>

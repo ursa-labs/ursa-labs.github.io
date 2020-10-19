@@ -46,7 +46,7 @@
 <link rel="canonical" href="https://ursalabs.org/blog/2020-outlook/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
-<meta name="generator" content="Hugo 0.63.0-DEV" />
+<meta name="generator" content="Hugo 0.55.6" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -110,6 +110,15 @@
             
             <li class="">
               
+                <a href="https://ursalabs.org/jobs/" >
+                  
+                  Jobs
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
                 <a href="https://ursalabs.org/support/" >
                   
                   Support
@@ -152,67 +161,87 @@
       </div>
       <div class="blog-post-content">
         
-        <p>2020 in Apache Arrow development has gotten off to a running start with a
+        
+
+<p>2020 in Apache Arrow development has gotten off to a running start with a
 0.16.0 major release around the corner and a 1.0.0 release (including <a href="https://arrow.apache.org/docs/format/Versioning.html">protocol
 stability guarantees</a>) coming with luck in the first half of the year.</p>
+
 <p>In this blog post, we would like to summarize Ursa Labs development highlights
 from 2019 and highlight our major focus areas and priorities for 2020. Apache
 Arrow libraries provide an efficient and high performance development platform
 that addresses, broadly speaking:</p>
+
 <ul>
 <li>Storage and deserialization to different file formats</li>
 <li>Fast data transport (i.e. Arrow Flight)</li>
 <li>Fast in-memory processing</li>
 </ul>
+
 <p>We are excited to be working with the open source community to build out this
 platform to accelerate existing analytical tools as well as to be a foundation
 for next-generation tools. This includes data frame libraries as well as any
 system that works with tabular datasets and may need to evaluate analytical
 queries.</p>
+
 <p>People often ask us how Apache Arrow is doing as an open source project. It’s
 doing extremely well. After 4 years, we have exceeded 400 unique contributors
 and adding more every month:</p>
-<iframe title="Unique Contributors to Apache Arrow" aria-label="Interactive line chart" id="datawrapper-chart-skGBa" src="//datawrapper.dwcdn.net/skGBa/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",function(a){if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")}})}();</script>
+
+<p><iframe title="Unique Contributors to Apache Arrow" aria-label="Interactive line chart" id="datawrapper-chart-skGBa" src="//datawrapper.dwcdn.net/skGBa/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="400"></iframe><script type="text/javascript">!function(){&ldquo;use strict&rdquo;;window.addEventListener(&ldquo;message&rdquo;,function(a){if(void 0!==a.data[&ldquo;datawrapper-height&rdquo;])for(var e in a.data[&ldquo;datawrapper-height&rdquo;]){var t=document.getElementById(&ldquo;datawrapper-chart-&rdquo;+e)||document.querySelector(&ldquo;iframe[src*=&lsquo;&ldquo;+e+&rdquo;&rsquo;]&ldquo;);t&amp;&amp;(t.style.height=a.data[&ldquo;datawrapper-height&rdquo;][e]+&ldquo;px&rdquo;)}})}();</script></p>
+
 <p>The rate of installs has also grown at a large rate, with 5-6 million installs
 per month alone from &ldquo;pip install pyarrow&rdquo; (for comparison, pandas recently had
 16 million downloads in a single month via PyPI). Apache Arrow is available
 through many other package managers and for many programming languages other
 than Python.</p>
-<iframe title="Downloads of pyarrow" aria-label="Column Chart" id="datawrapper-chart-j0oQP" src="//datawrapper.dwcdn.net/j0oQP/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="500"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",function(a){if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")}})}();</script>
+
+<p><iframe title="Downloads of pyarrow" aria-label="Column Chart" id="datawrapper-chart-j0oQP" src="//datawrapper.dwcdn.net/j0oQP/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="500"></iframe><script type="text/javascript">!function(){&ldquo;use strict&rdquo;;window.addEventListener(&ldquo;message&rdquo;,function(a){if(void 0!==a.data[&ldquo;datawrapper-height&rdquo;])for(var e in a.data[&ldquo;datawrapper-height&rdquo;]){var t=document.getElementById(&ldquo;datawrapper-chart-&rdquo;+e)||document.querySelector(&ldquo;iframe[src*=&lsquo;&ldquo;+e+&rdquo;&rsquo;]&ldquo;);t&amp;&amp;(t.style.height=a.data[&ldquo;datawrapper-height&rdquo;][e]+&ldquo;px&rdquo;)}})}();</script></p>
+
 <!-- <div align="center">
 <img src="https://ursalabs.org/20200130_pyarrow_downloads.png"
      alt="pyarrow downloads on PyPI by month"
      width="75%" class="img-responsive">
 </div> -->
+
 <h2 id="our-mission">Our Mission</h2>
+
 <p>We founded Ursa Labs with the goal of helping make Apache Arrow a robust and
 reliable next-generation computational foundation for in-memory analytics and
 data science. We recognized that existing popular tools such as pandas and base
 R have <a href="https://wesmckinney.com/blog/apache-arrow-pandas-internals/">fallen short in terms of computational performance and memory use</a>,
 particularly in the context of modern CPUs, GPUs, and solid state drives.</p>
+
 <p>We believe that a community-led open governance approach in the Apache Software
 Foundation and a <a href="https://ursalabs.org/blog/2020-new-sponsors/">not-for-profit, industry consortium-type funding model</a> is
 the best way to pursue this development work and place the needs of the open
 source community first. We also wanted to be free of the potentially
 distracting influence of venture capital or consulting services.</p>
+
 <p>While working to build a large development community in an Apache project can
 seem like a lot of work (and we go out of our way to support the growth of the
 community), we believe that a large, active contributor base coupled with open
 and transparent governance will yield an open source project with a long
 lifespan (on the order of decades) and high real world impact.</p>
+
 <h2 id="technical-vision-documents">Technical Vision Documents</h2>
+
 <p>Early in 2019, we discussed several significant design documents that
 articulate the motivation and requirements for our past and future efforts:</p>
+
 <ul>
 <li><a href="https://github.com/apache/arrow/pull/4225">Filesystems API</a></li>
 <li><a href="https://docs.google.com/document/d/1bVhzifD38qDypnSjtf8exvpP3sSB5x_Kw9m-n66FB2c/edit?usp=sharing">Datasets API</a>,</li>
 <li><a href="https://docs.google.com/document/d/1XHe_j87n2VHGzEbnLe786GHbbcbrzbjgG8D0IXWAeHg/edit#heading=h.g70gstc7jq4h">DataFrame API</a></li>
 <li><a href="https://docs.google.com/document/d/10RoUZmiMQRi_J1FcPeVAUAMJ6d_ZuiEbaM2Y33sNPu4/edit?usp=sharing">C++ Query Engine</a></li>
 </ul>
+
 <p>Obviously not all of this work has been completed yet, but we have been busy
 breaking down the projects into tractable pieces and getting them done.</p>
+
 <p>A common question we get is about the relationship between the &ldquo;data frame&rdquo; and
 &ldquo;query engine&rdquo; subprojects. Here is the answer:</p>
+
 <ul>
 <li>Data frames provide a convenient way to execute analytical operations on
 in-memory (or memory-mapped / out-of-core) datasets. Some algorithms, such as
@@ -225,32 +254,39 @@ more limited to the domain of SQL. The implementation of many operations
 (such as aggregations and many group-by operations) can be reused in the data
 frame API.</li>
 </ul>
+
 <div align="center">
 <img src="https://ursalabs.org/20200130_compute_arch.png"
      alt="Apache Arrow compute architecture"
      width="90%" class="img-responsive">
 </div>
+
 <p>In addition to building this essential functionality in C++, we are building
 rich bindings in Python and R with integrations into key projects in those
 ecosystems. Our intent is to accelerate existing data processing work,
 unlocking new workflows (such as new file formats or larger scale analysis),
 and generally providing a strong foundation for the next generation of
 analytics for data scientists.</p>
+
 <p>Doing all of this work properly in high quality C++ libraries with bindings in
 multiple languages is time- and labor-intensive, but doing so will yield
 dividends for open source data tools for many years to come.</p>
+
 <h2 id="relationship-with-existing-r-and-python-projects">Relationship with existing R and Python projects</h2>
+
 <p>One of the most common questions we are asked is how users of popular R and
 Python libraries will be able to take advantage of Apache Arrow. In some cases,
 such as with dplyr and tidyverse tools in R,
 we can provide a more <a href="https://enpiar.com/talks/rstudio-conf-2020/demo.html">natural and seamless integration</a>, while in others (like
 pandas) it will be more complex. We are working as closely as possible with the
 respective developer communities to deliver value to end users.</p>
+
 <p>The other way that Arrow is useful is as a dependency in other projects,
 augmenting their capabilities without the end user necessarily knowing that
-they're using Arrow.
+they&rsquo;re using Arrow.
 In Python, pyarrow is already being used in many downstream projects for
 various use cases, including:</p>
+
 <ul>
 <li>Dask, for Parquet support</li>
 <li>Google BigQuery Python API, for data ingest</li>
@@ -258,14 +294,18 @@ various use cases, including:</p>
 <li>PySpark, for UDF evaluation and data interchange</li>
 <li>Ray, for general serialization and messaging</li>
 </ul>
+
 <p>Similarly, the arrow R package can be used to <a href="https://arrow.apache.org/blog/2019/01/25/r-spark-improvements/">accelerate data transfer with
 Spark in the sparklyr package</a>.</p>
+
 <h2 id="2019-development-highlights">2019 Development Highlights</h2>
+
 <p>At the beginning of last year, we started publishing periodic status reports to
 summarize the work we are doing in Apache on a month-to-month basis. As we have
 settled into a groove, we have found that status reports every two to three
 months feels like a good cadence and doesn’t create too much overhead for
 us. You can find our 2019 reports here:</p>
+
 <ul>
 <li><a href="https://ursalabs.org/blog/2019-01/">January 2019</a></li>
 <li><a href="https://ursalabs.org/blog/2019-02/">February 2019</a></li>
@@ -274,7 +314,9 @@ us. You can find our 2019 reports here:</p>
 <li><a href="https://ursalabs.org/blog/2019-06-07-monthly-report/">June/July 2019</a></li>
 <li><a href="https://ursalabs.org/blog/2019-12-19-eoy-report/">August 2019 through year end</a></li>
 </ul>
+
 <p>Some of the most significant milestones from 2019 include:</p>
+
 <ul>
 <li><strong>R bindings development and CRAN release</strong>: In August 2019, we made the
 <a href="http://arrow.apache.org/blog/2019/08/08/r-package-on-cran/">first release of Apache Arrow on the CRAN package repository</a>. This was a
@@ -310,13 +352,17 @@ are very happy with the results.</li>
 and memory use, we worked to enable deeper integration with Apache Arrow’s
 <a href="https://arrow.apache.org/blog/2019/09/05/faster-strings-cpp-parquet/">dictionary-encoded data types</a>.</li>
 </ul>
+
 <p>Aside from some of these specific feature areas, we have also made significant
 improvements across the project to improve developer productivity and
 accessibility to new contributors.</p>
+
 <h2 id="2020-outlook-and-development-roadmap">2020 Outlook and Development Roadmap</h2>
+
 <p>This year we are continuing to pursue the development agenda described in the
 design documents referenced above and working to deepen our integrations with
 Python and R libraries.</p>
+
 <ul>
 <li><strong><a href="https://docs.google.com/document/d/1bVhzifD38qDypnSjtf8exvpP3sSB5x_Kw9m-n66FB2c/edit?usp=sharing">Datasets API</a></strong>: We will expand to support all of the file formats for
 which there is an Arrow-based interface. We will also enable writing datasets
@@ -351,20 +397,25 @@ performance over time and on different kinds of hardware configurations and
 architectures (e.g. both x86 and ARM). This will be increasingly important to
 prevent performance regressions in the software.</li>
 </ul>
+
 <h2 id="summary">Summary</h2>
+
 <p>We have laid out an ambitious development roadmap before us, but we are
 building essential open source computational software that will be widely
 deployed and used for many years. Much of the proverbial &ldquo;low-hanging fruit&rdquo; in
 data science tools has already been picked, and building faster, more efficient
 software to accelerate current work is much more difficult and time consuming
 than building the last generation of open source tools.</p>
+
 <p>As Ursa Labs depends on the <a href="https://ursalabs.org/blog/2020-new-sponsors/">generosity of its corporate sponsors</a>, one of
 the ways that you can help us make faster progress and expand the scope of our
 work is by becoming a sponsor. If you would like to discuss this with us,
 please <a href="https://ursalabs.org/support/">read more on our website</a> or reach out to
 <a href="mailto:info@ursalabs.org">info@ursalabs.org</a>.</p>
-<p>We'd like to thank our current 2020 sponsors and look forward to the year
+
+<p>We&rsquo;d like to thank our current 2020 sponsors and look forward to the year
 ahead:</p>
+
 <ul>
 <li>RStudio (our largest sponsor and administrative partner)</li>
 <li>Two Sigma</li>
@@ -417,7 +468,7 @@ ahead:</p>
     
 <div class="container copyright">
     <small>
-  (c) 2018-2019 Ursa Labs
+  &copy; 2018-2020 Ursa Labs
 
   </small>
 </div>

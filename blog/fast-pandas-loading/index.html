@@ -46,7 +46,7 @@
 <link rel="canonical" href="https://ursalabs.org/blog/fast-pandas-loading/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
-<meta name="generator" content="Hugo 0.63.0-DEV" />
+<meta name="generator" content="Hugo 0.55.6" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -110,6 +110,15 @@
             
             <li class="">
               
+                <a href="https://ursalabs.org/jobs/" >
+                  
+                  Jobs
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
                 <a href="https://ursalabs.org/support/" >
                   
                   Support
@@ -154,12 +163,17 @@
       </div>
       <div class="blog-post-content">
         
-        <h2 id="a-surprising-performance-experiment">A Surprising Performance Experiment</h2>
-<p>To start off this blog post, I'll present a surprising fact. The pyarrow
+        
+
+<h2 id="a-surprising-performance-experiment">A Surprising Performance Experiment</h2>
+
+<p>To start off this blog post, I&rsquo;ll present a surprising fact. The pyarrow
 library is able to construct a <code>pandas.DataFrame</code> faster than using
-<code>pandas.DataFrame</code> directly in some cases. Let's have a look.</p>
+<code>pandas.DataFrame</code> directly in some cases. Let&rsquo;s have a look.</p>
+
 <p>First, I make a dict of 100 NumPy arrays of <code>float64</code> type, a little under 800
 megabytes of data:</p>
+
 <pre><code>import pandas as pd
 import pyarrow as pa
 import numpy as np
@@ -171,56 +185,78 @@ dict_of_numpy_arrays = {
     'f{}'.format(i): arr
     for i in range(num_columns)
 }
-</code></pre><p>Then, I measure the time to create a <code>pandas.DataFrame</code> from this dict:</p>
+</code></pre>
+
+<p>Then, I measure the time to create a <code>pandas.DataFrame</code> from this dict:</p>
+
 <pre><code>In [3]: timeit df = pd.DataFrame(dict_of_numpy_arrays)
 82.5 ms ± 865 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
-</code></pre><p>You might be wondering why <code>pd.DataFrame(dict_of_numpy_arrays)</code> allocates
+</code></pre>
+
+<p>You might be wondering why <code>pd.DataFrame(dict_of_numpy_arrays)</code> allocates
 memory or performs computation. More on that later.</p>
-<p>I'll use <code>pyarrow.Table.to_pandas</code> to do the same thing:</p>
+
+<p>I&rsquo;ll use <code>pyarrow.Table.to_pandas</code> to do the same thing:</p>
+
 <pre><code>In [4]: timeit df = pa.table(dict_of_numpy_arrays).to_pandas()
 50.2 ms ± 2.63 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
-</code></pre><p>Are you disturbed? Well I'm cheating a little bit by using all 8 cores of my
-laptop. So I'll do the same thing with a single thread:</p>
+</code></pre>
+
+<p>Are you disturbed? Well I&rsquo;m cheating a little bit by using all 8 cores of my
+laptop. So I&rsquo;ll do the same thing with a single thread:</p>
+
 <pre><code>In [5]: timeit df = pa.table(dict_of_numpy_arrays).to_pandas(use_threads=False)
 63.4 ms ± 579 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
-</code></pre><p>It's still about 24% faster, even single-threaded. It's important to note here
+</code></pre>
+
+<p>It&rsquo;s still about 24% faster, even single-threaded. It&rsquo;s important to note here
 that conversion to an Arrow array from a contiguous numeric NumPy array without
 nulls is a zero-copy operation.</p>
+
 <h2 id="what-is-this-sorcery">What is this sorcery?</h2>
+
 <p>The internals of <code>pandas.DataFrame</code> are a bit complicated. At some point during
-the library's development, it was decided to collect or &ldquo;consolidate&rdquo; columns
+the library&rsquo;s development, it was decided to collect or &ldquo;consolidate&rdquo; columns
 of the same type into two-dimensional NumPy arrays internally. So when you call
 <code>pd.DataFrame(dict_of_numpy_arrays)</code>, pandas internally concatenates these 100
 arrays together into a 1,000,000 by 100 NumPy array.</p>
+
 <p>We were able to circumvent this logic in pandas to go 25-35% faster from
 pyarrow through a few tactics.</p>
+
 <ul>
 <li>Constructing the exact internal &ldquo;block&rdquo; structure of a pandas DataFrame, and
-using pandas's developer APIs to construct a DataFrame without any further
+using pandas&rsquo;s developer APIs to construct a DataFrame without any further
 computation or memory allocation.</li>
 <li>Using multiple threads to copy memory</li>
 <li>Using a faster memory allocator than the system allocator used by NumPy (we
 use jemalloc on Linux and macOS)</li>
 </ul>
+
 <p>You can see all the <a href="https://github.com/apache/arrow/blob/master/cpp/src/arrow/python/arrow_to_pandas.cc">gory details in the Apache Arrow codebase</a>.</p>
+
 <h2 id="conclusions">Conclusions</h2>
+
 <p>One of the reasons we did all of this engineering to construct
 <code>pandas.DataFrame</code> as fast as possible is to reduce the number of bespoke
 &ldquo;pandas DataFrame converters&rdquo; that have to be implemented. Systems can produce
 the Apache Arrow columnar format, which can be done in any programming language
 and <a href="https://github.com/apache/arrow/blob/master/docs/source/format/CDataInterface.rst">even without depending on any Apache Arrow libraries</a>, and then use
 functions like <code>pyarrow.Table.to_pandas</code> to convert to pandas.</p>
-<p>The idea is that by going via Arrow, in most cases you'll be able to construct
+
+<p>The idea is that by going via Arrow, in most cases you&rsquo;ll be able to construct
 <code>pandas.DataFrame</code> much faster than the custom pandas conversion code you might
 write yourself. This is a win-win: you can produce pandas objects faster and we
 collectively have less code overall to maintain. We like to think we did the
-hard work of dealing with pandas's internals so you don't have to.</p>
+hard work of dealing with pandas&rsquo;s internals so you don&rsquo;t have to.</p>
+
 <p>Of course, supporting Arrow in your project can have benefits beyond fast
 connectivity to pandas, since more and more projects are adding Arrow support
 as time goes by.</p>
-<p>At Ursa Labs we're interested to hear about the interoperability challenges you
+
+<p>At Ursa Labs we&rsquo;re interested to hear about the interoperability challenges you
 have and how you might be better served by the computational infrastructure
-we're building in the Apache Arrow project.</p>
+we&rsquo;re building in the Apache Arrow project.</p>
 
       </div>
       
@@ -264,7 +300,7 @@ we're building in the Apache Arrow project.</p>
     
 <div class="container copyright">
     <small>
-  (c) 2018-2019 Ursa Labs
+  &copy; 2018-2020 Ursa Labs
 
   </small>
 </div>

@@ -46,7 +46,7 @@
 <link rel="canonical" href="https://ursalabs.org/blog/2020-feather-v2/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
-<meta name="generator" content="Hugo 0.63.0-DEV" />
+<meta name="generator" content="Hugo 0.55.6" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -110,6 +110,15 @@
             
             <li class="">
               
+                <a href="https://ursalabs.org/jobs/" >
+                  
+                  Jobs
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
                 <a href="https://ursalabs.org/support/" >
                   
                   Support
@@ -163,9 +172,12 @@
       </div>
       <div class="blog-post-content">
         
-        <p>Back in October 2019, <a href="https://ursalabs.org/blog/2019-10-columnar-perf/">we took a look at performance and file sizes</a> for a
+        
+
+<p>Back in October 2019, <a href="https://ursalabs.org/blog/2019-10-columnar-perf/">we took a look at performance and file sizes</a> for a
 handful of binary file formats for storing data frames in Python and R. These
 included <a href="http://parquet.apache.org/">Apache Parquet</a>, <a href="https://blog.rstudio.com/2016/03/29/feather/">Feather</a>, and <a href="https://www.fstpackage.org/">FST</a>.</p>
+
 <p>In the intervening months, we have developed &ldquo;Feather V2&rdquo;, an evolved version
 of the Feather format with compression support and complete coverage for Arrow
 data types. In this post, we explain what Feather V2 is and what you might find
@@ -173,22 +185,27 @@ it useful. We also revisit the benchmarks from six months ago to show how
 compressed Feather V2 files compare, demonstrating that they can be even faster
 than Parquet to read and write. We also discuss some of the situations in which
 using Parquet or Feather may make more sense.</p>
+
 <h1 id="more-about-feather-v2">More about Feather V2</h1>
+
 <p>Wes and <a href="https://twitter.com/hadleywickham">Hadley</a> developed the original Feather format (&ldquo;Feather V1&rdquo;) early
 in 2016 as a proof of concept of using Arrow Arrow for <a href="https://blog.rstudio.com/2016/03/29/feather/">fast, interoperable
 frame storage</a>. While it has been extremely useful for people these last 4
 years as a fast and simple way to move data between R and Python, it had a few
 shortcomings:</p>
+
 <ul>
 <li>No support for list columns</li>
 <li>No support for incremental / chunk-based writes</li>
 <li>Memory limitations: individual string columns limited to 2 gigabytes.</li>
 </ul>
+
 <p>The &ldquo;Arrow IPC format&rdquo;, part of the <a href="https://github.com/apache/arrow/blob/master/docs/source/format/Columnar.rst">Arrow columnar specification</a>, is
 designed for transporting large quantities of data in chunks and does not have
 these limitations. IPC stands for &ldquo;interprocess communication&rdquo;, and we use this
 term to describe the format as it is designed for moving datasets from one
 process (or machine) to another.</p>
+
 <p>We layered simple compression using the industry standard <a href="https://github.com/lz4/lz4">LZ4</a> or
 <a href="https://github.com/facebook/zstd">ZSTD</a> libraries on top of the Arrow IPC format to create Feather V2. The
 result is files that are substantially smaller (but generally not as small as
@@ -196,33 +213,42 @@ Parquet files, more on this below) but very fast to read and write. We chose to
 use LZ4 and ZSTD because they have <a href="https://github.com/facebook/zstd#benchmarks">extremely fast decompression speeds</a>,
 substantially faster than zlib, Snappy, and other compression libraries in wide
 use.</p>
+
 <p>Additionally, Feather V2 supports incremental and chunked writes. This allows
 you to build a large file without having to first load all of the data into
 memory. We have a little work to do to expose this functionality publicly (see
 <a href="https://issues.apache.org/jira/browse/ARROW-8470">ARROW-8470</a>) but the format supports it.</p>
+
 <p>Lastly, by basing Feather V2 on the Arrow IPC format, we assure <a href="https://github.com/apache/arrow/blob/master/docs/source/format/Versioning.rst">longer-term
 stability</a> of the file storage, since Apache Arrow has committed itself to
 not making backwards incompatible changes to the IPC format / protocol.</p>
+
 <h1 id="benchmarking">Benchmarking</h1>
-<p>As in the <a href="https://ursalabs.org/blog/2019-10-columnar-perf/">last performance analysis</a>, we're looking at two large (&gt; 1 Gigabyte) datasets containing a mix of numeric and
+
+<p>As in the <a href="https://ursalabs.org/blog/2019-10-columnar-perf/">last performance analysis</a>, we&rsquo;re looking at two large (&gt; 1 Gigabyte) datasets containing a mix of numeric and
 string data:</p>
+
 <ul>
 <li><a href="https://loanperformancedata.fanniemae.com/">Fannie Mae Loan Performance</a>. We use the 2016Q4 &ldquo;Performance&rdquo; dataset,
 which is a 1.52 GB uncompressed CSV and 208 MB when gzipped</li>
 <li><a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC Yellow Taxi Trip Data</a>: We use the &ldquo;January 2010 Yellow Taxi Trip
 Records,&rdquo; which is a 2.54 GB uncompressed CSV</li>
 </ul>
+
 <p>For each dataset, we look at the following storage variants:</p>
+
 <ul>
 <li>Parquet, both with Snappy-compressed and Uncompressed internal data
 pages. Note that Parquet does a bunch of other encoding beyond using
 compression libraries</li>
 <li>Feather V2 with Uncompressed, LZ4, and ZSTD (level 1), and Feather V1 from
 the current <code>feather</code> package on CRAN</li>
-<li>R's native serialization format, RDS</li>
+<li>R&rsquo;s native serialization format, RDS</li>
 <li>FST format with <code>compress = 0</code> and <code>compress = 50</code> (default)</li>
 </ul>
+
 <p>For each case we compute:</p>
+
 <ul>
 <li>Read and write time to/from <code>pandas.DataFrame</code> (in Python) and <code>data.frame</code>
 (in R)</li>
@@ -230,7 +256,9 @@ the current <code>feather</code> package on CRAN</li>
 R)</li>
 <li>The size of each file</li>
 </ul>
+
 <p>Methodology notes:</p>
+
 <ul>
 <li>CPU: i9-9880H laptop with 8 physical cores and a fast M.2 NVMe SSD.  Many
 thanks to Dell for donating this hardware to Ursa Labs!</li>
@@ -247,79 +275,95 @@ the 5 runs. By reading the file many times we hopefully partially mitigate the
 impact of disk caching in the Linux kernel, but this could be improved. For
 the write benchmarks we timed based on 3 iterations.</li>
 <li>For the Feather benchmarks that read Arrow tables, we disabled memory mapping
-so that we are aren't &ldquo;cheating&rdquo; by using the zero-copy Arrow read
+so that we are aren&rsquo;t &ldquo;cheating&rdquo; by using the zero-copy Arrow read
 functionality. That said, if you are working directly with Arrow tables, then
 uncompressed Feather files are effectively &ldquo;free&rdquo; to read (aside from the
-cost of disk IO) because of Arrow's zero-copy memory-mapping functionality.</li>
+cost of disk IO) because of Arrow&rsquo;s zero-copy memory-mapping functionality.</li>
 </ul>
+
 <h2 id="results">Results</h2>
+
 <p>For simplicity, the graphs below show benchmarks on the Fannie Mae dataset using
 4 cores. The patterns observed are consistent with the NYC Taxi dataset, and
-four cores are generally better than one. If you're interested in comparing,
+four cores are generally better than one. If you&rsquo;re interested in comparing,
 full benchmarks for <a href="https://ursalabs.org/20200414_read_full.png">read</a> and <a href="https://ursalabs.org/20200414_write_full.png">write</a>
-performance across both datasets are also posted, though they're harder to read.</p>
+performance across both datasets are also posted, though they&rsquo;re harder to read.</p>
+
 <h3 id="file-size">File size</h3>
+
 <div align="center">
 <img src="https://ursalabs.org/20200414_file_sizes.png"
      alt="2020-04 File Sizes"
      width="100%" class="img-responsive">
 </div>
+
 <p>The file size benefits of compression in Feather V2 are quite good, though
 Parquet is smaller on disk, due in part to its internal use of dictionary and
 run-length encoding. Even without adding Snappy compression, the Parquet file
 is smaller than the compressed Feather V2 and FST files.  Note that LZ4 and
-ZSTD have been added to the Parquet format but we didn't use them in the
+ZSTD have been added to the Parquet format but we didn&rsquo;t use them in the
 benchmarks because support for them is not widely deployed.</p>
+
 <p>Compressed .rds files (using GZIP) from R are slightly smaller than the Snappy-compressed
-Parquet files, but that comes at a cost, as we'll see in the read and write speed
-results below. (And of course, they're only readable by R.)</p>
+Parquet files, but that comes at a cost, as we&rsquo;ll see in the read and write speed
+results below. (And of course, they&rsquo;re only readable by R.)</p>
+
 <p>The relative file sizes for the nyc-taxi dataset are consistent with the patterns shown here,
 though due to the differences in data types, the benefit of compression is smaller across the board.</p>
+
 <h3 id="read-speed">Read speed</h3>
+
 <div align="center">
 <img src="https://ursalabs.org/20200414_read_py.png"
      alt="2020-04 Read Benchmarks"
      width="100%" class="img-responsive">
 </div>
+
 <p>Overall, the read performance of the binary formats falls in the same general
 ballpark, and we see modest performance improvements by using multiple threads,
 which helps both with file decoding as well as the conversions to and from
 Arrow format.</p>
+
 <p>Parquet is fast to read into an Arrow Table, but Feather is faster. And Feather
 with compression is even faster to read. This is partly because the files are
 much smaller on disk, so even though the NVMe SSD reads at 1-2GB/second, it
 shows that IO is a bottleneck.</p>
+
 <p>For Parquet and Feather, performance of reading to Pandas and R is the speed of
 reading to Arrow plus the speed of converting that Table to a Pandas/R Data
 Frame.  For the Pandas with the Fannie Mae dataset, we see that Arrow to Pandas
 adds around 2 seconds to each read.  <a href="https://ursalabs.org/blog/2019-10-columnar-perf/">In our last performance analysis</a>, we
 demonstrated that there is significant overhead associated with converting to
-and from Python pandas and R data frame objects. While indeed we've done our
+and from Python pandas and R data frame objects. While indeed we&rsquo;ve done our
 best to <a href="https://ursalabs.org/blog/fast-pandas-loading/">optimize the creation of these objects</a>, populating data frames
 with a lot of strings is a bottleneck in both languages. As such, the read and
 write times of these file formats can be overshadowed by the effort involved
 with creating the data frames.</p>
+
 <p>Some might comment that faster readers for these file formats could be built
 that circumvent the Arrow columnar format as the &ldquo;middle man&rdquo;. In the case of
-Feather, the stored data <strong>is</strong> Arrow format already, so there's no extra
+Feather, the stored data <strong>is</strong> Arrow format already, so there&rsquo;s no extra
 overhead there.  With Parquet, we are decoding Parquet files into Arrow first
 then converting to R or pandas. so strictly speaking faster &ldquo;custom&rdquo; converters
 <em>could</em> potentially be created, but we would guess the performance gains would
 be measly (at most 20%) and so hardly justify the implementation and code
 maintenance effort.</p>
+
 <div align="center">
 <img src="https://ursalabs.org/20200414_read_r.png"
      alt="2020-04 Read Benchmarks"
      width="100%" class="img-responsive">
 </div>
+
 <p>When reading in R, we see that the Arrow to R code is not as fast as the Arrow
 to Pandas code. The Feather and Parquet R readers are about 2 seconds slower
 than their Python counterparts. In the <a href="https://ursalabs.org/20200414_read_full.png">full results</a>,
 we can see that the timings for single-threaded Feather and Parquet reading in
-Python and R are closer together. This may mean that the Arrow-to-R code isn't
+Python and R are closer together. This may mean that the Arrow-to-R code isn&rsquo;t
 able to take as full advantage of multithreading compared with the similar code
 in <code>pyarrow</code>, so there may be room for improvement there.</p>
-<p>As we showed previously, the <code>arrow</code> package's Feather reader (V2) is much
+
+<p>As we showed previously, the <code>arrow</code> package&rsquo;s Feather reader (V2) is much
 faster than the V1 implementation in the <code>feather</code> package. Parquet, Feather
 V2, and FST are all comparably fast. Reading .rds is much slower, literally off
 the chart here: the uncompressed file took 30 seconds to read, and 41 seconds
@@ -328,28 +372,36 @@ GZIP can achieve good compression ratios (i.e. smaller files), it is not as
 fast as LZ4 or ZSTD, which is why Feather supports those two compression
 libraries. It also shows the benefit of multithreaded reading as the .rds
 reader is single-threaded.</p>
+
 <h3 id="write-speed">Write speed</h3>
+
 <div align="center">
 <img src="https://ursalabs.org/20200414_write_py.png"
      alt="2020-04 Write Benchmarks"
      width="100%" class="img-responsive">
 </div>
+
 <p>On the write side, we see that compressed Feather files can
 also be faster to write than uncompressed files, and also faster than writing to Parquet.
 So we can produce the
 compressed data at a higher speed than it would take to write the uncompressed
 data to disk, even with a very fast SSD. This is a significant performance win.</p>
+
 <div align="center">
 <img src="https://ursalabs.org/20200414_write_r.png"
      alt="2020-04 Write Benchmarks"
      width="100%" class="img-responsive">
 </div>
+
 <h1 id="why-use-feather-v2-when-you-can-use-parquet">Why use Feather V2 when you can use Parquet?</h1>
+
 <p>Parquet format has become one of the &ldquo;gold standard&rdquo; binary file formats for
 data warehousing. We highly recommend it as a portable format that can be used
 in many different data processing systems. It also generally (but not always)
 produces very small files.</p>
+
 <p>Feather V2 has some attributes that can make it attractive:</p>
+
 <ul>
 <li>Accessible by any Arrow implementation. R and Python use the Arrow C++
 library internally, which is a well-supported reference implementation.</li>
@@ -364,16 +416,22 @@ and while most of Arrow can be stored in Parquet, there are some things that
 cannot (like unions). Support for reading nested Parquet data is not fully
 implemented yet, but should be in 2020 (see <a href="https://issues.apache.org/jira/browse/ARROW-1644">ARROW-1644</a>).</li>
 </ul>
+
 <p>In general, our view is that having options are good, and you can choose the
 tool that works best for you.</p>
+
 <h1 id="conclusion-and-acknowledgements">Conclusion and Acknowledgements</h1>
+
 <p>We refer you to the <a href="https://ursalabs.org/blog/2019-10-columnar-perf/">October 2019 post</a> on this topic for more information
 about some of the internal details relating to performance, especially with
 string-heavy datasets.</p>
+
 <p>We hope again that this analysis is useful for Python and R programmers, and
 look forward to continuing to work with the open source community to make data
 processing faster and more productive!</p>
+
 <p>This work was supported by some of our generous sponsors:</p>
+
 <ul>
 <li>RStudio</li>
 <li>Intel</li>
@@ -381,6 +439,7 @@ processing faster and more productive!</p>
 <li>Two Sigma</li>
 <li>Bloomberg</li>
 </ul>
+
 <p>If you would like to help fund Arrow development, please drop us a line at
 <a href="mailto:info@ursalabs.org">info@ursalabs.org</a>.</p>
 
@@ -426,7 +485,7 @@ processing faster and more productive!</p>
     
 <div class="container copyright">
     <small>
-  (c) 2018-2019 Ursa Labs
+  &copy; 2018-2020 Ursa Labs
 
   </small>
 </div>

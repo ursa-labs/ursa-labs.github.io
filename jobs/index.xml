@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ursa Labs Jobs on Ursa Labs</title>
+    <link>https://ursalabs.org/jobs/</link>
+    <description>Recent content in Ursa Labs Jobs on Ursa Labs</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>(c) 2018-2020 Ursa Labs</copyright>
+    <lastBuildDate>Thu, 15 Oct 2020 20:26:53 -0400</lastBuildDate>
+    
+	<atom:link href="https://ursalabs.org/jobs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Developer Advocate</title>
+      <link>https://ursalabs.org/jobs/advocate/</link>
+      <pubDate>Thu, 15 Oct 2020 20:26:53 -0400</pubDate>
+      
+      <guid>https://ursalabs.org/jobs/advocate/</guid>
+      <description>Apache Arrow is developing at a rapid pace&amp;ndash;so fast that we haven’t had time to introduce and publicize many of the features included in the Arrow libraries. Adoption of Arrow in data science/engineering has grown steadily over the past few years, but we think there are many more people out there who could benefit from Arrow libraries if they were aware of their capabilities and had more helpful guidance for how to get started with them.</description>
+    </item>
+    
+    <item>
+      <title>Senior R Developer</title>
+      <link>https://ursalabs.org/jobs/r/</link>
+      <pubDate>Thu, 15 Oct 2020 20:26:53 -0400</pubDate>
+      
+      <guid>https://ursalabs.org/jobs/r/</guid>
+      <description>Ursa Labs has played a leading role in the development of the Python and R packages for Apache Arrow. Regardless of their language of choice, data scientists can access the fast, efficient Arrow libraries, and they can even share data between Python and R to take advantage of the best of both languages.
+We’re searching for someone who is passionate about developing open data tools to join our team. The primary focus for this role is the maintenance of the Arrow R package, though it is expected that leadership in the R subproject of Arrow will spill over into helping shape the priorities of the broader cross-language project.</description>
+    </item>
+    
+  </channel>
+</rss>

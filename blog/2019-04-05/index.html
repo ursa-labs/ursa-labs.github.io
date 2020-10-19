@@ -46,7 +46,7 @@
 <link rel="canonical" href="https://ursalabs.org/blog/2019-04-05/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
-<meta name="generator" content="Hugo 0.63.0-DEV" />
+<meta name="generator" content="Hugo 0.55.6" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -110,6 +110,15 @@
             
             <li class="">
               
+                <a href="https://ursalabs.org/jobs/" >
+                  
+                  Jobs
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
                 <a href="https://ursalabs.org/support/" >
                   
                   Support
@@ -157,16 +166,21 @@
         <p>Our last report was for March 2019, so I have rolled up two months
 into one. There have been a number of exciting developments in the
 project in the last couple of months. See the end of the report for
-the team's full changelog of patches contributed to Apache Arrow.</p>
+the team&rsquo;s full changelog of patches contributed to Apache Arrow.</p>
+
 <h2 id="ursa-labs-team-growing">Ursa Labs Team growing</h2>
+
 <p>Since the last report, <a href="https://github.com/nealrichardson">Neal Richardson</a> has joined the team,
 bringing expertise in growing distributed engineering teams and R
 programming to boot. <a href="https://github.com/jorisvandenbossche">Joris Van den Bossche</a> from the <a href="https://github.com/pandas-dev/pandas">pandas</a>
 core team has also come on board on a part-time basis to scale our
 general Python and pandas-related development efforts in Apache Arrow.</p>
+
 <h2 id="major-c-development-initiatives">Major C++ Development Initiatives</h2>
+
 <p>Generally speaking, the Ursa Labs team is focusing on 4 major projects
 going forward:</p>
+
 <ul>
 <li><strong>Datasets</strong>: a common API/framework for reading and writing large,
 partitioned datasets in a variety of file formats (Memory-mapped
@@ -190,15 +204,20 @@ data. This system will utilize common analytical components from the
 DataFrames library. See <a href="https://docs.google.com/document/d/10RoUZmiMQRi_J1FcPeVAUAMJ6d_ZuiEbaM2Y33sNPu4/edit?usp=sharing">discussion document</a> from the mailing
 list</li>
 </ul>
+
 <p>Up until this point in the project, our development work has tilted
 more toward the first two projects but we will be beginning to do some
 DataFrames work as 2019 advances.</p>
+
 <h2 id="development-highlights-in-april-and-may">Development Highlights in April and May</h2>
+
 <p>We are continuing to set up our <strong>physical build and test cluster</strong>
-which we'll use to run integration tests, GPU-enabled builds,
+which we&rsquo;ll use to run integration tests, GPU-enabled builds,
 benchmark comparisons, nightly builds, and other automated tests to
 help with Arrow development.</p>
+
 <p>Some highlights from our work in the Apache Arrow codebase:</p>
+
 <ul>
 <li><strong>Multi-threaded JSON file reader</strong>: an initial version of a
 line-delimited JSON reader with type inference is available in C++
@@ -221,40 +240,53 @@ types and other places) to permit dictionaries to change as a
 streaming dataset evolves. This will help with improving Parquet
 read performance and other future features.</li>
 </ul>
+
 <h2 id="arrow-flight-progress">Arrow Flight progress</h2>
-<p>We've been working since last fall with Two Sigma and Dremio on the
-new Flight messaging and RPC framework built on top of Google's gRPC
+
+<p>We&rsquo;ve been working since last fall with Two Sigma and Dremio on the
+new Flight messaging and RPC framework built on top of Google&rsquo;s gRPC
 library. Flight is an Arrow-native data messaging layer designed for
 creating high-performance clients and servers that send Arrow-based
 datasets to each other. By bypassing unnecessary serialization steps,
 we are able to achieve excellent end-to-end throughput.</p>
+
 <p>One use case for Flight is as an alternative to ODBC or JDBC in
 database systems.</p>
+
 <p>In the last couple of months we have completed cross-platform support
 for Flight (i.e. including Windows) and we expect to be able to
 include Flight support in Python packages in the next release. Flight
 now also features URI-based locations, which can permit different modes
 of underlying data transport.</p>
+
 <h2 id="progress-on-r-packaging-and-cran">Progress on R packaging and CRAN</h2>
+
 <p>The Arrow R package is still not available on CRAN but we are
 investigating various strategies to enable R users to
 obtain both the Arrow C++ libraries and the Rcpp-based Arrow R library
 that is easy-to-install and CRAN compatible. We hope to have this
 sorted out in time for the 0.14 release sometime this summer.</p>
+
 <h2 id="sponsor-acknowledgements">Sponsor Acknowledgements</h2>
+
 <p>We are grateful to the support of our sponsors:</p>
+
 <ul>
 <li>RStudio</li>
 <li>NVIDIA AI Labs</li>
 <li>ODSC Conference</li>
 <li>Two Sigma Investments</li>
 </ul>
+
 <p>If you or your company would be interested in sponsoring the work of Ursa Labs,
-please contact us at <strong><a href="mailto:info@ursalabs.org">info@ursalabs.org</a></strong>.</p>
+please contact us at <strong>info@ursalabs.org</strong>.</p>
+
 <h2 id="team-changelog">Team Changelog</h2>
+
 <p>The team had 103 commits merged into Apache Arrow in April and
 May. You can click on the ASF JIRA links to learn more about the
 discussion on a particular issue or the commit hash to see each patch.</p>
+
 <ul>
 <li>2019-04-02: <a href="https://issues.apache.org/jira/browse/ARROW-5078">ARROW-5078</a>: [Documentation] Sphinx is failed by RemovedInSphinx30Warning (<a href="https://github.com/apache/arrow/commit/56d5d23cf418c71b04fe779fffb77c35f5acc1ba">56d5d2</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
 <li>2019-04-02: <a href="https://issues.apache.org/jira/browse/ARROW-3791">ARROW-3791</a>: [C++ / Python] Add boolean type inference to the CSV parser (<a href="https://github.com/apache/arrow/commit/f7ef65e5fc367f1f5649dfcea0754e413fcca394">f7ef65</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
@@ -290,7 +322,7 @@ discussion on a particular issue or the commit hash to see each patch.</p>
 <li>2019-04-24: <a href="https://issues.apache.org/jira/browse/ARROW-5204">ARROW-5204</a>: [C++] Improve builder performance (<a href="https://github.com/apache/arrow/commit/948379f2bb87480a44ca2218c0aaa9da7cd164ff">948379</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-04-25: <a href="https://issues.apache.org/jira/browse/ARROW-4702">ARROW-4702</a>: [C++] Update dependency versions (<a href="https://github.com/apache/arrow/commit/f913d8f0adff71c288a10f6c1b0ad2d1ab3e9e32">f913d8</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-04-25: <a href="https://issues.apache.org/jira/browse/ARROW-4827">ARROW-4827</a>: [C++] Implement benchmark comparison (<a href="https://github.com/apache/arrow/commit/c3511db97e981fd24367916e45fd1d1edd83bb73">c3511d</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
-<li>2019-04-26: Fix Travis-CI doc build failure [skip appveyor] (#4205) (<a href="https://github.com/apache/arrow/commit/621d649059589f6a819fdc3dfe6798f0a5ae2cf9">621d64</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-04-26: Fix Travis-CI doc build failure <a href="#4205">skip appveyor</a> (<a href="https://github.com/apache/arrow/commit/621d649059589f6a819fdc3dfe6798f0a5ae2cf9">621d64</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-04-26: <a href="https://issues.apache.org/jira/browse/ARROW-5219">ARROW-5219</a>: [C++] Build protobuf_ep in parallel when using Ninja build (<a href="https://github.com/apache/arrow/commit/67efb73eff689180a1d100606f53ce3ad85db4ac">67efb7</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-04-26: <a href="https://issues.apache.org/jira/browse/ARROW-5214">ARROW-5214</a>: [C++] Fix thirdparty download script (<a href="https://github.com/apache/arrow/commit/02bd2a890b9b715e4efa7d003dbf26bd419036ee">02bd2a</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
 <li>2019-04-29: <a href="https://issues.apache.org/jira/browse/ARROW-4694">ARROW-4694</a>: [CI] Improve detect-changes.py on Travis PRs (<a href="https://github.com/apache/arrow/commit/56a1292fe2dae172e096ef633bfd27d8c866d667">56a129</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
@@ -304,7 +336,7 @@ discussion on a particular issue or the commit hash to see each patch.</p>
 <li>2019-05-03: <a href="https://issues.apache.org/jira/browse/ARROW-3767">ARROW-3767</a>: [C++] Add cast from null to any other type (<a href="https://github.com/apache/arrow/commit/982f341bc81e1e22d4b25f8cf00ef882a34766b6">982f34</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-05-06: <a href="https://issues.apache.org/jira/browse/ARROW-5252">ARROW-5252</a>: [C++] Use standard-compliant std::variant backport (<a href="https://github.com/apache/arrow/commit/89a18b5381ed0148065c994df1108d9632135086">89a18b</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-05-06: <a href="https://issues.apache.org/jira/browse/PARQUET-1569">PARQUET-1569</a>: [C++] Consolidate shared unit testing header files (<a href="https://github.com/apache/arrow/commit/44bafe4ea52562c93f96438a6019ffeb32a8312f">44bafe</a> by <a href="https://github.com/wesm">wesm</a>)</li>
-<li>2019-05-07: <a href="https://issues.apache.org/jira/browse/ARROW-5270">ARROW-5270</a>: [C++] reduce json-reader-test's working size (<a href="https://github.com/apache/arrow/commit/08829248fd540b7e3bd96b980e357f8a4db7970e">088292</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
+<li>2019-05-07: <a href="https://issues.apache.org/jira/browse/ARROW-5270">ARROW-5270</a>: [C++] reduce json-reader-test&rsquo;s working size (<a href="https://github.com/apache/arrow/commit/08829248fd540b7e3bd96b980e357f8a4db7970e">088292</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
 <li>2019-05-07: <a href="https://issues.apache.org/jira/browse/ARROW-3475">ARROW-3475</a>: [C++] Allow builders to finish to the corresponding array type (<a href="https://github.com/apache/arrow/commit/0a5f90ad02a1fbfe18f6a1e374d682e250691a90">0a5f90</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
 <li>2019-05-08: <a href="https://issues.apache.org/jira/browse/ARROW-767">ARROW-767</a>: [C++] Filesystem abstraction (<a href="https://github.com/apache/arrow/commit/9fadcd23322002e2697bba7a3a454f44db696b1b">9fadcd</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-05-08: <a href="https://issues.apache.org/jira/browse/ARROW-5071">ARROW-5071</a>: [Archery] Implement running benchmark suite (<a href="https://github.com/apache/arrow/commit/c3c8e7630079e712f75df69cb3da70997274f72b">c3c8e7</a> by <a href="https://github.com/fsaintjacques">fsaintjacques</a>)</li>
@@ -316,7 +348,7 @@ discussion on a particular issue or the commit hash to see each patch.</p>
 <li>2019-05-13: <a href="https://issues.apache.org/jira/browse/ARROW-5286">ARROW-5286</a>: [Python] support struct type in from_pandas (<a href="https://github.com/apache/arrow/commit/3939252a895fdc77102f3849012e5fec08603ce0">393925</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
 <li>2019-05-13: <a href="https://issues.apache.org/jira/browse/ARROW-1280">ARROW-1280</a>: [C++] add fixed size list type (<a href="https://github.com/apache/arrow/commit/ea271b31700aa5ea74efd042e2ca6875cb05a83c">ea271b</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
 <li>2019-05-13: <a href="https://issues.apache.org/jira/browse/ARROW-5291">ARROW-5291</a>: [Python] Add wrapper for take kernel on Array (<a href="https://github.com/apache/arrow/commit/2ca6fe8a91ea888fe528d457b10a555682359022">2ca6fe</a> by <a href="https://github.com/jorisvandenbossche">jorisvandenbossche</a>)</li>
-<li>2019-05-15: <a href="https://issues.apache.org/jira/browse/ARROW-5323">ARROW-5323</a>: [CI] Compress clcache files [skip travis] (<a href="https://github.com/apache/arrow/commit/85420d5e1a2239ac2ffdd2cce0284a553f2c3ccd">85420d</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-05-15: <a href="https://issues.apache.org/jira/browse/ARROW-5323">ARROW-5323</a>: [CI] Compress clcache files <a href="[85420d][227] by [pitrou][103]">skip travis</a></li>
 <li>2019-05-15: <a href="https://issues.apache.org/jira/browse/ARROW-4993">ARROW-4993</a>: [C++] Add simple build configuration summary (<a href="https://github.com/apache/arrow/commit/b199b27646ecf8432d3b6d9a70858a8a875d8283">b199b2</a> by <a href="https://github.com/bkietz">bkietz</a>)</li>
 <li>2019-05-15: <a href="https://issues.apache.org/jira/browse/ARROW-5288">ARROW-5288</a>: [Documentation] Enhance the contribution guidelines page (<a href="https://github.com/apache/arrow/commit/10db6745159b69c0cff3ea75e551a4337b3e385f">10db67</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-05-15: <a href="https://issues.apache.org/jira/browse/ARROW-5275">ARROW-5275</a>: [C++] Generic filesystem tests (<a href="https://github.com/apache/arrow/commit/f0f50b00279d541b308233a5162bb282d101d2e0">f0f50b</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
@@ -327,7 +359,7 @@ discussion on a particular issue or the commit hash to see each patch.</p>
 <li>2019-05-20: <a href="https://issues.apache.org/jira/browse/ARROW-5113">ARROW-5113</a>: [C++] Fix DoPut with dictionary arrays, add tests (<a href="https://github.com/apache/arrow/commit/3848b654832c18c46d6d4090d3d68a9ff1e1712f">3848b6</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-05-20: <a href="https://issues.apache.org/jira/browse/ARROW-5376">ARROW-5376</a>: [C++] Workaround for gcc 5.4.0 bug (<a href="https://github.com/apache/arrow/commit/c154825ad903a8872513330957a826a07e9ae870">c15482</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-05-20: <a href="https://issues.apache.org/jira/browse/ARROW-5260">ARROW-5260</a>: [Python] Fix crash when deserializating from components in another process (<a href="https://github.com/apache/arrow/commit/e643845dc45d8d6c03102eb05bcfc67d520a39b1">e64384</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
-<li>2019-05-20: <a href="https://issues.apache.org/jira/browse/ARROW-5330">ARROW-5330</a>: [CI] Run Python Flight tests on Travis [skip appveyor] (<a href="https://github.com/apache/arrow/commit/3da236ac38f7d98a326f361d741b2c828221ba2b">3da236</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-05-20: <a href="https://issues.apache.org/jira/browse/ARROW-5330">ARROW-5330</a>: [CI] Run Python Flight tests on Travis <a href="[3da236][249] by [pitrou][103]">skip appveyor</a></li>
 <li>2019-05-21: <a href="https://issues.apache.org/jira/browse/PARQUET-1583">PARQUET-1583</a>: [C++] Remove superfluous parquet::Vector class (<a href="https://github.com/apache/arrow/commit/2d4fe0153cd3edec6ddc8ca742d05c8e3a98f768">2d4fe0</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-05-21: <a href="https://issues.apache.org/jira/browse/ARROW-5325">ARROW-5325</a>: [Archery][Benchmark] Output properly formatted jsonlines from benchmark diff cli command (<a href="https://github.com/apache/arrow/commit/68329e728c5356f85c4a492c9749ea9125b06993">68329e</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
 <li>2019-05-22: <a href="https://issues.apache.org/jira/browse/ARROW-5389">ARROW-5389</a>: [C++] Add Temporary Directory facility (<a href="https://github.com/apache/arrow/commit/1c4d4333ecfc4aaf959f2c1e59d4f40363c2f3b6">1c4d43</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
@@ -339,7 +371,7 @@ discussion on a particular issue or the commit hash to see each patch.</p>
 <li>2019-05-25: <a href="https://issues.apache.org/jira/browse/ARROW-5332">ARROW-5332</a>: [R] Update R package README with richer installation instructions (<a href="https://github.com/apache/arrow/commit/184b8deb651c6f6308c0fa2a595f5a40f5da8ce8">184b8d</a> by <a href="https://github.com/nealrichardson">nealrichardson</a>)</li>
 <li>2019-05-26: <a href="https://issues.apache.org/jira/browse/ARROW-5349">ARROW-5349</a>: [C++][Parquet] Add method to set file path in a parquet::FileMetaData instance (<a href="https://github.com/apache/arrow/commit/f82af62dfde364f3eeea2015586ec5846a78ec8f">f82af6</a> by <a href="https://github.com/wesm">wesm</a>)</li>
 <li>2019-05-28: <a href="https://issues.apache.org/jira/browse/ARROW-5413">ARROW-5413</a>: [C++] Skip UTF8 BOM in CSV files (<a href="https://github.com/apache/arrow/commit/8b0318a11bba2aa2cf39bff245ff916a3283d372">8b0318</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
-<li>2019-05-28: <a href="https://issues.apache.org/jira/browse/ARROW-5401">ARROW-5401</a>: [CI] Print ccache statistics on Travis-CI [skip appveyor] (<a href="https://github.com/apache/arrow/commit/d86b7d2756ae5beb8f369079f0627e69708926c2">d86b7d</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
+<li>2019-05-28: <a href="https://issues.apache.org/jira/browse/ARROW-5401">ARROW-5401</a>: [CI] Print ccache statistics on Travis-CI <a href="[d86b7d][272] by [pitrou][103]">skip appveyor</a></li>
 <li>2019-05-28: <a href="https://issues.apache.org/jira/browse/ARROW-5421">ARROW-5421</a>: [Packaging][Crossbow] Duplicated key in nightly test configuration (<a href="https://github.com/apache/arrow/commit/46fb329f290bababb85c41ee182f9568d2e547b8">46fb32</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
 <li>2019-05-28: <a href="https://issues.apache.org/jira/browse/ARROW-5419">ARROW-5419</a>: [C++] Allow recognizing empty strings as null strings in CSV files (<a href="https://github.com/apache/arrow/commit/1643c1ecb3eac7db0b273097f9476621f8297a9c">1643c1</a> by <a href="https://github.com/pitrou">pitrou</a>)</li>
 <li>2019-05-29: <a href="https://issues.apache.org/jira/browse/ARROW-5437">ARROW-5437</a>: [Python] Missing pandas pytest marker from parquet tests (<a href="https://github.com/apache/arrow/commit/343c289fdd17e5988c17bf21acc0cef26bcf76bd">343c28</a> by <a href="https://github.com/kszucs">kszucs</a>)</li>
@@ -402,7 +434,7 @@ discussion on a particular issue or the commit hash to see each patch.</p>
     
 <div class="container copyright">
     <small>
-  (c) 2018-2019 Ursa Labs
+  &copy; 2018-2020 Ursa Labs
 
   </small>
 </div>

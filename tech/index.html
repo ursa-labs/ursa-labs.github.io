@@ -39,7 +39,7 @@
 <link rel="canonical" href="https://ursalabs.org/tech/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
-<meta name="generator" content="Hugo 0.63.0-DEV" />
+<meta name="generator" content="Hugo 0.55.6" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -97,6 +97,15 @@
                 <a href="https://ursalabs.org/blog/" >
                   
                   Blog
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/jobs/" >
+                  
+                  Jobs
                 </a>
               
             </li>
@@ -212,19 +221,26 @@
       </div>
 
       <div class="long-article col-sm-8">
-        <h2 id="technical-vision-documents">Technical Vision Documents</h2>
+        
+
+<h2 id="technical-vision-documents">Technical Vision Documents</h2>
+
 <p>Early in 2019, we discussed several significant design documents that
 articulate the motivation and requirements for our past and future efforts:</p>
+
 <ul>
 <li><a href="https://github.com/apache/arrow/pull/4225">Filesystems API</a></li>
 <li><a href="https://docs.google.com/document/d/1bVhzifD38qDypnSjtf8exvpP3sSB5x_Kw9m-n66FB2c/edit?usp=sharing">Datasets API</a>,</li>
 <li><a href="https://docs.google.com/document/d/1XHe_j87n2VHGzEbnLe786GHbbcbrzbjgG8D0IXWAeHg/edit#heading=h.g70gstc7jq4h">DataFrame API</a></li>
 <li><a href="https://docs.google.com/document/d/10RoUZmiMQRi_J1FcPeVAUAMJ6d_ZuiEbaM2Y33sNPu4/edit?usp=sharing">C++ Query Engine</a></li>
 </ul>
+
 <p>Obviously not all of this work has been completed yet, but we have been busy
 breaking down the projects into tractable pieces and getting them done.</p>
+
 <p>A common question we get is about the relationship between the &ldquo;data frame&rdquo; and
 &ldquo;query engine&rdquo; subprojects. Here is the answer:</p>
+
 <ul>
 <li>Data frames provide a convenient way to execute analytical operations on
 in-memory (or memory-mapped / out-of-core) datasets. Some algorithms, such as
@@ -237,21 +253,26 @@ more limited to the domain of SQL. The implementation of many operations
 (such as aggregations and many group-by operations) can be reused in the data
 frame API.</li>
 </ul>
+
 <div align="center">
 <img src="https://ursalabs.org/20200130_compute_arch.png"
      alt="Apache Arrow compute architecture"
      width="90%" class="img-responsive">
 </div>
+
 <p>In addition to building this essential functionality in C++, we are building
 rich bindings in Python and R with integrations into key projects in those
 ecosystems. Our intent is to accelerate existing data processing work,
 unlocking new workflows (such as new file formats or larger scale analysis),
 and generally providing a strong foundation for the next generation of
 analytics for data scientists.</p>
+
 <h2 id="2020-outlook-and-development-roadmap">2020 Outlook and Development Roadmap</h2>
+
 <p>We are continuing to pursue the development agenda described in the
 design documents and working to deepen our integrations with
 Python and R libraries.</p>
+
 <ul>
 <li>Datasets API: We will expand to support all of the file formats for which
 there is an Arrow-based interface. We will also enable writing datasets
@@ -285,7 +306,9 @@ performance over time and on different kinds of hardware configurations and
 architectures (e.g. both x86 and ARM). This will be increasingly important to
 prevent performance regressions in the software.</li>
 </ul>
+
 <h2 id="talks-and-other-references">Talks and Other References</h2>
+
 <ul>
 <li><a href="https://www.slideshare.net/wesm/shared-infrastructure-for-data-science">https://www.slideshare.net/wesm/shared-infrastructure-for-data-science</a></li>
 </ul>
@@ -334,7 +357,7 @@ prevent performance regressions in the software.</li>
     
 <div class="container copyright">
     <small>
-  (c) 2018-2019 Ursa Labs
+  &copy; 2018-2020 Ursa Labs
 
   </small>
 </div>
