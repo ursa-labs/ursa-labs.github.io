@@ -5,28 +5,28 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <title>Ultrafast pandas DataFrame loading from Apache Arrow  &middot; Ursa Labs</title>
+  <title>Chan Zuckerberg Initiative funds new Apprenticeship program to foster diversity and inclusion in Apache Arrow  &middot; Ursa Labs</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="HandheldFriendly" content="True">
 <meta name="MobileOptimized" content="320">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="description" content="In this blog post, we discuss the work we&#39;ve done in Apache Arrow to efficiently construct pandas DataFrame objects. In some cases, we can do it faster than pandas itself." />
+<meta name="description" content="In this blog post we announce the grant we have received from the Chan Zuckerberg Initiative to create an open source apprenticeship program for Apache Arrow with the objective of promoting diversity and inclusion among the maintainers." />
 
 <meta name="keywords" content="">
 
 
-<meta property="og:title" content="Ultrafast pandas DataFrame loading from Apache Arrow  &middot; Ursa Labs ">
+<meta property="og:title" content="Chan Zuckerberg Initiative funds new Apprenticeship program to foster diversity and inclusion in Apache Arrow  &middot; Ursa Labs ">
 <meta property="og:site_name" content="Ursa Labs"/>
-<meta property="og:url" content="https://ursalabs.org/blog/fast-pandas-loading/" />
+<meta property="og:url" content="https://ursalabs.org/blog/2020-czi-ursa-labs/" />
 <meta property="og:locale" content="en">
 
 
 <meta property="og:type" content="article" />
-<meta property="og:description" content="In this blog post, we discuss the work we&#39;ve done in Apache Arrow to efficiently construct pandas DataFrame objects. In some cases, we can do it faster than pandas itself."/>
-<meta property="og:article:published_time" content="2020-04-02T00:00:00-05:00" />
-<meta property="og:article:modified_time" content="2020-04-02T00:00:00-05:00" />
+<meta property="og:description" content="In this blog post we announce the grant we have received from the Chan Zuckerberg Initiative to create an open source apprenticeship program for Apache Arrow with the objective of promoting diversity and inclusion among the maintainers."/>
+<meta property="og:article:published_time" content="2020-11-20T00:00:00-05:00" />
+<meta property="og:article:modified_time" content="2020-11-20T00:00:00-05:00" />
 
   
 
@@ -43,7 +43,7 @@
 </script>
 
 
-<link rel="canonical" href="https://ursalabs.org/blog/fast-pandas-loading/" />
+<link rel="canonical" href="https://ursalabs.org/blog/2020-czi-ursa-labs/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
 <meta name="generator" content="Hugo 0.63.0-DEV" />
@@ -148,88 +148,86 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-lg-10">
-      <h1 class="blog-post-title">Ultrafast pandas DataFrame loading from Apache Arrow</h1>
+      <h1 class="blog-post-title">Chan Zuckerberg Initiative funds new Apprenticeship program to foster diversity and inclusion in Apache Arrow</h1>
       <div class="blog-post-meta">
         <span>
           
-          Wes McKinney
-          
-            (<a href="https://twitter.com/wesmckinn">@wesmckinn</a>)
-          
+            
+            Wes McKinney
+            
+              (<a href="https://twitter.com/wesmckinn">@wesmckinn</a>)
+            
+            <br>
+            
+            Neal Richardson
+            
+              (<a href="https://twitter.com/enpiar">@enpiar</a>)
+            
+            <br>
+            
           
         </span>
         <br/>
-        <span>April 2, 2020</span>
+        <span>November 20, 2020</span>
       </div>
       <div class="blog-post-content">
         
-        <h2 id="a-surprising-performance-experiment">A Surprising Performance Experiment</h2>
-<p>To start off this blog post, I'll present a surprising fact. The pyarrow
-library is able to construct a <code>pandas.DataFrame</code> faster than using
-<code>pandas.DataFrame</code> directly in some cases. Let's have a look.</p>
-<p>First, I make a dict of 100 NumPy arrays of <code>float64</code> type, a little under 800
-megabytes of data:</p>
-<pre><code>import pandas as pd
-import pyarrow as pa
-import numpy as np
-
-num_rows = 1_000_000
-num_columns = 100
-arr = np.random.randn(num_rows)
-dict_of_numpy_arrays = {
-    'f{}'.format(i): arr
-    for i in range(num_columns)
-}
-</code></pre><p>Then, I measure the time to create a <code>pandas.DataFrame</code> from this dict:</p>
-<pre><code>In [3]: timeit df = pd.DataFrame(dict_of_numpy_arrays)
-82.5 ms ± 865 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
-</code></pre><p>You might be wondering why <code>pd.DataFrame(dict_of_numpy_arrays)</code> allocates
-memory or performs computation. More on that later.</p>
-<p>I'll use <code>pyarrow.Table.to_pandas</code> to do the same thing:</p>
-<pre><code>In [4]: timeit df = pa.table(dict_of_numpy_arrays).to_pandas()
-50.2 ms ± 2.63 ms per loop (mean ± std. dev. of 7 runs, 10 loops each)
-</code></pre><p>Are you disturbed? Well I'm cheating a little bit by using all 8 cores of my
-laptop. So I'll do the same thing with a single thread:</p>
-<pre><code>In [5]: timeit df = pa.table(dict_of_numpy_arrays).to_pandas(use_threads=False)
-63.4 ms ± 579 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
-</code></pre><p>It's still about 24% faster, even single-threaded. It's important to note here
-that conversion to an Arrow array from a contiguous numeric NumPy array without
-nulls is a zero-copy operation.</p>
-<h2 id="what-is-this-sorcery">What is this sorcery?</h2>
-<p>The internals of <code>pandas.DataFrame</code> are a bit complicated. At some point during
-the library's development, it was decided to collect or &ldquo;consolidate&rdquo; columns
-of the same type into two-dimensional NumPy arrays internally. So when you call
-<code>pd.DataFrame(dict_of_numpy_arrays)</code>, pandas internally concatenates these 100
-arrays together into a 1,000,000 by 100 NumPy array.</p>
-<p>We were able to circumvent this logic in pandas to go 25-35% faster from
-pyarrow through a few tactics.</p>
-<ul>
-<li>Constructing the exact internal &ldquo;block&rdquo; structure of a pandas DataFrame, and
-using pandas's developer APIs to construct a DataFrame without any further
-computation or memory allocation.</li>
-<li>Using multiple threads to copy memory</li>
-<li>Using a faster memory allocator than the system allocator used by NumPy (we
-use jemalloc on Linux and macOS)</li>
-</ul>
-<p>You can see all the <a href="https://github.com/apache/arrow/blob/master/cpp/src/arrow/python/arrow_to_pandas.cc">gory details in the Apache Arrow codebase</a>.</p>
-<h2 id="conclusions">Conclusions</h2>
-<p>One of the reasons we did all of this engineering to construct
-<code>pandas.DataFrame</code> as fast as possible is to reduce the number of bespoke
-&ldquo;pandas DataFrame converters&rdquo; that have to be implemented. Systems can produce
-the Apache Arrow columnar format, which can be done in any programming language
-and <a href="https://github.com/apache/arrow/blob/master/docs/source/format/CDataInterface.rst">even without depending on any Apache Arrow libraries</a>, and then use
-functions like <code>pyarrow.Table.to_pandas</code> to convert to pandas.</p>
-<p>The idea is that by going via Arrow, in most cases you'll be able to construct
-<code>pandas.DataFrame</code> much faster than the custom pandas conversion code you might
-write yourself. This is a win-win: you can produce pandas objects faster and we
-collectively have less code overall to maintain. We like to think we did the
-hard work of dealing with pandas's internals so you don't have to.</p>
-<p>Of course, supporting Arrow in your project can have benefits beyond fast
-connectivity to pandas, since more and more projects are adding Arrow support
-as time goes by.</p>
-<p>At Ursa Labs we're interested to hear about the interoperability challenges you
-have and how you might be better served by the computational infrastructure
-we're building in the Apache Arrow project.</p>
+        <p>We founded Ursa Labs in 2018 to build a team to enable Apache Arrow to be a
+robust and reliable next-generation computational foundation for in-memory
+analytics and data science. To make this possible, we partnered with RStudio,
+Two Sigma, and several other corporate sponsors to secure the financial support
+for a group of full time open source developers. In part through our efforts,
+Arrow is now installed more than ten million times per month by Python and R
+users and has quickly become one of the most important technologies for working
+with large tabular datasets. We have additionally helped the project reach its
+critical &ldquo;1.0&rdquo; release milestone, the first one offering formal cross-version
+stability guarantees.</p>
+<p>But it’s not sufficient to write fast code. The success of a software project
+depends just as much—or more—on the community that forms around it. We believe
+that a large, active, and diverse contributor base, coupled with open and
+transparent governance, will yield an open source project with a long lifespan
+and high real world impact. Consequently, Ursa Labs works not only to add
+functionality to Arrow but also to cultivate its developer community.</p>
+<p>We are continually encouraged by the growth and vibrance of the community, and
+we are proud to work alongside so many talented individuals who share our
+commitment. Apache Arrow counts over 500 unique contributors from diverse
+backgrounds across 6 continents. Within the community, discourse is highly
+collegial, and decision-making is consensus-driven, in keeping with our <a href="https://www.apache.org/foundation/policies/conduct.html">Code
+of Conduct</a> and with <a href="https://www.apache.org/foundation/how-it-works.html">the ideals of the Apache Software Foundation</a>.</p>
+<p>That said, as we reflect on the project’s new stage of maturity following the
+1.0 release, we recognize that we can do more to promote diversity, equity, and
+inclusion. Open source software is well known to no more diverse (<a href="https://journals.uic.edu/ojs/index.php/fm/article/view/4291/3381">and often
+less so</a>) than the broader tech community. There are many factors
+contributing to the lack of diversity, many of them rooted in the fact that too
+often open source contributions are unpaid and undertaken as a &ldquo;side
+project&rdquo;. Many individuals&rsquo; work and family situations do not permit them the
+time and space to contribute free labor to an open source project.</p>
+<p>We aspire to be supportive and welcoming of everyone who joins the mailing list
+or files a bug report. Frequently we encourage someone who tweets about an
+Arrow problem to open a Jira issue, where we can discuss and debug in more
+detail; in many cases, we can even persuade the reporter to submit a pull
+request to fix the issue or improve the documentation. Yet, we know that there
+is a much larger potential community out there that may feel intimidated to
+speak up or overwhelmed by the complexity of the project. We want to actively
+seek out these potential collaborators and give them the support necessary to
+become active members of the community.</p>
+<p>To that end, we are very excited to announce the establishment of an open
+source apprenticeship program at Ursa Labs, <a href="https://chanzuckerberg.com/eoss/proposals/apache-arrow-apprenticeship-program-for-oss-maintenance-and-community/">supported by a $215,000 grant from
+the Chan Zuckerberg Initiative</a>. Our program aims to promote the long-term
+sustainability and diversity of the Arrow project by recruiting developers from
+underrepresented groups (especially non-males and people of color) for a
+one-year fellowship and training them to be open source software
+maintainers. Apprentices will gain general experience in open source project
+maintenance and community support, as well as specific, deep knowledge of the
+Arrow libraries and of testing and packaging C++, Python, and R libraries on a
+range of platforms. Following the year-long program, apprentices will be
+prepared for software engineering jobs in the big data ecosystem, and we hope
+that they will continue to engage with the Arrow community and other open
+source projects into the future.</p>
+<p>We are grateful to the Chan Zuckerberg Initiative for their support of Apache
+Arrow and of diversity and inclusion in open source software. In the coming
+weeks, we'll be providing more details on the Ursa Labs apprenticeship program,
+as well as the application process.</p>
 
       </div>
       

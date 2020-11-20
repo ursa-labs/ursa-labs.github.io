@@ -46,7 +46,7 @@
 <link rel="canonical" href="https://ursalabs.org/blog/2019-10-columnar-perf/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.63.0-DEV" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -163,35 +163,27 @@
       </div>
       <div class="blog-post-content">
         
-        
-
-<p>Since the founding of Ursa Labs in 2018, one of our focus areas has been
+        <p>Since the founding of Ursa Labs in 2018, one of our focus areas has been
 accelerating data access to binary file formats for Python and R
 programmers. My first semi-formal collaboration with the R community was the
 <a href="https://blog.rstudio.com/2016/03/29/feather/">creation of the Feather file format</a> with <a href="https://twitter.com/hadleywickham">Hadley Wickham</a> shortly after
 the Apache Arrow project was started. Since then I have focused my energy on
 the Arrow project to build high performance data processing infrastructure.</p>
-
 <p>We have a number of motivations in working through <a href="https://github.com/apache/arrow">Apache Arrow</a> to
 accelerate data access:</p>
-
 <ul>
 <li>Take advantage of the memory- and CPU-efficient Arrow columnar memory layout
 to speed up processing especially of non-numeric (e.g. string) data</li>
 <li>Utilize a common C++ codebase in both Python and R and maintain that codebase
-with a large community of developers. We&rsquo;ve had active collaborations with
+with a large community of developers. We've had active collaborations with
 the Ruby and MATLAB on this codebase, which has been a lot of fun.</li>
 </ul>
-
 <p>In August 2019, the R community <a href="https://cran.r-project.org/package=arrow">published Apache Arrow to CRAN</a>. Since the
 project is about to make its 0.15.0 release with a number of performance
 optimizations relating to Parquet files, we wanted to do some simple
 benchmarking to show how reading popular file formats performs in various scenarios.</p>
-
 <h2 id="file-formats">File formats</h2>
-
 <p>The four columnar formats I look at are:</p>
-
 <ul>
 <li><a href="http://parquet.apache.org/">Apache Parquet</a> (simply &ldquo;Parquet&rdquo; from now on), a popular open standard
 columnar file format used widely in data warehousing. It began originally in
@@ -203,47 +195,36 @@ feature any encoding or compression; the Arrow data structures are written to
 disk unmodified, so a Feather file occupies the same amount of space on disk
 as it does in-memory</li>
 <li><a href="https://www.fstpackage.org/">FST</a>: a binary columnar format designed for use in R</li>
-<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html">RDS</a>: R&rsquo;s native serialization format</li>
+<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html">RDS</a>: R's native serialization format</li>
 </ul>
-
 <p>Note that out of the four of these, only Parquet and RDS support nested
 data (i.e. arrays, structs, etc.). The benchmarks in this post, therefore, only
 deal with flat / non-nested data.</p>
-
-<p>Since we&rsquo;re evaluating read performance, we&rsquo;ll also compare reading the same
+<p>Since we're evaluating read performance, we'll also compare reading the same
 data from CSV with <code>data.table::fread()</code>, even though CSV is not a columnar
 file format.</p>
-
 <h2 id="example-datasets-and-methodology">Example Datasets and Methodology</h2>
-
 <p>I look at two large (&gt; 1 Gigabyte) datasets containing a mix of numeric and
 string data:</p>
-
 <ul>
 <li><a href="https://loanperformancedata.fanniemae.com/">Fannie Mae Loan Performance</a>. I use the 2016Q4 &ldquo;Performance&rdquo; dataset
 which is a 1.52 GB uncompressed CSV and 208 MB when gzipped</li>
 <li><a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC Yellow Taxi Trip Data</a>: I use the &ldquo;January 2010 Yellow Taxi Trip
 Records&rdquo; which is a 2.54 GB uncompressed CSV</li>
 </ul>
-
 <p>For each dataset, I generate files for each file format without any data
 preparation or cleansing. Some of these files would benefit from columns being
 converted to &ldquo;dictionary-encoded&rdquo; in Arrow directly, or equivalently &ldquo;factor&rdquo;
 in R or &ldquo;categorical&rdquo; in pandas, but I leave them as normal strings since this
 is more representative of what the average user will experience.</p>
-
 <p>As far as hardware, I use the following machine:</p>
-
 <ul>
 <li>i9-9880H laptop with 8 physical cores. I will test performance using 1, 4,
 and 8 cores</li>
 <li>Ubuntu 18.04 with CPU governor set to &ldquo;performance&rdquo;</li>
 </ul>
-
 <p>Many thanks to Dell for donating this hardware to Ursa Labs!</p>
-
 <p>Version information:</p>
-
 <ul>
 <li>Python interpreter 3.7.4</li>
 <li>Python pyarrow 0.15.0</li>
@@ -253,15 +234,11 @@ and 8 cores</li>
 <li>R data.table 1.12.2</li>
 <li>R fst 0.9.0</li>
 </ul>
-
 <h2 id="difference-in-file-sizes">Difference in file sizes</h2>
-
 <p>Before digging into the benchmark results and analysis, I want to point out the
 significant differences in on-disk file sizes of each of the file formats under
 consideration.</p>
-
 <p>In the case of the Fannie Mae dataset, we have:</p>
-
 <ul>
 <li>208 MB as gzipped CSV</li>
 <li>503 MB as FST file</li>
@@ -272,7 +249,6 @@ straightforward affair and we would be happy to accept a pull request for
 this</li>
 <li>4.68 GB as an uncompressed R RDS file</li>
 </ul>
-
 <p>That is, the Parquet file is half as big as even the gzipped CSV.
 One of the reasons that the Parquet file is so small is because of
 <strong>dictionary-encoding</strong> (also called &ldquo;dictionary compression&rdquo;). Dictionary
@@ -280,11 +256,8 @@ compression can yield substantially better compression than using a general
 purpose bytes compressor like LZ4 or ZSTD (which are used in the FST
 format). Parquet was designed to produce very small files that are fast to
 read.</p>
-
 <h2 id="benchmark-results">Benchmark results</h2>
-
 <p>I read the files in several different ways:</p>
-
 <ul>
 <li>Read Parquet to Arrow using <code>pyarrow.parquet</code></li>
 <li>Read Parquet to Arrow using <code>pyarrow.parquet</code> and convert to
@@ -299,63 +272,48 @@ performance improvements of the <code>arrow</code> package over the <code>feathe
 <li>Read CSV file with <code>data.table::fread</code></li>
 <li>Read uncompressed R RDS file created with <code>saveRDS</code></li>
 </ul>
-
 <p>The benchmarking scripts (a bit messy, sorry) are <a href="https://github.com/wesm/notebooks/tree/06c52e03b98797bbbbdd5ffc50011911cd7a1789/20190919file_benchmarks">located on GitHub</a>. If I
 made any mistakes, please let me know and I will fix it!</p>
-
 <p>In each benchmark, I read the file 5 times and compute the average of the 5
 runs. By reading the file many times I hopefully partially mitigate the impact
 of disk caching in the Linux kernel, but this could be improved.</p>
-
 <p>Here are the performance results. The bars are color-coded by the type of data
 structure created. Note that generating Apache Arrow columnar format is
 significantly more efficient than either R <code>data.frame</code> or <code>pandas.DataFrame</code>. I
 will discuss some reasons why this is below.</p>
-
 <p>The results are split by dataset: see the facet titles on the right. The colors
 indicate what kind of object is produced at the end.
 On the left you can see each case as above. The measurement is the
 average read time; shorter bars indicate faster performance. When possible, the
 libraries use all available CPU cores to improve performance.</p>
-
 <p>Note that these benchmarks were run with Apache Arrow 0.15.0, which includes
 some <a href="http://arrow.apache.org/blog/2019/09/05/faster-strings-cpp-parquet/">performance and memory use-related bug fixes</a> to the previous 0.14.1
 release.</p>
-
 <p><strong>Results with 8 threads (<code>OMP_NUM_THREADS=8</code>)</strong></p>
-
 <div align="center">
 <img src="https://ursalabs.org/20190925_8.png"
      alt="201909 Columnar Benchmarks"
      width="100%" class="img-responsive">
 </div>
-
 <p><strong>Results with 4 threads (<code>OMP_NUM_THREADS=4</code>)</strong></p>
-
 <div align="center">
 <img src="https://ursalabs.org/20190925_4.png"
      alt="201909 Columnar Benchmarks"
      width="100%" class="img-responsive">
 </div>
-
 <p><strong>Results with 1 thread (<code>OMP_NUM_THREADS=1</code>)</strong></p>
-
 <div align="center">
 <img src="https://ursalabs.org/20190925_1.png"
      alt="201909 Columnar Benchmarks"
      width="100%" class="img-responsive">
 </div>
-
 <h2 id="performance-result-discussion">Performance result discussion</h2>
-
 <p>When controlling by output type (e.g. comparing all R <code>data.frame</code> outputs with
 each other) we see the the performance of Parquet, Feather, and FST falls within a relatively small margin
 of each other. The same is true of the <code>pandas.DataFrame</code> outputs.
 <code>data.table::fread</code> is impressively competitive with the 1.5 GB file size but
 lags the others on the 2.5 GB CSV.</p>
-
 <p>There are a few things I would like to comment on:</p>
-
 <ul>
 <li>Why should you use Parquet over the other columnar formats?</li>
 <li>If you are a current user of the <code>feather</code> R package, is it worth upgrading
@@ -364,81 +322,64 @@ to the <code>arrow</code> package for dealing with Feather files?</li>
 frame formats?</li>
 <li>Why are the pandas benchmarks faster than the R benchmarks?</li>
 </ul>
-
 <h3 id="parquet-versus-the-other-formats">Parquet versus the other formats</h3>
-
 <p>Now that there is a well-supported Parquet implementation available for both
 Python and R, we recommend it as a &ldquo;gold standard&rdquo; columnar storage
 format. These benchmarks show that the performance of reading the Parquet
 format is similar to other &ldquo;competing&rdquo; formats, but comes with additional
 benefits:</p>
-
 <ul>
 <li>The size of Parquet files is significantly smaller in almost all cases, due
-to Parquet&rsquo;s compression schemes</li>
+to Parquet's compression schemes</li>
 <li>Parquet is an industry-standard data format for data warehousing, so you can
 use Parquet files with Apache Spark and nearly any modern analytic SQL engine
 (Apache Impala, Google BigQuery, Presto, Amazon Redshift, etc.)</li>
 </ul>
-
 <h3 id="from-feather-to-arrow-in-r">From <code>feather</code> to <code>arrow</code> in R</h3>
-
 <p>The <code>arrow::read_feather</code> function can be up to 50% faster than the
 <code>feather::read_feather</code> function, particularly on multi-core CPU
 environments. We recommend all <code>feather</code> users upgrade to use the <code>arrow</code>
 package in R to take advantage of the optimization work we will continue to do
 there.</p>
-
 <h3 id="arrow-versus-the-other-output-types">Arrow versus the other output types</h3>
-
 <p>I used the Linux <code>perf</code> tool to investigate and found that
 the main difference has to do with how strings are handled. As discussed in a
 <a href="http://arrow.apache.org/blog/2019/02/05/python-string-memory-0.12/">past Arrow blog post</a>, string-heavy datasets are expensive to work with
 when using pandas. This can be mitigated by using <code>pandas.Categorical</code>, but
-this won&rsquo;t necessarily help in data where the cardinality of the &ldquo;unique set&rdquo;
+this won't necessarily help in data where the cardinality of the &ldquo;unique set&rdquo;
 is high.</p>
-
 <p>By contrast, the Apache Arrow string layout is extremely efficient. Each string
 value has a small amount of storage overhead (4 bytes plus 1 bit) and values
-are guaranteed to be adjacent to each other in memory, so the CPU won&rsquo;t have as
+are guaranteed to be adjacent to each other in memory, so the CPU won't have as
 many &ldquo;cache misses&rdquo; when constructing or processing a string column.</p>
-
-<p>I don&rsquo;t know the exact details of how R deals with strings, but my
+<p>I don't know the exact details of how R deals with strings, but my
 understanding is that there is a &ldquo;global string hash table&rdquo; and so strings in R
 feature pointer indirection and likely a similarly high incidence of cache
-misses like pandas does. Note that because of R&rsquo;s global hash table, string
+misses like pandas does. Note that because of R's global hash table, string
 data in R in general may use less memory than in Python.</p>
-
-<h3 id="pandas-dataframe-vs-r-data-frame">pandas.DataFrame vs. R data.frame</h3>
-
-<p>I haven&rsquo;t done enough analysis to determine exactly where the performance
+<h3 id="pandasdataframe-vs-r-dataframe">pandas.DataFrame vs. R data.frame</h3>
+<p>I haven't done enough analysis to determine exactly where the performance
 difference between Python and R lies. Both implementations use the same Arrow
 C++ code to read the Parquet and Feather files into Arrow format. So the
 difference likely has to do with conversion of strings from Arrow into the
 other data frames&rsquo; representations.</p>
-
 <p>Compared with the Arrow R library, we have spent a significant amount of time
 optimizing the performance of converting from C++ Arrow data structures to
 <code>pandas.DataFrame</code>. I expect there are some performance gains to be found in
 the <a href="https://github.com/apache/arrow/tree/master/r/src">Arrow-to-R conversion C++ code</a>.</p>
-
 <h2 id="conclusion-and-acknowledgements">Conclusion and Acknowledgements</h2>
-
 <p>We hope this analysis is useful for Python and R programmers, and look forward
 to continuing to work with the open source community to make data processing
 faster and more productive!</p>
-
 <p>This work was supported by some of our generous sponsors:</p>
-
 <ul>
 <li>RStudio</li>
 <li>NVIDIA</li>
 <li>Bloomberg</li>
 <li>Two Sigma</li>
 </ul>
-
 <p>If you would like to help fund Arrow development, please drop us a line at
-info@ursalabs.org.</p>
+<a href="mailto:info@ursalabs.org">info@ursalabs.org</a>.</p>
 
       </div>
       
@@ -482,7 +423,7 @@ info@ursalabs.org.</p>
     
 <div class="container copyright">
     <small>
-  &copy; 2018-2020 Ursa Labs
+  (c) 2018-2020 Ursa Labs
 
   </small>
 </div>

@@ -1,6 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://ursalabs.org/blog/2020-czi-ursa-labs/</loc>
+    <lastmod>2020-11-20T00:00:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ursalabs.org/</loc>
+    <lastmod>2020-11-20T00:00:00-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://ursalabs.org/blog/</loc>
+    <lastmod>2020-11-20T00:00:00-05:00</lastmod>
+  </url>
   
   <url>
     <loc>https://ursalabs.org/jobs/advocate/</loc>
@@ -13,23 +28,12 @@
   </url>
   
   <url>
-    <loc>https://ursalabs.org/</loc>
-    <lastmod>2020-10-15T20:26:53-04:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://ursalabs.org/jobs/</loc>
     <lastmod>2020-10-15T20:26:53-04:00</lastmod>
   </url>
   
   <url>
     <loc>https://ursalabs.org/blog/2020-feather-v2/</loc>
-    <lastmod>2020-04-23T00:00:00-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://ursalabs.org/blog/</loc>
     <lastmod>2020-04-23T00:00:00-05:00</lastmod>
   </url>
   
@@ -110,12 +114,10 @@
   
   <url>
     <loc>https://ursalabs.org/tags/</loc>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://ursalabs.org/topics/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>
