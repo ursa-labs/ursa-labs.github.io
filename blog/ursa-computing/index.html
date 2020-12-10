@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Toward an Arrow-native world: the next stage of the Ursa journey  &middot; Ursa Labs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="Announcing Ursa Computing, a startup to empower data teams and accelerate data science, machine learning, and AI work." />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Toward an Arrow-native world: the next stage of the Ursa journey  &middot; Ursa Labs ">
+<meta property="og:site_name" content="Ursa Labs"/>
+<meta property="og:url" content="https://ursalabs.org/blog/ursa-computing/" />
+<meta property="og:locale" content="en">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Announcing Ursa Computing, a startup to empower data teams and accelerate data science, machine learning, and AI work."/>
+<meta property="og:article:published_time" content="2020-12-10T00:00:00-05:00" />
+<meta property="og:article:modified_time" content="2020-12-10T00:00:00-05:00" />
+
+  
+
+  
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107500873-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-107500873-2');
+</script>
+
+
+<link rel="canonical" href="https://ursalabs.org/blog/ursa-computing/" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
+<link rel="icon" href="https://ursalabs.org/favicon.ico">
+<meta name="generator" content="Hugo 0.63.0-DEV" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="https://ursalabs.org/css/bootswatch/flatly/bootstrap.min.css">
+
+
+<link rel="stylesheet" href="https://ursalabs.org/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ursalabs.org/css/style.css">
+
+
+
+
+  <link rel="stylesheet" href="https://ursalabs.org/css/highlight/default.css">
+
+
+</head>
+<body>
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+          
+          <a class="navbar-brand-img" href="https://ursalabs.org/">
+            <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
+            
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/about/" >
+                  
+                  About
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/blog/" >
+                  
+                  Blog
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/support/" >
+                  
+                  Support
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/tech/" >
+                  
+                  Technology
+                </a>
+              
+            </li>
+            
+            
+            
+          </ul>
+        </div>
+        
+      </div>
+      
+    </nav>
+
+  </header>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-lg-10">
+      <h1 class="blog-post-title">Toward an Arrow-native world: the next stage of the Ursa journey</h1>
+      <div class="blog-post-meta">
+        <span>
+          
+          Wes McKinney
+          
+            (<a href="https://twitter.com/wesmckinn">@wesmckinn</a>)
+          
+          
+        </span>
+        <br/>
+        <span>December 10, 2020</span>
+      </div>
+      <div class="blog-post-content">
+        
+        <p>Since launching Ursa Labs in 2018, we have made extraordinary progress growing
+the Apache Arrow project and supporting the open source community around it. As
+I explained in my <a href="https://wesmckinney.com/blog/announcing-ursalabs/">announcement of the
+initiative</a>, our objective
+has been to create a robust engineering team in partnership with a wide variety
+of sponsoring companies with the Arrow project's success as our number one
+priority. Since then, we have added NVIDIA, Intel, Bloomberg, G-Research, and
+OneSixtyTwo Technologies (and some others we cannot name publicly) to our
+sponsor ranks, joining our founding sponsors RStudio and Two Sigma.</p>
+<p>From the perspective of funding the growth and maintenance of an open source
+project, Ursa Labs has undoubtedly been a success. This level of sponsorship
+enabled us to add <a href="https://twitter.com/enpiar">Neal Richardson</a> to the team's
+leadership to advance Arrow development for R users, and together we have
+expanded the Ursa team to six people overall. Together we've helped drive the
+project to its pivotal <a href="https://arrow.apache.org/blog/2020/07/24/1.0.0-release/">1.0.0
+release</a>, which is the
+first formally &ldquo;stable&rdquo; release. Working with Dremio and Two Sigma, we have
+developed <a href="https://arrow.apache.org/blog/2019/10/13/introducing-arrow-flight/">Arrow
+Flight</a>, a
+state-of-the-art Arrow-native data transport framework. Overall, our team has
+been responsible for a significant share of the work on the Arrow project:</p>
+<div align="center">
+<img src="https://ursalabs.org/ursa-commits-2018-2020.png"
+     alt="Apache Arrow patches authored per release, 2018-2020"
+     width="100%" class="img-responsive">
+</div>
+<p>Arrow has quickly become the gold standard for high performance data transfer
+and data access for data frame-like data. We have seen extraordinary adoption
+in all kinds of data systems, from computing frameworks like <a href="https://arrow.apache.org/blog/2017/07/26/spark-arrow/">Apache
+Spark</a> and
+<a href="https://medium.com/tensorflow/tensorflow-with-apache-arrow-datasets-cdbcfe80a59f">TensorFlow</a>
+to data warehouses like
+<a href="https://medium.com/google-cloud/announcing-google-cloud-bigquery-version-1-17-0-1fc428512171">BigQuery</a>
+and
+<a href="https://www.snowflake.com/blog/fetching-query-results-from-snowflake-just-got-a-lot-faster-with-apache-arrow/">Snowflake</a>. At
+the same time, we are seeing progress on new Arrow-native computing frameworks
+inside the Apache Arrow project and in both academia and industry.</p>
+<p>In the Arrow Python package alone, we've exceeded 10 million monthly installs as we have become a critical dependency of data processing systems:</p>
+<div align="center">
+<img src="https://ursalabs.org/pyarrow-downloads.png"
+     alt="Downloads of pyarrow from PyPI per month"
+     width="100%" class="img-responsive">
+</div>
+<h2 id="looking-ahead">Looking ahead</h2>
+<p>As the Arrow developer and user communities have grown, it has become evident
+that we need to scale up the Ursa team to sustain the acceleration of ambitious
+and mission-critical applications based on Arrow. Enterprises are increasingly
+looking for professional help unlocking the full value that can be achieved by
+broadly adopting Arrow as the universal standard for fast, serialization-free
+data access and high performance in-memory analytics on tabular data. While we
+have created a solid foundation that has improved the lives of data scientists
+significantly in many ways, we have a lot more to do, and it is essential that
+we have the engineering personnel and financial resources to be able to realize
+the vision of an Arrow-native world.</p>
+<p>With these things in context, I am excited to announce that we have formed a
+new company, <a href="https://ursacomputing.com">Ursa Computing</a>, to create enterprise
+products and services to empower data teams and accelerate data science,
+machine learning, and AI work. To get this new company off the ground, we have
+raised $4.9 million in seed funding led by <a href="https://www.gv.com/">GV</a>, with
+participation from Walden International, Nepenthe, Amplify Partners, RStudio,
+and many amazing angel investors.</p>
+<p>As I noted in the 2018 announcement, I originally founded Ursa Labs as a
+non-profit entity, in part to avoid the conflicts that sometimes arise with
+building a new open source project community while also building a profitable
+company. With that insulation, Ursa Labs has been successful in cultivating a
+strong community-centric foundation, and Apache Arrow has reached broad
+industry adoption and gained a robust developer community.</p>
+<p>We see Ursa Computing as a path to invest even more in the open-source
+community. Working more closely with enterprises to enhance their data
+platforms will allow us to learn more about how the Arrow project needs to
+evolve to meet current and future needs. We want to create a &ldquo;virtuous cycle&rdquo;
+where the company's success enables us to invest more and more in the open
+source ecosystem. Offering products and services related to Arrow will allow us
+to tackle problems, such as managed cloud services, that would be challenging
+to pursue as an open source project; we have seen this pattern play out in many
+other open source data infrastructure projects.</p>
+<p>Over the last five years of Arrow development, we have observed many ways in
+which data scientists and data engineers are underserved by their computing
+tools, particularly when it comes to scaling up on big machines or scaling out
+on large clusters. Python and R users, for example, have often felt like
+second-class citizens due to costly data interoperability or limited
+extensibility. The promise of Arrow-native computing platforms is that they can
+become truly language-agnostic: any programming language that &ldquo;speaks Arrow&rdquo;
+can become a first-class citizen. We believe that current generation
+large-scale analytics systems which are only &ldquo;native&rdquo; to a specific programming
+language ecosystem (like Java or Scala) will be replaced by more
+language-agnostic Arrow-based systems. Ursa Computing intends to spearhead this
+computing revolution.</p>
+<p>Since we have grown a team of seasoned Arrow maintainers, it is also incumbent
+upon us to continue in our leadership of the Apache project. As such, Ursa
+Computing will maintain a &ldquo;Labs&rdquo; team, initially formed by the existing Ursa
+Labs team, that is primarily focused on advancing and supporting the Arrow open
+source project. We will continue to accept Labs sponsorships with corporations
+that wish to directly fund Arrow development and maintenance, and we will be
+fully transparent with sponsors about how their funds are being directed toward
+open source work.</p>
+<p>We stand at an exciting crossroads with Apache Arrow poised to be the key
+computational technology powering the future of data science and ML/AI
+tools. We look forward to working with engineering and data science teams to
+enable organizations to get more out of their data.</p>
+<p>If you are interested in joining the Ursa Computing team, check out our <a href="https://jobs.lever.co/Ursa">open
+job listings</a>. To sign up for the waitlist for Ursa
+products, use this form:</p>
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+<div id="mc_embed_signup">
+  <form action="https://ursacomputing.us2.list-manage.com/subscribe/post?u=e83b35e9e54cb005e1b1a3f1e&amp;id=1b2577a2e9" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <div class="mc-field-group">
+  	    <label for="mce-EMAIL">Email <span class="asterisk">*</span></label>
+  	    <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+      </div>
+      <div class="mc-field-group">
+  	    <label for="mce-FNAME">First Name </label>
+  	    <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+      </div>
+      <div class="mc-field-group">
+  	    <label for="mce-LNAME">Last Name </label>
+  	    <input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+      </div>
+      <div class="mc-field-group">
+        <label for="mce-MMERGE4">Company / Affiliation </label>
+        <input type="text" value="" name="MMERGE4" class="" id="mce-MMERGE4">
+      </div>
+      <div class="mc-field-group">
+  	    <label for="mce-MESSAGE">Message </label>
+  	    <textarea value="" name="MESSAGE" class="" id="mce-MESSAGE" rows="4" placeholder="Tell us about your data challenges" style="width: 100%;"></textarea>
+      </div>
+  	  <div id="mce-responses" class="clear">
+  		  <div class="response" id="mce-error-response" style="display:none"></div>
+  		  <div class="response" id="mce-success-response" style="display:none"></div>
+  	  </div>
+      <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_e83b35e9e54cb005e1b1a3f1e_1b2577a2e9" tabindex="-1" value=""></div>
+      <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+  </form>
+</div>
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='MESSAGE';ftypes[3]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+    
+<footer class="footer hidden-print">
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+
+</div>
+<div class="pull-right">
+
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              
+    
+<div class="container footline">
+	<div class="row">
+	    <div class="col-md-2">
+	    	<a class="footer-brand-img" href="https://ursalabs.org/">
+            <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
+          </a>
+	    </div>
+	    <div class="col-md-10">
+	    	<h4>Innovating Open Source Data Science Tools</h4>
+	    </div>
+	    <div class="col-md-12">
+	    	<hr>
+	    </div>
+
+	 </div>
+</div>
+
+
+    
+<div class="container copyright">
+    <small>
+  (c) 2018-2020 Ursa Labs
+
+  </small>
+</div>
+<div class="container copyright tm-info">
+    <small>
+  Apache Arrow, Arrow, Apache, the Apache feather logo, and the Apache Arrow project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.
+
+  </small>
+</div>
+
+
+
+        </div>
+    </div>
+  </div>
+</footer>
+
+    
+
+<script src="https://ursalabs.org/js/jquery.min.js"></script>
+<script src="https://ursalabs.org/js/bootstrap.min.js"></script>
+
+<script src="https://ursalabs.org/js/highlight.pack.js"></script>
+<script src="https://ursalabs.org/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+CONTENTLANGUAGE =  null ; 
+</script>
+
+
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/config/TeX-AMS-MML_HTMLorMML.js"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    for(var all in MathJax.Hub.getAllJax()) {
+        all.SourceElement().parentNode.className += ' has-jax';
+
+    }
+});
+</script>
+
+
+
+
+
+
+  </body>
+</html>
+

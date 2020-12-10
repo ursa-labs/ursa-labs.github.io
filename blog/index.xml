@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>(c) 2018-2020 Ursa Labs</copyright>
-    <lastBuildDate>Fri, 20 Nov 2020 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 10 Dec 2020 00:00:00 -0500</lastBuildDate>
     
 	<atom:link href="https://ursalabs.org/blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Toward an Arrow-native world: the next stage of the Ursa journey</title>
+      <link>https://ursalabs.org/blog/ursa-computing/</link>
+      <pubDate>Thu, 10 Dec 2020 00:00:00 -0500</pubDate>
+      
+      <guid>https://ursalabs.org/blog/ursa-computing/</guid>
+      <description>Since launching Ursa Labs in 2018, we have made extraordinary progress growing the Apache Arrow project and supporting the open source community around it. As I explained in my announcement of the initiative, our objective has been to create a robust engineering team in partnership with a wide variety of sponsoring companies with the Arrow project&#39;s success as our number one priority. Since then, we have added NVIDIA, Intel, Bloomberg, G-Research, and OneSixtyTwo Technologies (and some others we cannot name publicly) to our sponsor ranks, joining our founding sponsors RStudio and Two Sigma.</description>
+    </item>
     
     <item>
       <title>Chan Zuckerberg Initiative funds new Apprenticeship program to foster diversity and inclusion in Apache Arrow</title>

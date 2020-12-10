@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>(c) 2018-2020 Ursa Labs</copyright>
-    <lastBuildDate>Fri, 20 Nov 2020 00:00:00 -0500</lastBuildDate>
+    <lastBuildDate>Thu, 10 Dec 2020 00:00:00 -0500</lastBuildDate>
     
 	<atom:link href="https://ursalabs.org/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Toward an Arrow-native world: the next stage of the Ursa journey</title>
+      <link>https://ursalabs.org/blog/ursa-computing/</link>
+      <pubDate>Thu, 10 Dec 2020 00:00:00 -0500</pubDate>
+      
+      <guid>https://ursalabs.org/blog/ursa-computing/</guid>
+      <description>Since launching Ursa Labs in 2018, we have made extraordinary progress growing the Apache Arrow project and supporting the open source community around it. As I explained in my announcement of the initiative, our objective has been to create a robust engineering team in partnership with a wide variety of sponsoring companies with the Arrow project&#39;s success as our number one priority. Since then, we have added NVIDIA, Intel, Bloomberg, G-Research, and OneSixtyTwo Technologies (and some others we cannot name publicly) to our sponsor ranks, joining our founding sponsors RStudio and Two Sigma.</description>
+    </item>
     
     <item>
       <title>Chan Zuckerberg Initiative funds new Apprenticeship program to foster diversity and inclusion in Apache Arrow</title>
@@ -19,25 +28,6 @@
       
       <guid>https://ursalabs.org/blog/2020-czi-ursa-labs/</guid>
       <description>We founded Ursa Labs in 2018 to build a team to enable Apache Arrow to be a robust and reliable next-generation computational foundation for in-memory analytics and data science. To make this possible, we partnered with RStudio, Two Sigma, and several other corporate sponsors to secure the financial support for a group of full time open source developers. In part through our efforts, Arrow is now installed more than ten million times per month by Python and R users and has quickly become one of the most important technologies for working with large tabular datasets.</description>
-    </item>
-    
-    <item>
-      <title>Developer Advocate</title>
-      <link>https://ursalabs.org/jobs/advocate/</link>
-      <pubDate>Thu, 15 Oct 2020 20:26:53 -0400</pubDate>
-      
-      <guid>https://ursalabs.org/jobs/advocate/</guid>
-      <description>Apache Arrow is developing at a rapid pace&amp;ndash;so fast that we haven’t had time to introduce and publicize many of the features included in the Arrow libraries. Adoption of Arrow in data science/engineering has grown steadily over the past few years, but we think there are many more people out there who could benefit from Arrow libraries if they were aware of their capabilities and had more helpful guidance for how to get started with them.</description>
-    </item>
-    
-    <item>
-      <title>Senior R Developer</title>
-      <link>https://ursalabs.org/jobs/r/</link>
-      <pubDate>Thu, 15 Oct 2020 20:26:53 -0400</pubDate>
-      
-      <guid>https://ursalabs.org/jobs/r/</guid>
-      <description>Ursa Labs has played a leading role in the development of the Python and R packages for Apache Arrow. Regardless of their language of choice, data scientists can access the fast, efficient Arrow libraries, and they can even share data between Python and R to take advantage of the best of both languages.
-We’re searching for someone who is passionate about developing open data tools to join our team. The primary focus for this role is the maintenance of the Arrow R package, though it is expected that leadership in the R subproject of Arrow will spill over into helping shape the priorities of the broader cross-language project.</description>
     </item>
     
     <item>
@@ -197,8 +187,8 @@ tooling.&lt;/p&gt;</description>
       <pubDate>Mon, 26 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>https://ursalabs.org/about/</guid>
-      <description>Founded in 2018, Ursa Labs is an industry-funded development group specializing in open source data science tools. It is dedicated to advancing the state of the art in high-productivity, high-performance, cross-language software for data scientists.
-Our Mission We founded Ursa Labs with the goal of helping make Apache Arrow a robust and reliable next-generation computational foundation for in-memory analytics and data science. We recognized that existing popular tools such as pandas and base R have fallen short in terms of computational performance and memory use, particularly in the context of modern CPUs, GPUs, and solid state drives.</description>
+      <description>Founded in 2018, Ursa Labs is an industry-funded development group specializing in open source data science tools. It is dedicated to advancing the state of the art in high-productivity, high-performance, cross-language software for data scientists. Ursa Labs is now a part of Ursa Computing.
+Our Mission We founded Ursa Labs with the goal of helping make Apache Arrow a robust and reliable next-generation computational foundation for in-memory analytics and data science.</description>
     </item>
     
     <item>

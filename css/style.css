@@ -579,3 +579,16 @@ h1.blog-post-title {
 .blog-post-content {
 	margin-top: 40px;
 }
+
+.major-announcement {
+	background-color: #2e88d6;
+	font-size: 14px;
+	color: #fff;
+	text-align: center;
+	padding: .5rem 1rem;
+	display: block;
+}
+
+.major-announcement:hover {
+	color: #1a242f;
+}
