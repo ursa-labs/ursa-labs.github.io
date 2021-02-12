@@ -6,10 +6,6 @@
     <description>Recent content in Tags on Ursa Labs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>(c) 2018-2020 Ursa Labs</copyright>
-    
-	<atom:link href="https://ursalabs.org/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>(c) 2018-2020 Ursa Labs</copyright><atom:link href="https://ursalabs.org/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

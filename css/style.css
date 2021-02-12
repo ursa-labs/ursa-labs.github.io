@@ -1,7 +1,6 @@
 @import url(/css/google-fonts.css);
 
 /*  <-------------------   Additional CSS    ------------------->  */
-
 .navbar-default {
 background-color: #3F4945;
 }
@@ -166,10 +165,18 @@ footer hr {
 }
 
 :target:before {
-  content:"";
+  content: "";
   display:block;
   height:80px;
   margin:-80px 0 0;
+}
+
+.footnotes > * :target:before {
+  content: none;
+}
+
+sup:target:before {
+	display: inline;
 }
 
 .job-board pre {
@@ -438,7 +445,7 @@ html {
 body {
   /* Margin bottom by footer height */
 	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif !important;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 300;
   margin-bottom: 130px;
   color: #222222;

@@ -7,10 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>(c) 2018-2020 Ursa Labs</copyright>
-    <lastBuildDate>Thu, 10 Dec 2020 00:00:00 -0500</lastBuildDate>
-    
-	<atom:link href="https://ursalabs.org/blog/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Fri, 12 Feb 2021 00:00:00 -0500</lastBuildDate><atom:link href="https://ursalabs.org/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Measuring and Monitoring Arrow&#39;s Performance: Some Updated R Benchmarks</title>
+      <link>https://ursalabs.org/blog/2021-r-benchmarks-part-1/</link>
+      <pubDate>Fri, 12 Feb 2021 00:00:00 -0500</pubDate>
+      
+      <guid>https://ursalabs.org/blog/2021-r-benchmarks-part-1/</guid>
+      <description>The Apache Arrow project defines a standardized, language-agnostic, columnar data format optimized for speed and efficiency. But a fast in-memory format is valuable only if you can read data into it and write data out of it, so Arrow libraries include methods for working with common file formats including CSV, JSON, and Parquet, as well as Feather, which is Arrow on disk. By using Arrow libraries, developers of analytic data systems can avoid the hassle of implementing their own methods for reading and writing data in these formats.</description>
+    </item>
     
     <item>
       <title>Toward an Arrow-native world: the next stage of the Ursa journey</title>
@@ -18,7 +23,7 @@
       <pubDate>Thu, 10 Dec 2020 00:00:00 -0500</pubDate>
       
       <guid>https://ursalabs.org/blog/ursa-computing/</guid>
-      <description>Since launching Ursa Labs in 2018, we have made extraordinary progress growing the Apache Arrow project and supporting the open source community around it. As I explained in my announcement of the initiative, our objective has been to create a robust engineering team in partnership with a wide variety of sponsoring companies with the Arrow project&#39;s success as our number one priority. Since then, we have added NVIDIA, Intel, Bloomberg, G-Research, and OneSixtyTwo Technologies (and some others we cannot name publicly) to our sponsor ranks, joining our founding sponsors RStudio and Two Sigma.</description>
+      <description>Since launching Ursa Labs in 2018, we have made extraordinary progress growing the Apache Arrow project and supporting the open source community around it. As I explained in my announcement of the initiative, our objective has been to create a robust engineering team in partnership with a wide variety of sponsoring companies with the Arrow project&amp;rsquo;s success as our number one priority. Since then, we have added NVIDIA, Intel, Bloomberg, G-Research, and OneSixtyTwo Technologies (and some others we cannot name publicly) to our sponsor ranks, joining our founding sponsors RStudio and Two Sigma.</description>
     </item>
     
     <item>
@@ -46,7 +51,7 @@ In the intervening months, we have developed &amp;ldquo;Feather V2&amp;rdquo;, a
       <pubDate>Thu, 02 Apr 2020 00:00:00 -0500</pubDate>
       
       <guid>https://ursalabs.org/blog/fast-pandas-loading/</guid>
-      <description>A Surprising Performance Experiment To start off this blog post, I&#39;ll present a surprising fact. The pyarrow library is able to construct a pandas.DataFrame faster than using pandas.DataFrame directly in some cases. Let&#39;s have a look.
+      <description>A Surprising Performance Experiment To start off this blog post, I&amp;rsquo;ll present a surprising fact. The pyarrow library is able to construct a pandas.DataFrame faster than using pandas.DataFrame directly in some cases. Let&amp;rsquo;s have a look.
 First, I make a dict of 100 NumPy arrays of float64 type, a little under 800 megabytes of data:
 import pandas as pd import pyarrow as pa import numpy as np num_rows = 1_000_000 num_columns = 100 arr = np.</description>
     </item>
@@ -83,10 +88,10 @@ our work on Apache Arrow over the coming year:&lt;/p&gt;
       <pubDate>Thu, 19 Dec 2019 00:00:00 -0400</pubDate>
       
       <guid>https://ursalabs.org/blog/2019-12-19-eoy-report/</guid>
-      <description>&lt;p&gt;With a busy fall full of development and some travel I wasn&#39;t able to keep up
+      <description>&lt;p&gt;With a busy fall full of development and some travel I wasn&amp;rsquo;t able to keep up
 with monthly or bi-monthly reports, so this report gives highlights about the
-Ursa Labs team&#39;s work from August up until now. With 2019 nearly behind us,
-this also gives us a moment to reflect on everything that&#39;s been accomplished
+Ursa Labs team&amp;rsquo;s work from August up until now. With 2019 nearly behind us,
+this also gives us a moment to reflect on everything that&amp;rsquo;s been accomplished
 this year and look forward to next year. We hope to write a blog post soon
 discussing the big picture plan ahead for 2020.&lt;/p&gt;</description>
     </item>
@@ -106,9 +111,9 @@ discussing the big picture plan ahead for 2020.&lt;/p&gt;</description>
       <pubDate>Thu, 08 Aug 2019 12:00:00 -0400</pubDate>
       
       <guid>https://ursalabs.org/blog/2019-06-07-monthly-report/</guid>
-      <description>&lt;p&gt;Like April and May, I&#39;m continuing to give bimonthly rather than monthly
+      <description>&lt;p&gt;Like April and May, I&amp;rsquo;m continuing to give bimonthly rather than monthly
 reports. As usual it was a busy couple of months. See the end of the report for
-the team&#39;s full changelog of patches contributed to Apache Arrow.&lt;/p&gt;</description>
+the team&amp;rsquo;s full changelog of patches contributed to Apache Arrow.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -120,7 +125,7 @@ the team&#39;s full changelog of patches contributed to Apache Arrow.&lt;/p&gt;<
       <description>&lt;p&gt;Our last report was for March 2019, so I have rolled up two months
 into one. There have been a number of exciting developments in the
 project in the last couple of months. See the end of the report for
-the team&#39;s full changelog of patches contributed to Apache Arrow.&lt;/p&gt;</description>
+the team&amp;rsquo;s full changelog of patches contributed to Apache Arrow.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -165,7 +170,7 @@ related to the continued expansion of the project in recent months.&lt;/p&gt;</d
       <pubDate>Wed, 10 Oct 2018 20:26:53 -0400</pubDate>
       
       <guid>https://ursalabs.org/blog/ursa-labs-partner-nvidia/</guid>
-      <description>I&#39;m excited to announce that NVIDIA AI Labs has signed on as a supporter of Ursa Labs. NVIDIA&#39;s new open source RAPIDS data science platform uses Apache Arrow for an interoperable representation of tabular data (data frames). We are looking forward to collaborating on our respective development roadmaps and growing the ecosystem of projects that use Arrow.
+      <description>I&amp;rsquo;m excited to announce that NVIDIA AI Labs has signed on as a supporter of Ursa Labs. NVIDIA&amp;rsquo;s new open source RAPIDS data science platform uses Apache Arrow for an interoperable representation of tabular data (data frames). We are looking forward to collaborating on our respective development roadmaps and growing the ecosystem of projects that use Arrow.
 This new financial support will enable us to grow our team of full-time open source software developers.</description>
     </item>
     

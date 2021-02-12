@@ -46,7 +46,7 @@
 <link rel="canonical" href="https://ursalabs.org/blog/2019-10-columnar-perf/" />
 <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
 <link rel="icon" href="https://ursalabs.org/favicon.ico">
-<meta name="generator" content="Hugo 0.63.0-DEV" />
+<meta name="generator" content="Hugo 0.80.0" />
 
   <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
@@ -168,7 +168,7 @@ accelerate data access:</p>
 <li>Take advantage of the memory- and CPU-efficient Arrow columnar memory layout
 to speed up processing especially of non-numeric (e.g. string) data</li>
 <li>Utilize a common C++ codebase in both Python and R and maintain that codebase
-with a large community of developers. We've had active collaborations with
+with a large community of developers. We&rsquo;ve had active collaborations with
 the Ruby and MATLAB on this codebase, which has been a lot of fun.</li>
 </ul>
 <p>In August 2019, the R community <a href="https://cran.r-project.org/package=arrow">published Apache Arrow to CRAN</a>. Since the
@@ -188,12 +188,12 @@ feature any encoding or compression; the Arrow data structures are written to
 disk unmodified, so a Feather file occupies the same amount of space on disk
 as it does in-memory</li>
 <li><a href="https://www.fstpackage.org/">FST</a>: a binary columnar format designed for use in R</li>
-<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html">RDS</a>: R's native serialization format</li>
+<li><a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html">RDS</a>: R&rsquo;s native serialization format</li>
 </ul>
 <p>Note that out of the four of these, only Parquet and RDS support nested
 data (i.e. arrays, structs, etc.). The benchmarks in this post, therefore, only
 deal with flat / non-nested data.</p>
-<p>Since we're evaluating read performance, we'll also compare reading the same
+<p>Since we&rsquo;re evaluating read performance, we&rsquo;ll also compare reading the same
 data from CSV with <code>data.table::fread()</code>, even though CSV is not a columnar
 file format.</p>
 <h2 id="example-datasets-and-methodology">Example Datasets and Methodology</h2>
@@ -323,7 +323,7 @@ format is similar to other &ldquo;competing&rdquo; formats, but comes with addit
 benefits:</p>
 <ul>
 <li>The size of Parquet files is significantly smaller in almost all cases, due
-to Parquet's compression schemes</li>
+to Parquet&rsquo;s compression schemes</li>
 <li>Parquet is an industry-standard data format for data warehousing, so you can
 use Parquet files with Apache Spark and nearly any modern analytic SQL engine
 (Apache Impala, Google BigQuery, Presto, Amazon Redshift, etc.)</li>
@@ -339,23 +339,23 @@ there.</p>
 the main difference has to do with how strings are handled. As discussed in a
 <a href="http://arrow.apache.org/blog/2019/02/05/python-string-memory-0.12/">past Arrow blog post</a>, string-heavy datasets are expensive to work with
 when using pandas. This can be mitigated by using <code>pandas.Categorical</code>, but
-this won't necessarily help in data where the cardinality of the &ldquo;unique set&rdquo;
+this won&rsquo;t necessarily help in data where the cardinality of the &ldquo;unique set&rdquo;
 is high.</p>
 <p>By contrast, the Apache Arrow string layout is extremely efficient. Each string
 value has a small amount of storage overhead (4 bytes plus 1 bit) and values
-are guaranteed to be adjacent to each other in memory, so the CPU won't have as
+are guaranteed to be adjacent to each other in memory, so the CPU won&rsquo;t have as
 many &ldquo;cache misses&rdquo; when constructing or processing a string column.</p>
-<p>I don't know the exact details of how R deals with strings, but my
+<p>I don&rsquo;t know the exact details of how R deals with strings, but my
 understanding is that there is a &ldquo;global string hash table&rdquo; and so strings in R
 feature pointer indirection and likely a similarly high incidence of cache
-misses like pandas does. Note that because of R's global hash table, string
+misses like pandas does. Note that because of R&rsquo;s global hash table, string
 data in R in general may use less memory than in Python.</p>
 <h3 id="pandasdataframe-vs-r-dataframe">pandas.DataFrame vs. R data.frame</h3>
-<p>I haven't done enough analysis to determine exactly where the performance
+<p>I haven&rsquo;t done enough analysis to determine exactly where the performance
 difference between Python and R lies. Both implementations use the same Arrow
 C++ code to read the Parquet and Feather files into Arrow format. So the
 difference likely has to do with conversion of strings from Arrow into the
-other data frames&rsquo; representations.</p>
+other data frames' representations.</p>
 <p>Compared with the Arrow R library, we have spent a significant amount of time
 optimizing the performance of converting from C++ Arrow data structures to
 <code>pandas.DataFrame</code>. I expect there are some performance gains to be found in

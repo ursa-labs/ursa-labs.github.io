@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Measuring and Monitoring Arrow&#39;s Performance: Some Updated R Benchmarks  &middot; Ursa Labs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="Because speed and efficiency are important design goals of Apache Arrow, we&#39;ve been working on tools to help us investigate and monitor performance. Here, we introduce our R package for benchmarking and use it to revisit some previously reported CSV benchmark results." />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Measuring and Monitoring Arrow&#39;s Performance: Some Updated R Benchmarks  &middot; Ursa Labs ">
+<meta property="og:site_name" content="Ursa Labs"/>
+<meta property="og:url" content="https://ursalabs.org/blog/2021-r-benchmarks-part-1/" />
+<meta property="og:locale" content="en">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Because speed and efficiency are important design goals of Apache Arrow, we&#39;ve been working on tools to help us investigate and monitor performance. Here, we introduce our R package for benchmarking and use it to revisit some previously reported CSV benchmark results."/>
+<meta property="og:article:published_time" content="2021-02-12T00:00:00-05:00" />
+<meta property="og:article:modified_time" content="2021-02-12T00:00:00-05:00" />
+
+  
+
+  
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107500873-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-107500873-2');
+</script>
+
+
+<link rel="canonical" href="https://ursalabs.org/blog/2021-r-benchmarks-part-1/" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
+<link rel="icon" href="https://ursalabs.org/favicon.ico">
+<meta name="generator" content="Hugo 0.80.0" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="https://ursalabs.org/css/bootswatch/flatly/bootstrap.min.css">
+
+
+<link rel="stylesheet" href="https://ursalabs.org/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ursalabs.org/css/style.css">
+
+
+
+
+  <link rel="stylesheet" href="https://ursalabs.org/css/highlight/default.css">
+
+
+</head>
+<body>
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+          
+          <a class="navbar-brand-img" href="https://ursalabs.org/">
+            <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
+            
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/about/" >
+                  
+                  About
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/blog/" >
+                  
+                  Blog
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/support/" >
+                  
+                  Support
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/tech/" >
+                  
+                  Technology
+                </a>
+              
+            </li>
+            
+            
+            
+          </ul>
+        </div>
+        
+      </div>
+      
+    </nav>
+
+  </header>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-lg-10">
+      <h1 class="blog-post-title">Measuring and Monitoring Arrow&#39;s Performance: Some Updated R Benchmarks</h1>
+      <div class="blog-post-meta">
+        <span>
+          
+            
+            Jonathan Keane
+            
+              (<a href="https://twitter.com/jonkeane">@jonkeane</a>)
+            
+            <br>
+            
+            Neal Richardson
+            
+              (<a href="https://twitter.com/enpiar">@enpiar</a>)
+            
+            <br>
+            
+          
+        </span>
+        <br/>
+        <span>February 12, 2021</span>
+      </div>
+      <div class="blog-post-content">
+        
+        <p>The Apache Arrow project defines a standardized, language-agnostic, columnar data format optimized for speed and efficiency. But a fast in-memory format is valuable only if you can read data into it and write data out of it, so Arrow libraries include methods for working with common file formats including CSV, JSON, and Parquet, as well as Feather, which is Arrow on disk. By using Arrow libraries, developers of analytic data systems can avoid the hassle of implementing their own methods for reading and writing data in these formats.</p>
+<p>Because the Arrow format is designed for fast and efficient computation, users of Arrow libraries have high expectations for performance. Of course, it&rsquo;s unrealistic to expect any one piece of software to be fastest at everything&mdash;software design involves tradeoffs and optimizing for certain use cases over others. That said, we should expect that Arrow libraries can take advantage of modern hardware features like <a href="https://en.wikipedia.org/wiki/SIMD">SIMD</a> and be efficient with memory, and this should result in good performance.</p>
+<p>We&rsquo;ve done some ad hoc benchmarking in the past that has shown how Arrow libraries measure up on certain workloads. This has demonstrated, among other things, the <a href="https://ursalabs.org/blog/2020-feather-v2/">speed and efficiency of reading and writing Parquet and Feather files</a>, <a href="https://www.youtube.com/watch?v=p87NFQbTP-A">how Arrow&rsquo;s CSV reader compares with alternatives in R</a>, and <a href="https://arrow.apache.org/docs/r/articles/dataset.html">how fast we can execute a query over 1.5 billion rows</a> of data partitioned into lots of Parquet files.</p>
+<p>These results are interesting&mdash;sometimes provocative&mdash;but they have limitations. For one, they&rsquo;re snapshots: they give us a result that corresponds to a particular version of the code, but they don&rsquo;t tell us how performance evolves over time&mdash;whether our changes have made things faster or slower. They also are time- and labor-intensive to set up, so we haven&rsquo;t done them as often as we should, and we&rsquo;ve been limited in the kinds of questions we could answer.</p>
+<p>We&rsquo;ve recently been investing in tools and infrastructure to solve these problems. Our goal is to elevate performance monitoring to a similar position as unit testing is in our continuous integration stack. Since speed is a key feature of Arrow, we should test it regularly and use benchmarking to prevent performance regressions. And just as one invests in tooling to make it easy to write and run tests&mdash;so that developers will be encouraged to write more tests&mdash;we&rsquo;re working to improve the experience of writing and running benchmarks.</p>
+<p>We&rsquo;ll talk more about the continuous benchmarking and monitoring project in a future post. Here, we wanted to revisit some R benchmark results we&rsquo;ve presented in the past, see how they hold up with the latest versions of the code, and discuss some of the research and insights we&rsquo;ve been able to pursue thanks to our new tools.</p>
+<h2 id="the-arrowbench-package">The {arrowbench} package</h2>
+<p>To help us investigate and monitor performance in R, we&rsquo;ve been developing a package called <a href="https://github.com/ursa-labs/arrowbench">{arrowbench}</a>. It contains tools for defining benchmarks, running them across a
+range of parameters, and reporting their results in a standardized form. The goal is to make it easier for us to test different library
+versions, variables, and machines, as well as to facilitate continuous monitoring.</p>
+<p>While this package could be used for microbenchmarking, it is designed specially
+for &ldquo;macrobenchmarks&rdquo;: workflows that real users do with real data that take
+longer than milliseconds to run.
+It builds on top of existing R benchmarking tools, notably the <a href="https://bench.r-lib.org/">{bench}</a> package.
+Among the features that this package adds are</p>
+<ul>
+<li>Setup designed with parametrization in mind so you can test across a range of
+variables</li>
+<li>Isolation of benchmark runs in separate processes to prevent cross-contamination
+such as global environment changes and previous memory allocation</li>
+<li>Tools for bootstrapping package versions and known data sources to facilitate
+running the same code on different machines</li>
+</ul>
+<p>While we&rsquo;ve put work into {arrowbench} for a while now, it is a work in progress and we anticipate it will grow, change, and improve over time. Even so, in its current state, it&rsquo;s enabled us to ask and answer performance-related questions we could not previously explore.</p>
+<h2 id="revisiting-csv-reading-benchmarks">Revisiting CSV reading benchmarks</h2>
+<p>At the <a href="https://rstats.ai/videos/2020-r-conference-ny/">New York R Conference in August 2020</a>, Neal presented results from <a href="https://enpiar.com/talks/nyr-2020/#34">extending the benchmark suite</a> in the <a href="https://vroom.r-lib.org/">{vroom}</a> package to include variations using {arrow} and {cudf}, a Python package based on Apache Arrow that runs on GPUs. {vroom}&rsquo;s benchmarks are great for a number of reasons: they run on a range of datasets with different sizes, shapes, and data types, including using real-world data and not just synthetic, generated files; they&rsquo;re honest&mdash;{vroom} isn&rsquo;t fastest everywhere; and they&rsquo;re scripted and well documented, easily reproducible and extensible.</p>
+<p>While it was not the primary result of focus for the presentation, this plot showing the time it took to read a CSV into a fully materialized R <code>data.frame</code> got a lot of attention:</p>
+<div align="center">
+<img src="https://enpiar.com/talks/nyr-2020/img/taxi-single-df-1.png"
+     alt="A bar plot of the 2020 vroom with arrow benchmarks: reading a data.frame showing that Arrow's csv reading is among the fastest csv readers for R."
+     width="100%" class="img-responsive">
+</div>
+<p>The green bars indicate the time to read the CSV into a <code>data.frame</code> using the reader on the first line of the legend ({readr}, etc.); gray bars extending beyond the green are the time spent on later stages of the benchmarked workflow (printing, sampling rows, computing a grouped aggregation) using the package on the second line of the legend (e.g. {dplyr}). Fully gray bars with no green are benchmark variations that don&rsquo;t pull all of the data into a <code>data.frame</code>: {vroom} with <code>altrep = TRUE</code>, for example, doesn&rsquo;t have to read all of the data in in order to complete the rest of the test workflow.</p>
+<p>In sum, the plot showed that using {arrow} just for its CSV reader could provide 2-3x speedups compared to other readers, at least on files like this one with millions of rows and including string columns. Once you had used {arrow} to read the data into a <code>data.frame</code>, you could then use your preferred R analytics packages on the data&mdash;there was nothing special or Arrow-flavored about the <code>data.frame</code> it produced.</p>
+<p>This seemed like an interesting result to revisit and track over time, so we added it to our new benchmarking framework. <a href="https://github.com/ursa-labs/arrowbench/blob/main/R/bm-read-csv.R">We now have a benchmark for CSV reading with several parameters</a>:</p>
+<ul>
+<li>
+<p><strong>Files</strong>: we&rsquo;re using the same two test datasets we used in our previous analysis of <a href="https://ursalabs.org/blog/2020-feather-v2/">Feather and Parquet reading</a>:</p>
+<ul>
+<li>The 2016 Q4 <a href="https://loanperformancedata.fanniemae.com/lppub/">Fannie Mae Loan Performance</a> dataset,
+which is a 1.52 GB pipe-delimited file
+<ul>
+<li>22 million rows by 31 columns</li>
+<li>Column types are 18 numerics (of which 6 are integers), 11 characters, and 2 columns with no values at all</li>
+</ul>
+</li>
+<li>The January 2010 <a href="https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page">NYC Yellow Taxi Trip Records</a> file, which is a 2.54 GB CSV
+<ul>
+<li>Nearly 15 million rows by 18 columns</li>
+<li>Column types are 14 numerics (none of which are integers), 2 datetimes, and 2 characters</li>
+</ul>
+</li>
+</ul>
+<p>We are using these datasets because they are the kind of datasets that people use in real life, including string columns, dates, fully empty columns, and missing data.</p>
+</li>
+<li>
+<p><strong>Reader</strong>: we compare <a href="https://arrow.apache.org/docs/r/reference/read_delim_arrow.html"><code>arrow::read_csv_arrow()</code></a> with <a href="https://rdatatable.gitlab.io/data.table/reference/fread.html"><code>data.table::fread()</code></a>, <a href="https://readr.tidyverse.org/reference/read_delim.html"><code>readr::read_csv()</code></a>, and <a href="https://vroom.r-lib.org/reference/vroom.html"><code>vroom::vroom()</code></a>. <code>vroom()</code> is called with <code>altrep = FALSE</code> in this benchmark because we&rsquo;re comparing how long it takes to read the data into memory as an R <code>data.frame</code>. With the exception of providing the delimiter to each, we are using the defaults for the arguments on all reading functions.</p>
+</li>
+<li>
+<p><strong>Result</strong>: contrary to the previous statement, for the {arrow} reader only, we benchmark both how long it takes to read an Arrow <code>Table</code> as well as an R <code>data.frame</code>. Because {arrow}&rsquo;s readers work by first reading the file into an Arrow <code>Table</code> and then converting the <code>Table</code> to a <code>data.frame</code>, comparing these two results tells us the relative speed of those two sections of work, and thus where we might focus our attention for performance optimization.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+</li>
+<li>
+<p><strong>Compression</strong>: uncompressed or gzipped. The Fannie Mae file is 208 MB when gzipped; the taxi file, 592 MB. All four CSV reading functions can read both compressed and uncompressed files.</p>
+</li>
+<li>
+<p><strong>CPU/thread count</strong>: we can flexibly test how these readers perform with different numbers of threads available for parallelization. Note that {readr} is only single-threaded, so we exclude it from the multithreaded results.</p>
+</li>
+</ul>
+<p>We can also test across a range of library versions, which we&rsquo;ll show below.</p>
+<h3 id="initial-results">Initial results</h3>
+<p>Using {arrowbench}, we have recreated benchmarks similar to those from the August 2020 presentation, isolating the CSV-read-to-data-frame portion. <a href="read_csv_benchmarks.R">Code</a> to run the benchmarks and generate the plots below, along with the data we collected (in both <a href="read_csv_benchmarks_2021_02_12.parquet">Parquet</a> and <a href="read_csv_benchmarks_2021_02_12.csv">CSV</a> format), are available.</p>
+<p>The results here are from a MacBook Pro with a 2GHz Quad-Core Intel Core i5 and 16 GB of RAM, though we also ran them on a MacPro with a 3.5 GHz 6-Core Intel Xeon E5 and 64GB of RAM and a system with a  4.5 GHz Quad-Core Intel Core i7 and 32GB of RAM running Ubuntu 18.04. We saw broadly similar results across each of these machines, but included only one system for clarity.<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<p>We are looking at out-of-the-box performance, not some sort of theoretical ideal performance. So, for example, there is no type/schema specification: all readers are having to infer the column types from the data. We&rsquo;re also not tuning any of the optional parameters the readers expose that may affect performance on different datasets.
+One exception is that we&rsquo;ve made the effort to ensure that all packages are using the same number of CPU cores/threads for comparison. This involves <a href="https://github.com/ursa-labs/arrowbench/blob/27ee910ea157610d5b1bc325fb0c330cff19a060/R/run.R#L157-L159">setting some environment variables</a> in each run and <a href="https://github.com/Rdatatable/data.table/wiki/Installation#openmp-enabled-compiler-for-mac">some special installation steps for {data.table} on macOS</a>.</p>
+<p>Looking at the three multi-core capable packages with their CRAN-released versions as of February 4, 2021, we see the following:</p>
+<div align="center">
+<img src="release-versions-limited.png"
+     alt="A bar chart of time it takes to read a csv into R for release versions of the packages Arrow, data.table, and vroom. The versions are released versions as of 2021-02-04, for the uncompressed nyctaxi_2010-01 dataset with 8 cores. Arrow is fastest, data.table second fastest, and vroom the slowest."
+     width="100%" class="img-responsive">
+</div>
+<p>We also have <a href="release-versions.png">a plot of full results, including with different numbers of cores, compression, and a different dataset</a>.</p>
+<p>This confirms the finding from the original presentation: when reading a NYC taxi data file, {arrow} is about three times faster than {data.table} and {vroom}. Oddly, {vroom} was slightly faster than {data.table} in the August analysis but appears to take twice as long to read the file now. We&rsquo;ll come back to that finding later.</p>
+<p>Examining the full set of results from the August analysis, it seemed that Arrow&rsquo;s exceptional performance could be accounted for by, among other factors, string data handling and memory allocation. We wanted to use our new benchmarking tools to explore those questions further.</p>
+<!-- 
+  These next sections are framed around "why is arrow faster"?
+  Instead, we could frame them around "here are some things our benchmarking tool lets us explore, and here's something we observed
+  ++++ 
+ -->
+<h3 id="string-data">String data</h3>
+<p>The {vroom} benchmarks have a few variations that test all-numeric and all-string (character) data of different shapes and sizes, and <a href="https://enpiar.com/talks/nyr-2020/#46">in the previous analysis</a>, it appeared that {arrow}&rsquo;s CSV reader particularly excelled at large files with lots of string data. This led us to suspect that the efficiency of Arrow format&rsquo;s string data type may be an important explanation for the reader&rsquo;s performance.</p>
+<p>Under the hood, a character vector in R (a <code>STRSXP</code>) is a <a href="https://github.com/hadley/r-internals/blob/master/strings.md">vector of <code>CHARSXP</code>s</a>, each of which contains a pointer to a value in a global string pool and an encoding value. In Arrow, a string Array is <a href="https://arrow.apache.org/docs/format/Columnar.html#variable-size-binary-layout">essentially</a> a big binary blob plus an array of integer offsets into it. In R-speak, <code>c(&quot;This&quot;, &quot;is&quot;, &quot;a&quot;, &quot;String&quot;, &quot;Array&quot;)</code> is represented something like <code>ThisisaStringArray</code> plus <code>c(0, 4, 6, 7, 13, 18)</code>. This is a more compact representation with some nice properties for accessing elements within it. It&rsquo;s possible that {arrow} is able to use this format as an intermediate representation and assemble R character vectors faster than R itself can. This may sound hard to believe, but we&rsquo;ve observed <a href="https://ursalabs.org/blog/fast-pandas-loading/">similar results elsewhere</a>.</p>
+<p>Benchmark results tell us how long a task took to complete, but they don&rsquo;t tell us exactly where all of that time was spent; that&rsquo;s what <a href="https://adv-r.hadley.nz/perf-measure.html#profiling">profiling</a> is for. However, {arrowbench} can show us what happens if we change a line of code across different versions, and from this we can see what happens if we suddenly stop taking advantage of the efficiencies of the Arrow string data type.</p>
+<p>We unintentionally did an &ldquo;experiment&rdquo; that made string data conversion from Arrow to R slower in the 2.0 release. In some internal refactoring, we had unintentionally made the code that creates R character vectors less efficient by making it scan to infer the length of each element. <a href="https://github.com/apache/arrow/pull/8536#pullrequestreview-517737704">This is not necessary</a> when converting from Arrow because the string Array&rsquo;s offsets tell us exactly how long each element is without having to recompute it. Fixing this restored the performance.</p>
+<p>Looking at CSV read performance across released versions, we can see this anomaly pop up in the 2.0 release, and from comparing the time it takes to create an Arrow Table with the time to create an R <code>data.frame</code>, it is clear that the problem is located in the Arrow-to-R conversion step.</p>
+<div align="center">
+<img src="arrow-versions-over-time-limited.png"
+     alt="A bar chart of time it takes to read a csv into R for different versions of Arrow (from 0.17 to 3.0 and our development branch). Version 2.0 has a stark increase (almost 25 seconds longer) in the arrow to R conversion portion of CSV reading. Dataset: uncompressed nyctaxi_2010-01 dataset with 8 cores"
+     width="100%" class="img-responsive">
+</div>
+<p><a href="arrow-versions-over-time-full.png">Plot of more results</a></p>
+<p>Performance regressions like these are exactly the reason we&rsquo;re investing in benchmarking tools and monitoring. Our goal is to prevent slowdowns like these from getting released in the future.</p>
+<h3 id="memory-allocators">Memory allocators</h3>
+<p>In order to read data in, software has to request memory from the system and allocate it, assigning objects and vectors into it. When allocating lots of memory, as we do in reading these large files in, issues such as fragmentation and multithreaded access can have significant performance implications. For this reason, a number of alternative <code>malloc</code> implementations exist. By default, {arrow} uses <a href="http://jemalloc.net/">jemalloc</a> except on Windows, where it uses <a href="https://github.com/microsoft/mimalloc">mimalloc</a> because <code>jemalloc</code> is not supported.</p>
+<p>To explore how much of a performance boost we were getting from <code>jemalloc</code>, we took advantage of a feature in {arrow} 3.0.0 that lets you switch memory allocators by setting an environment variable. We could parametrize {arrowbench} to compare Arrow&rsquo;s results using <code>jemalloc</code> or the system&rsquo;s <code>malloc</code>.</p>
+<div align="center">
+<img src="memory-allocators-jemalloc-system_data_frame.png"
+     alt="A bar chart showing differences between jemalloc and the system memory allocator when reading into a data.frame. Each has 10 iterations. Both allocators show similar speeds; the first iteration is longest, and subsequent iterations are longer. Dataset: uncompressed nyctaxi_2010-01 dataset with 8 cores"
+     width="100%" class="img-responsive">
+</div>
+<p>It turned out that, at least on this machine and on this workload, <code>jemalloc</code> wasn&rsquo;t much better than the system allocator: in fact, it seemed worse. We also noticed an odd pattern in the results across multiple runs (iterations) of the same benchmark. While most benchmarks were a bit slower on the first run and then stable across subsequent runs, the results with <code>jemalloc</code> when reading in an Arrow <code>Table</code> got progressively slower (see the plot below). This was further strange because it didn&rsquo;t persist when we pull data into R (which is what happens in the plot above).</p>
+<div align="center">
+<img src="memory-allocators-jemalloc-system_arrow_table.png"
+     alt="A bar chart showing differences between jemalloc and the system memory allocator when reading into an Arrow Table. Each has 10 iterations. Both allocators show a similar striking pattern increasing time on subsequent iterations. The system allocator is a bit faster than jemalloc. Dataset: uncompressed nyctaxi_2010-01 dataset with 8 cores"
+     width="100%" class="img-responsive">
+</div>
+<p>After some investigation, we <a href="https://issues.apache.org/jira/browse/ARROW-11433">isolated the cause</a> and determined that it is specific to macOS. This led us to wonder whether <code>mimalloc</code> was a better alternative on macOS (or on more platforms as well). Adding <code>mimalloc</code> to the benchmark parameters, we see that it is indeed noticeably faster, a full second faster on reading this CSV.</p>
+<div align="center">
+<img src="memory-allocators-limited.png"
+     alt="A bar chart showing differences between jemalloc, the system memory allocator, and mimalloc for both reading data into a data.frame and into an Arrow table. The jemalloc and system are the same as the two plots above. Mimalloc is faster for both data.frame and Arrow tables and importantly does not show the growth pattern for Arrow tables. Each has 10 iterations. Benchmarks for Arrow across versions Dataset: uncompressed nyctaxi_2010-01 dataset with 8 cores"
+     width="100%" class="img-responsive">
+</div>
+<p><a href="memory-allocators-full.png">Plot of results for different memory allocators</a></p>
+<h3 id="using-benchmarks-to-guide-development-decisions">Using benchmarks to guide development decisions</h3>
+<p>As we just learned, the choice of memory allocator has meaningful implications for performance, and at least on macOS, <code>mimalloc</code> seems to significantly speed up this workflow. It&rsquo;s worth more analysis to see whether the same pattern holds on other workflows and on other platforms; there&rsquo;s also a new release of <code>mimalloc</code> that may be even faster. Fortunately, we now have these benchmarking tools that help us parametrize our analyses and easily explore a range of alternatives. Using these tools, we can make technical decisions about performance based on evidence rather than conjecture.</p>
+<p>It&rsquo;s also worth noting that since we&rsquo;re testing non-{arrow} packages for reference, we&rsquo;re also able to detect changes in performance in those other packages and can share that information to help those maintainers improve their packages. Indeed, one result that surprised us was that the recently released 1.4 version of {vroom} seemed slower than past versions. So, we <a href="https://github.com/r-lib/vroom/issues/309">reported an issue</a> to help {vroom}&rsquo;s maintainer address it, which <a href="https://github.com/r-lib/vroom/commit/c9021fcd3c22bb030a6464fbb9ccd3cafd63f3ac">they quickly did</a>.</p>
+<p>Similarly, reacting to the August 2020 benchmark results, {data.table}&rsquo;s maintainer decided to <a href="https://github.com/Rdatatable/data.table/blob/master/NEWS.md#potentially-breaking-changes">change the default timestamp parsing behavior</a>, believing that the difference in performance with {arrow} on that particular file was due to timestamp data. Our data does show that this timestamp parsing does account for the gap between {data.table} and {arrow} on reading this file: when <a href="release-versions.png">comparing with the Fannie Mae dataset</a>, which does not have timestamp columns, the gap between the two readers is closed, and when we benchmark the taxi file with the development version of {data.table}, read speed is much improved.</p>
+<p>Putting this all together, we can see the benefits of using benchmark analysis to inform development choices. This plot compares the CSV read performance of {arrow}, {data.table}, and {vroom} on both the current CRAN release versions (3.0.0, 1.13.6, and 1.4.0, respectively) along with the development versions that incorporate the changes in memory allocator ({arrow}), timestamp parsing behavior ({data.table}), and C++ value passing ({vroom}). In this particular benchmark, {arrow} and {data.table} show very similar results in their development versions; looking at the <a href="devel-versions.png">full results</a> across multiple files and parameters, each is slightly faster in some circumstances. The results show that we can expect noticeable performance improvements in the next releases of all three packages.</p>
+<div align="center">
+<img src="devel-versions-limited-both-vroom.png"
+     alt="A bar chart showing differences between release and development versions of the arrow, data.table, and vroom pacakges. For the arrow package, the development version is using mimalloc. Arrow devel and data.table devel show similar speeds. The devel version of vroom is much faster than the release reflecting the update made in writing this post. Dataset: uncompressed nyctaxi_2010-01 dataset with 8 cores"
+     width="100%" class="img-responsive">
+</div>
+<p><a href="devel-versions.png">Plot of full results</a></p>
+<p><a href="devel-versions-sans-vroom.png">Plot of full results for all packages except vroom release</a> to better show the other comparisons</p>
+<h2 id="looking-ahead">Looking ahead</h2>
+<p>As should be clear from this discussion, we are firmly pro-benchmark: they can be very useful in guiding technical decisions and ensuring quality of the software we write. That said, it&rsquo;s important to be clear about what benchmarks like these tell us and what they don&rsquo;t. A good benchmark is like a scientific experiement: we aim to hold everything constant (hardware, inputs, settings) except for the code we&rsquo;re comparing so that we can attribute any measured differences to the code that was run.</p>
+<p>Hence, a well designed benchmark has strong <em>internal validity</em>&mdash;we can trust the inference that the difference in code caused the difference in performance&mdash;but that is distinct from <em>external validity</em>&mdash;how these results generalize outside the experimental context. Indeed, many of the things we can do to increase internal validity, such as running multiple iterations, running everything in a fresh process, or running on dedicated hardware, can add to the laboratory-like nature of the research, separating it further from the real world.</p>
+<p>There are some things we&rsquo;ve done with {arrowbench} to keep the research close to real world use. We&rsquo;re focusing on real datasets, not generated data, and we are testing on multiple datasets with different characteristics&mdash;and have the ability to add more interesting datasets. Even so, every benchmark result should be read with a &ldquo;your mileage may vary&rdquo; disclaimer and never a guarantee that you&rsquo;ll experience the exact same numbers on every dataset on every machine.</p>
+<p>We take inspiration from that caveat, though. We&rsquo;re curious <em>how</em> your mileage varies, and
+we&rsquo;re excited to have better tooling to monitor performance and to investigate these kinds of questions. Indeed, one of the hardest parts of writing this post was deciding which questions to include and which questions we should mark as to-dos for our future selves to answer. Expect to see more blog posts from us that explore the performance of other key Arrow workloads and delve into the quirks we discover along the way.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>It is also an indication of speed ups that can be gained with Arrow-native workflows. We are hard at work implementing native compute in Arrow such that for many workloads the conversion from Arrow <code>Table</code>s to R data structures can be deferred or avoided completely. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Since we&rsquo;re running on a different machine, with slightly newer versions of all packages, and with a different taxi data file (January 2010 vs. January 2013), we should not directly compare the read times from this analysis with those from August 2020. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+    
+<footer class="footer hidden-print">
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+
+</div>
+<div class="pull-right">
+
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              
+    
+<div class="container footline">
+	<div class="row">
+	    <div class="col-md-2">
+	    	<a class="footer-brand-img" href="https://ursalabs.org/">
+            <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
+          </a>
+	    </div>
+	    <div class="col-md-10">
+	    	<h4>Innovating Open Source Data Science Tools</h4>
+	    </div>
+	    <div class="col-md-12">
+	    	<hr>
+	    </div>
+
+	 </div>
+</div>
+
+
+    
+<div class="container copyright">
+    <small>
+  (c) 2018-2020 Ursa Labs
+
+  </small>
+</div>
+<div class="container copyright tm-info">
+    <small>
+  Apache Arrow, Arrow, Apache, the Apache feather logo, and the Apache Arrow project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.
+
+  </small>
+</div>
+
+
+
+        </div>
+    </div>
+  </div>
+</footer>
+
+    
+
+<script src="https://ursalabs.org/js/jquery.min.js"></script>
+<script src="https://ursalabs.org/js/bootstrap.min.js"></script>
+
+<script src="https://ursalabs.org/js/highlight.pack.js"></script>
+<script src="https://ursalabs.org/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+CONTENTLANGUAGE =  null ; 
+</script>
+
+
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/config/TeX-AMS-MML_HTMLorMML.js"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    for(var all in MathJax.Hub.getAllJax()) {
+        all.SourceElement().parentNode.className += ' has-jax';
+
+    }
+});
+</script>
+
+
+
+
+
+
+  </body>
+</html>
+
