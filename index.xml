@@ -7,7 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>(c) 2018-2020 Ursa Labs</copyright>
-    <lastBuildDate>Fri, 12 Feb 2021 00:00:00 -0500</lastBuildDate><atom:link href="https://ursalabs.org/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 May 2021 00:00:00 -0500</lastBuildDate><atom:link href="https://ursalabs.org/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introducing Conbench</title>
+      <link>https://ursalabs.org/blog/announcing-conbench/</link>
+      <pubDate>Wed, 05 May 2021 00:00:00 -0500</pubDate>
+      
+      <guid>https://ursalabs.org/blog/announcing-conbench/</guid>
+      <description>Join us in welcoming a new tool to the Apache Arrow project: Conbench.
+Conbench is a language independent, continuous benchmarking framework, built specifically with the needs of a cross-language, platform-independent, high-performance project like Arrow in mind.
+Conbench allows you to write benchmarks in any language, publish the results as JSON via an API, and persist them for comparison while iterating on performance improvements or to guard against regressions.
+In addition to benchmark results, Conbench will also collect machine information relevant to hardware specific optimizations (architecture, CPU info, L1d/L1i/L2/L3 cache info, etc), and any applicable context, configurable per project (like git revision, compiler flags, benchmark language version, etc).</description>
+    </item>
+    
     <item>
       <title>Measuring and Monitoring Arrow&#39;s Performance: Some Updated R Benchmarks</title>
       <link>https://ursalabs.org/blog/2021-r-benchmarks-part-1/</link>

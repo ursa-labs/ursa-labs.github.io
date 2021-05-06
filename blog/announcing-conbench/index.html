@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Introducing Conbench  &middot; Ursa Labs</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<meta name="description" content="Conbench is a language independent, continuous benchmarking framework, built specifically with the needs of a cross-language, platform-independent, high-performance project like Arrow in mind." />
+
+<meta name="keywords" content="">
+
+
+<meta property="og:title" content="Introducing Conbench  &middot; Ursa Labs ">
+<meta property="og:site_name" content="Ursa Labs"/>
+<meta property="og:url" content="https://ursalabs.org/blog/announcing-conbench/" />
+<meta property="og:locale" content="en">
+
+
+<meta property="og:type" content="article" />
+<meta property="og:description" content="Conbench is a language independent, continuous benchmarking framework, built specifically with the needs of a cross-language, platform-independent, high-performance project like Arrow in mind."/>
+<meta property="og:article:published_time" content="2021-05-05T00:00:00-05:00" />
+<meta property="og:article:modified_time" content="2021-05-05T00:00:00-05:00" />
+
+  
+
+  
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107500873-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-107500873-2');
+</script>
+
+
+<link rel="canonical" href="https://ursalabs.org/blog/announcing-conbench/" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://ursalabs.org/touch-icon-144-precomposed.png">
+<link rel="icon" href="https://ursalabs.org/favicon.ico">
+<meta name="generator" content="Hugo 0.80.0" />
+
+  <!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+
+
+    <link rel="stylesheet" href="https://ursalabs.org/css/bootswatch/flatly/bootstrap.min.css">
+
+
+<link rel="stylesheet" href="https://ursalabs.org/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://ursalabs.org/css/style.css">
+
+
+
+
+  <link rel="stylesheet" href="https://ursalabs.org/css/highlight/default.css">
+
+
+</head>
+<body>
+    <header id="main-header">
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        
+          
+          <a class="navbar-brand-img" href="https://ursalabs.org/">
+            <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
+            
+          </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/about/" >
+                  
+                  About
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/blog/" >
+                  
+                  Blog
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/support/" >
+                  
+                  Support
+                </a>
+              
+            </li>
+            
+            <li class="">
+              
+                <a href="https://ursalabs.org/tech/" >
+                  
+                  Technology
+                </a>
+              
+            </li>
+            
+            
+            
+          </ul>
+        </div>
+        
+      </div>
+      
+    </nav>
+
+  </header>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-lg-10">
+      <h1 class="blog-post-title">Introducing Conbench</h1>
+      <div class="blog-post-meta">
+        <span>
+          
+            
+            Diana Clarke
+            
+            <br>
+            
+          
+        </span>
+        <br/>
+        <span>May 5, 2021</span>
+      </div>
+      <div class="blog-post-content">
+        
+        <p><img src="brand.png" alt="brand.png"></p>
+<p>Join us in welcoming a new tool to the Apache Arrow project: <a href="https://conbench.ursa.dev/">Conbench</a>.</p>
+<p>Conbench is a language independent, continuous benchmarking framework, built specifically with the needs of a cross-language, platform-independent, high-performance project like Arrow in mind.</p>
+<p>Conbench allows you to write benchmarks in any language, publish the results as <a href="https://conbench.ursa.dev/api/docs/">JSON via an API</a>, and persist them for comparison while iterating on performance improvements or to guard against regressions.</p>
+<p>In addition to benchmark results, Conbench will also collect machine information relevant to hardware specific optimizations (architecture, CPU info, L1d/L1i/L2/L3 cache info, etc), and any applicable context, configurable per project (like git revision, compiler flags, benchmark language version, etc).</p>
+<br>
+<h3 id="conbench-for-arrow">Conbench for Arrow</h3>
+<p>Arrow is a fast moving project, with libraries in 10+ languages (C, C++, C#, Go, Java, JavaScript, Julia, MATLAB, Python, R, Ruby, Rust), and support for a variety of platforms (Amazon Linux, CentOS, Debian, macOS, Red Hat Enterprise Linux, Ubuntu, Windows, etc).</p>
+<ul>
+<li><a href="https://arrow.apache.org/blog/2020/07/24/1.0.0-release/">Arrow 1.0 (July 2020)</a>: 810 resolved issues from 100 distinct contributors</li>
+<li><a href="https://arrow.apache.org/blog/2020/10/22/2.0.0-release/">Arrow 2.0 (October 2020)</a>: 511 resolved issues from 81 distinct contributors</li>
+<li><a href="https://arrow.apache.org/blog/2021/01/25/3.0.0-release/">Arrow 3.0 (January 2021)</a>: 666 resolved issues from 106 distinct contributors</li>
+<li><a href="https://arrow.apache.org/blog/2021/05/03/4.0.0-release/">Arrow 4.0 (April 2021)</a>: 711 resolved issues from 114 distinct contributors</li>
+</ul>
+<p>Making sure each of these ecosystems lives up to the promise of high-performance analytics is where benchmarking becomes increasingly important.</p>
+<p>There are over <a href="https://arrow.apache.org/docs/developers/benchmarks.html">2000 C++ micro benchmarks</a> in the <a href="https://github.com/apache/arrow">Arrow git repository</a>, and there are additional Python and R macro benchmarks for Arrow in the <a href="https://github.com/ursacomputing/benchmarks/">ursacomputing/benchmarks</a> and <a href="https://github.com/ursacomputing/arrowbench">ursacomputing/arrowbench</a> repositories.</p>
+<p>On each commit to the main Arrow branch, the C++, Python, and R benchmarks are run on a variety of physical benchmarking machines &amp; EC2 instances of different sizes, and the results are published to Conbench.</p>
+<p>The 500 most recent benchmark runs can be seen by visiting: <a href="https://conbench.ursa.dev/">https://conbench.ursa.dev/</a>.</p>
+<br>
+<p><img src="runs.png" alt="runs.png"></p>
+<br>
+<h3 id="pull-request-integration">Pull Request Integration</h3>
+<p>Additionally, benchmarks can also be run on an Arrow pull request by adding a GitHub comment with the text: <code>@ursabot please benchmark</code>. A baseline benchmarking run against the pull request&rsquo;s head with also be scheduled, and Conbench comparison links will be posted as a follow-up comment. The C++ benchmarks take about 45 minutes to execute, and the R and Python benchmarks take an additional 30 minutes, but results will immediately start showing up in those comparison links, as each individual benchmark completes.</p>
+<br>
+<img src="ursabot.png" alt="buffer.png" width="75%">
+<br>
+<p>You can also filter the pull request benchmarks runs by filter name, language, or specific command. A GitHub comment with text <code>@ursabot benchmark help</code> will follow-up with a list of available ursabot benchmark commands.</p>
+<br>
+<pre><code>@ursabot benchmark help
+@ursabot please benchmark
+@ursabot please benchmark lang=Python
+@ursabot please benchmark lang=C++
+@ursabot please benchmark lang=R
+@ursabot please benchmark name=file-write
+@ursabot please benchmark name=file-write lang=Python
+@ursabot please benchmark name=file-.*
+@ursabot please benchmark command=cpp-micro --suite-filter=arrow-compute-vector-selection-benchmark --benchmark-filter=TakeStringRandomIndicesWithNulls/262144/2 --iterations=3 --show-output=true
+</code></pre><br>
+<h3 id="comparison-view">Comparison View</h3>
+<p>On the comparison view, a negative percent changed always indicates a potential regression. This is true for both units where a higher value is better (like the number of bytes processed per second), and for units where a lower number is better (execution time). That said, a regression may not be statistically relevant — instead consider looking only at regressions with a threshold greater than 5% or more. Reducing benchmark volatility and alerting on actual regressions is next on our roadmap.</p>
+<br>
+<p><img src="comparisons.png" alt="comparisons.png"></p>
+<br>
+<p>A note about terminology: A &ldquo;run&rdquo; is a set of batches, and a &ldquo;batch&rdquo; is a set of benchmark results. For example, all of these Python &ldquo;file-read&rdquo; benchmarks are in one batch, and the R &ldquo;file-read&rdquo; benchmarks are in another batch, but both sets are part of the same run.</p>
+<p>From the run comparison view, clicking on a batch link will filter the comparison table to just the results from a particular batch. Clicking on a benchmark link, will display the baseline and contender details side by side for a more detailed comparison of the benchmark results, commit information, project context, and machine information.</p>
+<br>
+<h3 id="contender-vs-baseline-view">Contender vs. Baseline View</h3>
+<p><img src="compare.png" alt="compare.png"></p>
+<br>
+<p>From the contender vs baseline view, you can navigate to the entire run or batch of benchmark results for either the contender or baseline. When in batch mode, Conbench will provide some rudimentary graphs of the various batch cases. More improvements to these graphs, and time series plots of the benchmarks results over time are on the roadmap for future Conbench iterations.</p>
+<br>
+<img src="batch.png" alt="buffer.png" width="75%">
+<h3 id="success-stories">Success Stories</h3>
+<p>It&rsquo;s early days for the Arrow/Conbench integration, but already there are success stories.</p>
+<p>Conbench primarily serves as continuous benchmarking platform, but it&rsquo;s also useful for uncovering regressions in functionality, as the macro benchmarks also act as integration tests. Most notably, the <a href="https://github.com/ursacomputing/arrowbench/blob/main/R/bm-df-to-table.R">R dataframe-to table benchmarks</a> uncovered a <a href="https://issues.apache.org/jira/browse/ARROW-11832">bug</a>) when run against a <a href="https://github.com/ursacomputing/arrowbench/blob/main/R/known-sources.R">variety of source types</a>, and the <a href="https://github.com/ursacomputing/benchmarks/blob/main/benchmarks/dataset_read_benchmark.py">Python dataset-read benchmarks</a> uncovered a <a href="https://github.com/apache/arrow/pull/9482">segfault</a> on a work in progress pull request, allowing the author to quickly address it before it was merged to the main Arrow branch.</p>
+<p>Performance wise, those same R benchmarks were also used to uncover slowdowns in a <a href="https://issues.apache.org/jira/browse/ARROW-10570">large work in progress</a>), which, once addressed, provided the prerequisite confidence needed to merge the new &amp; improved code. Similarly, the <a href="https://github.com/ursacomputing/benchmarks/blob/main/benchmarks/wide_dataframe_benchmark.py">Python wide-dataframe benchmark</a> found <a href="https://issues.apache.org/jira/browse/ARROW-11469">a regression</a> when benchmarking the Arrow 3.0 and 4.0 wheels against each other.</p>
+<p>Also fun was using Conbench and the Python benchmarks to visualize the improvements of a <a href="https://issues.apache.org/jira/browse/ARROW-11601">new pre_buffer toggle</a> that was added in Arrow 4.0, which is useful for high-latency filesystems like S3 and takes advantage of the structure of Parquet files. Instead of making a separate request to S3 for every row group and column, pre-buffering combines reads of &ldquo;adjacent&rdquo; data into a single request, then makes requests in parallel behind the scenes. This allows it to take advantage of parallelism, while not flooding S3 with small requests.</p>
+<h4 id="pre-buffer-on-vs-off">Pre-buffer on vs. off</h4>
+<img src="buffer.png" alt="buffer.png" width="60%	">
+<h4 id="pre-buffer-example">Pre-buffer example</h4>
+<pre><code>paths = [
+    &quot;ursa-labs-taxi-data/2009/01/data.parquet&quot;,
+    &quot;ursa-labs-taxi-data/2009/02/data.parquet&quot;,
+    &quot;ursa-labs-taxi-data/2009/03/data.parquet&quot;,
+    &quot;ursa-labs-taxi-data/2009/04/data.parquet&quot;,
+]
+dataset = pyarrow.dataset.FileSystemDataset.from_paths(
+    paths,
+    schema=schema,
+    format=pyarrow.dataset.ParquetFileFormat(pre_buffer=True),
+    filesystem=pyarrow.fs.S3FileSystem(region=&quot;us-east-2&quot;),
+)
+table = dataset.to_table()
+</code></pre><br>
+<h3 id="happy-benchmarking">Happy benchmarking!</h3>
+<p>All four GitHub repositories mentioned are open source, and <strong>contributions are welcome</strong>.</p>
+<ul>
+<li>Conbench: <a href="https://github.com/ursacomputing/conbench">https://github.com/ursacomputing/conbench</a></li>
+<li>Arrow R benchmarks: <a href="https://github.com/ursacomputing/arrowbench">https://github.com/ursacomputing/arrowbench</a></li>
+<li>Arrow Python benchmarks: <a href="https://github.com/ursacomputing/benchmarks">https://github.com/ursacomputing/benchmarks</a></li>
+<li>Arrow &amp; C++ benchmarks: <a href="https://github.com/apache/arrow/">https://github.com/apache/arrow/</a></li>
+</ul>
+<br>
+<hr>
+<p><em>May your best benchmark results today, be your worst benchmark results tomorrow.</em></p>
+<p><em>— fake benchmarking proverb</em> 🙂</p>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+    
+<footer class="footer hidden-print">
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <div class="pull-left">
+
+</div>
+<div class="pull-right">
+
+</div>
+
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              
+    
+<div class="container footline">
+	<div class="row">
+	    <div class="col-md-2">
+	    	<a class="footer-brand-img" href="https://ursalabs.org/">
+            <img alt="Ursa Labs" src="https://ursalabs.org/logo.png">
+          </a>
+	    </div>
+	    <div class="col-md-10">
+	    	<h4>Innovating Open Source Data Science Tools</h4>
+	    </div>
+	    <div class="col-md-12">
+	    	<hr>
+	    </div>
+
+	 </div>
+</div>
+
+
+    
+<div class="container copyright">
+    <small>
+  (c) 2018-2020 Ursa Labs
+
+  </small>
+</div>
+<div class="container copyright tm-info">
+    <small>
+  Apache Arrow, Arrow, Apache, the Apache feather logo, and the Apache Arrow project logo are either registered trademarks or trademarks of The Apache Software Foundation in the United States and other countries.
+
+  </small>
+</div>
+
+
+
+        </div>
+    </div>
+  </div>
+</footer>
+
+    
+
+<script src="https://ursalabs.org/js/jquery.min.js"></script>
+<script src="https://ursalabs.org/js/bootstrap.min.js"></script>
+
+<script src="https://ursalabs.org/js/highlight.pack.js"></script>
+<script src="https://ursalabs.org/js/site.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+CONTENTLANGUAGE =  null ; 
+</script>
+
+
+
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/config/TeX-AMS-MML_HTMLorMML.js"></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    for(var all in MathJax.Hub.getAllJax()) {
+        all.SourceElement().parentNode.className += ' has-jax';
+
+    }
+});
+</script>
+
+
+
+
+
+
+  </body>
+</html>
+
